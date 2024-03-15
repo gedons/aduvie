@@ -357,9 +357,9 @@
     <!-- ===== Blog End ===== -->
 
     <!-- ===== Contact Start ===== -->
-    <section id="support" class="i pg fh rm ji gp uq">
+    <section class="i pg fh rm ji gp uq">
         <!-- Bg Shapes -->
-        <img src="../assets/images/shape-06.svg" alt="Shape" class="h aa y" />
+
         <img src="../assets/images/shape-03.svg" alt="Shape" class="h ca u" />
         <img src="../assets/images/shape-07.svg" alt="Shape" class="h w da ee" />
         <img src="../assets/images/shape-12.svg" alt="Shape" class="h p s" />
@@ -372,8 +372,8 @@
                     Let’s Stay Connected
                 </h2>
                 <p class="bb on/5 wo/5 hq">
-                    It is a long established fact that a reader will be distracted by the readable content of a page
-                    when looking at its layout. The point of using.
+                    Have questions about hosting your event at Aduvie Events? Ready to start planning the celebration of
+                    a lifetime? Get in touch with us today – we're here to help!
                 </p>
             </div>
 
@@ -398,7 +398,7 @@
                     </div>
                     <div class="fb">
                         <h4 class="wj kk wm cc">Phone Number</h4>
-                        <p><a href="#">+009 8754 3433 223</a></p>
+                        <p><a href="#">+234 54 3433 2231</a></p>
                     </div>
                     <div class="fb">
                         <h4 class="wj kk wm cc">Skype Email</h4>
@@ -473,7 +473,7 @@
                         <div class="tc sf yo ap zf ep qb">
                             <div class="vd to/2">
                                 <label class="rc ac" for="phone">Phone number</label>
-                                <input type="text" name="phone" id="phone" placeholder="+009 3342 3432"
+                                <input type="text" name="phone" id="phone" placeholder="+234 54 3433 223"
                                     class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" />
                             </div>
 
