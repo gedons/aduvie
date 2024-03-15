@@ -47,20 +47,20 @@
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="!menuOpen">
                         <li><a href="#"
-                            class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
-                    <li><a href="#"
-                            class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
-                    </li>
-                    <li><a href="#"
-                            class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
-                    <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
-                            Us</a></li>
+                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
+                        <li><a href="#"
+                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
+                        </li>
+                        <li><a href="#"
+                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
+                        <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                Us</a></li>
                     </ul>
                 </nav>
 
                 <div class="tc wf ig pb no">
                     <a href="signup.html" :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                        class="lk gh dk rg tc wf xf _l gi hi  bg-indigo-400">Book Your Event</a>
+                        class="lk gh dk rg tc wf xf _l gi hi  bg-indigo-500">Book Your Event</a>
                 </div>
             </div>
             <!-- Navigation Links -->
@@ -73,28 +73,29 @@
         <!-- Hero Images -->
         <div class="xc fn zd/2 2xl:ud-w-187.5 bd 2xl:ud-h-171.5 h q r">
             <img src="../assets/images/shape-01.svg" alt="shape" class="xc 2xl:ud-block h t -ud-left-[10%] ua" />
-            <img src="../assets/images/shape-02.svg" alt="shape" class="xc 2xl:ud-block h u p va" />
+
             <img src="../assets/images/shape-03.svg" alt="shape" class="xc 2xl:ud-block h v w va" />
-            <img src="../assets/images/shape-04.svg" alt="shape" class="h q r" />
-            <img src="../assets/images/hero.png" alt="Woman" class="h q r ua" />
+
+            <img src="../assets/images/nc_8.jpg" alt="Woman" class="h q r ua mt-14" />
         </div>
 
         <!-- Hero Content -->
         <div class="bb ze ki xn 2xl:ud-px-0">
             <div class="tc _o">
                 <div class="animate_left jn/2">
-                    <h1 class="fk vj zp or kk wm wb">We specialize in UI/UX, Web Development, Digital Marketing.</h1>
+                    <h1 class="fk vj zp or kk wm wb">Aduvie Events</h1>
                     <p class="fq">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fringilla magna mauris. Nulla
-                        fermentum viverra sem eu rhoncus consequat varius nisi quis, posuere magna.
+                        Welcome to Aduvie Event Center, where every moment is an occasion to remember!
+                        We take immense pride in offering you a versatile and dynamic space perfect for all your events,
+                        from corporate meetings to weddings and everything in between.
                     </p>
 
                     <div class="tc tf yo zf mb">
-                        <a href="#" class="ek jk lk gh gi hi rg ml il vc _d _l">Get Started Now</a>
+                        <a href="#" class="ek jk lk gh gi hi rg ml il vc _d _l bg-indigo-500">Book Now</a>
 
                         <span class="tc sf">
-                            <a href="#" class="inline-block ek xj kk wm"> Call us (0123) 456 – 789 </a>
-                            <span class="inline-block">For any question or concern</span>
+                            <a href="#" class="inline-block ek xj kk wm">Opening Hours </a>
+                            <span class="inline-block">Mon - Fri: 10AM - 7PM / Sat - Sun : 10AM - 5PM</span>
                         </span>
                     </div>
                 </div>
@@ -105,7 +106,7 @@
 
 
     <!-- ===== Small Features Start ===== -->
-    <section id="features">
+    <section>
         <div class="bb ze ki yn 2xl:ud-px-12.5">
             <div class="tc uf zo xf ap zf bp mq">
                 <!-- Small Features Item -->
@@ -114,8 +115,8 @@
                         <img src="../assets/images/icon-01.svg" alt="Icon" />
                     </div>
                     <div>
-                        <h4 class="ek yj go kk wm xb">24/7 Support</h4>
-                        <p>Lorem ipsum dolor sit amet conse adipiscing elit.</p>
+                        <h4 class="ek yj go kk wm xb">Versatile Spaces</h4>
+                        <p>From intimate gatherings to grand celebrations.</p>
                     </div>
                 </div>
 
@@ -125,8 +126,8 @@
                         <img src="../assets/images/icon-02.svg" alt="Icon" />
                     </div>
                     <div>
-                        <h4 class="ek yj go kk wm xb">Take Ownership</h4>
-                        <p>Lorem ipsum dolor sit amet conse adipiscing elit.</p>
+                        <h4 class="ek yj go kk wm xb">Scenic Surroundings</h4>
+                        <p>Enjoy breathtaking views and lush surroundings.</p>
                     </div>
                 </div>
 
@@ -136,8 +137,8 @@
                         <img src="../assets/images/icon-03.svg" alt="Icon" />
                     </div>
                     <div>
-                        <h4 class="ek yj go kk wm xb">Team Work</h4>
-                        <p>Lorem ipsum dolor sit amet conse adipiscing elit.</p>
+                        <h4 class="ek yj go kk wm xb">Modern Amenities</h4>
+                        <p>Our facilities are equipped with the latest technology.</p>
                     </div>
                 </div>
             </div>
