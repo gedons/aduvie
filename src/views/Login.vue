@@ -16,20 +16,20 @@
                     <h2 class="ek ck kk wm xb">Admin Login</h2>
                 </div>
 
-                <form class="sb" action="https://formbold.com/s/unique_form_id" method="POST">
+                <form class="sb" @submit.prevent="login">
                     <div class="wb">
-                        <label class="rc kk wm vb" for="username">Email</label>
-                        <input type="text" name="username" id="username" placeholder="example@gmail.com"
+                        <label class="rc kk wm vb" for="email">Email</label>
+                        <input type="email" v-model="email" placeholder="example@gmail.com"
                             class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" />
                     </div>
 
                     <div class="wb">
                         <label class="rc kk wm vb" for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="**************"
+                        <input type="password" v-model="password" placeholder="**************"
                             class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" />
                     </div>
 
-                    <button class="vd rj ek rc rg gh lk ml il _l gi hi">
+                    <button type="submit" class="vd rj ek rc rg gh lk ml il _l gi hi bg-indigo-500 cursor-pointer">
                         Login
                     </button>
                 </form>
@@ -184,15 +184,43 @@
 </template>
 
 <script>
+import axios from 'axios';
+import api from '../api';
 export default {
     data() {
         return {
-            menuOpen: true
+            menuOpen: true,
+            email: '',
+            password: ''
         };
     },
     methods: {
         toggleMenu() {
             this.menuOpen = !this.menuOpen;
+        },
+
+        async login() {
+            try {
+                const response = await axios.post(`${api}/auth/admin/login`, {
+                email: this.email,
+                password: this.password
+                });
+                if (response.status === 200) {
+                    this.$toast.success('Admin Login successful.', {
+		                timeout: 3000, 
+                    });	
+                    localStorage.setItem('adminToken', response.data.token);  
+                    this.$router.push({ name: 'Dashboard' });
+                }
+            } catch (error) {
+                if (error.response.status === 400) {  
+                    this.$toast.error('Invalid credentials. Please try again.', {
+                        timeout: 3000,
+                    });
+                } else {
+                    console.error('Login error:', error.response.data);
+                }
+            }
         }
     }
 };
