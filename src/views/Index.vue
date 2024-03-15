@@ -72,11 +72,8 @@
     <section class="gj do ir hj sp jr i pg">
         <!-- Hero Images -->
         <div class="xc fn zd/2 2xl:ud-w-187.5 bd 2xl:ud-h-171.5 h q r">
-            <img src="../assets/images/shape-01.svg" alt="shape" class="xc 2xl:ud-block h t -ud-left-[10%] ua" />
-
             <img src="../assets/images/shape-03.svg" alt="shape" class="xc 2xl:ud-block h v w va" />
-
-            <img src="../assets/images/nc_8.jpg" alt="Woman" class="h q r ua mt-14" />
+            <img src="../assets/images/nc_8.jpg" alt="Woman" class="h q r ua mt-16" />
         </div>
 
         <!-- Hero Content -->
@@ -167,17 +164,18 @@
 
                 <!-- About Content -->
                 <div class="animate_right jn/2">
-                    <h4 class="ek yj mk gb">Why Choose Us</h4>
-                    <h2 class="fk vj zp pr kk wm qb">We Make Our customers happy by giving Best services.</h2>
-                    <p class="uo">It is a long established fact that a reader will be distracted by the readable content
-                        of a page when looking at its layout. The point of using Lorem Ipsum.</p>
+                    <h4 class="ek yj mk gb">Why Aduvie Events</h4>
+                    <h2 class="fk vj zp pr kk wm qb">We understand that selecting the perfect venue is crucial for the
+                        success of your event.</h2>
+                    <p class="uo">Our event center boasts modern and versatile spaces equipped with state-of-the-art
+                        amenities, ensuring a seamless experience for you and your guests.</p>
 
-                    <a href="https://www.youtube.com/watch?v=xcJtL7QggTI" data-fslightbox class="vc wf hg mb">
+                    <a href="https://www.youtube.com" data-fslightbox class="vc wf hg mb">
                         <span class="tc wf xf be dd rg i gh ua">
                             <span class="nf h vc yc vd rg gh qk -ud-z-1"></span>
                             <img src="../assets/images/icon-play.svg" alt="Play" />
                         </span>
-                        <span class="kk">SEE HOW WE WORK</span>
+                        <span class="kk">See Videos</span>
                     </a>
                 </div>
             </div>
