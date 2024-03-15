@@ -192,8 +192,9 @@
                     We Offer The Best Quality Service for You
                 </h2>
                 <p class="bb on/5 wo/5 hq">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae
-                    tortor lacus. Phasellus aliquam ante in maximus.
+                    We offer a comprehensive range of services designed to make your event planning experience seamless
+                    and stress-free,
+                    from intimate gatherings to large-scale celebrations.
                 </p>
             </div>
 
@@ -206,43 +207,45 @@
                 <!-- Service Item -->
                 <div class="animate_top sg oi pi zq ml il am cn _m">
                     <img src="../assets/images/icon-04.svg" alt="Icon" />
-                    <h4 class="ek zj kk wm nb _b">Crafted for Startups</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                    <h4 class="ek zj kk wm nb _b">Event Planning Assistance</h4>
+                    <p>Our experienced event planners are here to guide you through every step of the planning process.
+                    </p>
                 </div>
 
                 <!-- Service Item -->
                 <div class="animate_top sg oi pi zq ml il am cn _m">
                     <img src="../assets/images/icon-05.svg" alt="Icon" />
-                    <h4 class="ek zj kk wm nb _b">High-quality Design</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                    <h4 class="ek zj kk wm nb _b">Catering Services</h4>
+                    <p>Indulge in a culinary experience like no other with our in-house catering services.</p>
                 </div>
 
                 <!-- Service Item -->
                 <div class="animate_top sg oi pi zq ml il am cn _m">
                     <img src="../assets/images/icon-06.svg" alt="Icon" />
-                    <h4 class="ek zj kk wm nb _b">All Essential Sections</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                    <h4 class="ek zj kk wm nb _b">Décor and Design</h4>
+                    <p>Transform our event spaces into your dream setting with our expert décor and design services.</p>
                 </div>
 
                 <!-- Service Item -->
                 <div class="animate_top sg oi pi zq ml il am cn _m">
                     <img src="../assets/images/icon-07.svg" alt="Icon" />
-                    <h4 class="ek zj kk wm nb _b">Speed Optimized</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                    <h4 class="ek zj kk wm nb _b">Vendor Coordination</h4>
+                    <p>Planning an event often requires the involvement of various vendors, from florists to
+                        photographers.</p>
                 </div>
 
                 <!-- Service Item -->
                 <div class="animate_top sg oi pi zq ml il am cn _m">
                     <img src="../assets/images/icon-05.svg" alt="Icon" />
-                    <h4 class="ek zj kk wm nb _b">Fully Customizable</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                    <h4 class="ek zj kk wm nb _b">Venue Customization</h4>
+                    <p>We understand that every event is unique, which is why we offer customizable event spaces.</p>
                 </div>
 
                 <!-- Service Item -->
                 <div class="animate_top sg oi pi zq ml il am cn _m">
                     <img src="../assets/images/icon-06.svg" alt="Icon" />
-                    <h4 class="ek zj kk wm nb _b">Regular Updates</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                    <h4 class="ek zj kk wm nb _b">On-Site Staffing</h4>
+                    <p> Rest assured that your event will run smoothly with our dedicated on-site staff.</p>
                 </div>
             </div>
         </div>
