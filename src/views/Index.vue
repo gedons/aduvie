@@ -1,11 +1,10 @@
 <template>
     <!-- ===== Header Start ===== -->
-    <header class="g s r vd ya cj bg-white" :class="{ 'hh sm _k dj bl ll': stickyMenu }"
-        @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
+    <header class="g s r vd ya cj bg-white" :class="{ 'hh sm _k dj bl ll': stickyMenu }">
         <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
             <div class="vd to/4 tc wf yf">
                 <a href="index.html">
-                    <img class="om" src="../assets/images/logo-light.svg" alt="Logo Light" />
+                    <img src="../assets/images/aduvie.png" alt="Logo Light" class="w-32 h-16" />
                     <img class="xc nm" src="../assets/images/logo-dark.svg" alt="Logo Dark" />
                 </a>
 
@@ -32,74 +31,36 @@
                 <!-- desktop Navigation -->
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="menuOpen">
-                        <li><a href="index.html" class="xl" :class="{ 'mk': page === 'home' }">Home</a></li>
-                        <li><a href="index.html#features" class="xl">Features</a></li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg" @click.prevent="dropdown = !dropdown"
-                                :class="{ 'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' || page === 'signup' || page === '404' }">
-                                Pages
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-                            </a>
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="blog-grid.html" class="xl" :class="{ 'mk': page === 'blog-grid' }">Blog
-                                        Grid</a></li>
-                                <li><a href="blog-single.html" class="xl" :class="{ 'mk': page === 'blog-single' }">Blog
-                                        Single</a></li>
-                                <li><a href="signin.html" class="xl" :class="{ 'mk': page === 'signin' }">Sign In</a>
-                                </li>
-                                <li><a href="signup.html" class="xl" :class="{ 'mk': page === 'signup' }">Sign Up</a>
-                                </li>
-                                <li><a href="404.html" class="xl" :class="{ 'mk': page === '404' }">404</a></li>
-                            </ul>
-                            <!-- Dropdown End -->
+                        <li><a href="#"
+                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
+                        <li><a href="#"
+                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
                         </li>
-                        <li><a href="index.html#support" class="xl">Support</a></li>
+                        <li><a href="#"
+                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
+                        <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                Us</a></li>
                     </ul>
                 </nav>
 
                 <!-- mobile Navigation -->
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="!menuOpen">
-                        <li><a href="index.html" class="xl" :class="{ 'mk': page === 'home' }">Home</a></li>
-                        <li><a href="index.html#features" class="xl">Features</a></li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg" @click.prevent="dropdown = !dropdown"
-                                :class="{ 'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' || page === 'signup' || page === '404' }">
-                                Pages
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-                            </a>
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="blog-grid.html" class="xl" :class="{ 'mk': page === 'blog-grid' }">Blog
-                                        Grid</a></li>
-                                <li><a href="blog-single.html" class="xl" :class="{ 'mk': page === 'blog-single' }">Blog
-                                        Single</a></li>
-                                <li><a href="signin.html" class="xl" :class="{ 'mk': page === 'signin' }">Sign In</a>
-                                </li>
-                                <li><a href="signup.html" class="xl" :class="{ 'mk': page === 'signup' }">Sign Up</a>
-                                </li>
-                                <li><a href="404.html" class="xl" :class="{ 'mk': page === '404' }">404</a></li>
-                            </ul>
-                            <!-- Dropdown End -->
-                        </li>
-                        <li><a href="index.html#support" class="xl">Support</a></li>
+                        <li><a href="#"
+                            class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
+                    <li><a href="#"
+                            class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
+                    </li>
+                    <li><a href="#"
+                            class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
+                    <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                            Us</a></li>
                     </ul>
                 </nav>
-                
+
                 <div class="tc wf ig pb no">
-                    <a href="signin.html" :class="{ 'nk yl': page === 'home', 'ok': page === 'home' && stickyMenu }"
-                        class="ek pk xl">Sign In</a>
                     <a href="signup.html" :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                        class="lk gh dk rg tc wf xf _l gi hi  bg-indigo-400">Sign Up</a>
+                        class="lk gh dk rg tc wf xf _l gi hi  bg-indigo-400">Book Your Event</a>
                 </div>
             </div>
             <!-- Navigation Links -->
@@ -622,7 +583,7 @@
                 <div class="tc uf ap gg fp">
                     <div class="animate_top zd/2 to/4">
                         <a href="index.html">
-                            <img src="../assets/images/logo-light.svg" alt="Logo" class="om" />
+                            <img src="../assets/images/aduvie.png" alt="Logo" class="om" />
                             <img src="../assets/images/logo-dark.svg" alt="Logo" class="xc nm" />
                         </a>
 
