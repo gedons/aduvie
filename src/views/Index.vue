@@ -73,7 +73,7 @@
         <!-- Hero Images -->
         <div class="xc fn zd/2 2xl:ud-w-187.5 bd 2xl:ud-h-171.5 h q r">
             <img src="../assets/images/shape-03.svg" alt="shape" class="xc 2xl:ud-block h v w va" />
-            <img src="../assets/images/nc_8.jpg" alt="Woman" class="h q r ua mt-16" />
+            <img src="../assets/images/nc_8.jpg" alt="Woman" class="h q r ua mt-28" />
         </div>
 
         <!-- Hero Content -->
@@ -83,8 +83,7 @@
                     <h1 class="fk vj zp or kk wm wb">Aduvie Events</h1>
                     <p class="fq">
                         Welcome to Aduvie Event Center, where every moment is an occasion to remember!
-                        We take immense pride in offering you a versatile and dynamic space perfect for all your events,
-                        from corporate meetings to weddings and everything in between.
+                        We take immense pride in offering you a versatile and dynamic space.
                     </p>
 
                     <div class="tc tf yo zf mb">
