@@ -509,16 +509,17 @@
             <div class="tc uf sn tn un gg">
                 <div class="animate_left to/2">
                     <h2 class="fk vj zp pr lk ac">
-                        Join with 5000+ Startups Growing with Base.
+                        Event Gallery
                     </h2>
                     <p class="lk">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis nibh lorem. Duis sed odio
-                        lorem. In a efficitur leo. Ut venenatis rhoncus.
+                        Explore our gallery to see snapshots of past events hosted.
+                        Get inspired by stunning décor, joyful celebrations, and satisfied smiles captured within our
+                        walls.
                     </p>
                 </div>
                 <div class="animate_right bf">
                     <a href="#" class="vc ek kk hh rg ol il cm gi hi">
-                        Get Started Now
+                        Event Gallery
                     </a>
                 </div>
             </div>
