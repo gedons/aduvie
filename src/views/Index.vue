@@ -122,7 +122,7 @@
                     v-bind:style="{ 'background-image': 'url(' + bgImage2 + ')' }">
                     <div class="container pl-[6rem] max-md:pl-2">
                         <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
-                            Affordable Excellence:
+                            Affordable Excellence
                         </h1>
                         <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">
                             We believe that hosting an exceptional event shouldn't break the bank.<br/>
