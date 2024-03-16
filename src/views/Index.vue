@@ -68,73 +68,107 @@
     </header>
     <!-- ===== Header End ===== -->
 
-    <!-- ===== Hero Start ===== -->
-    <section class="gj do ir hj sp jr i pg">
-        <!-- Hero Images -->
-        <div class="xc fn zd/2 2xl:ud-w-187.5 bd 2xl:ud-h-171.5 h q r">
-            <img src="../assets/images/shape-03.svg" alt="shape" class="xc 2xl:ud-block h v w va" />
-            <img src="../assets/images/nc_8.jpg" alt="Woman" class="h q r ua mt-28" />
-        </div>
+    <!-- ===== Swipper Start ===== -->
+    <section>
+        <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+        delay: 4500,
+        disableOnInteraction: false,
+    }" :pagination="{
+        clickable: true,
+    }" :navigation="true" :modules="modules">
+            <swiper-slide>
 
-        <!-- Hero Content -->
-        <div class="bb ze ki xn 2xl:ud-px-0">
-            <div class="tc _o">
-                <div class="animate_left jn/2">
-                    <h1 class="fk vj zp or kk wm wb">Aduvie Events</h1>
-                    <p class="fq">
-                        Welcome to Aduvie Event Center, where every moment is an occasion to remember!
-                        We take immense pride in offering you a versatile and dynamic space.
-                    </p>
-
-                    <div class="tc tf yo zf mb">
-                        <a href="#" class="ek jk lk gh gi hi rg ml il vc _d _l bg-indigo-500">Book Now</a>
-
-                        <span class="tc sf">
-                            <a href="#" class="inline-block ek xj kk wm">Opening Hours </a>
-                            <span class="inline-block">Mon - Fri: 10AM - 7PM / Sat - Sun : 10AM - 5PM</span>
-                        </span>
+                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
+                    v-bind:style="{ 'background-image': 'url(' + bgImage + ')' }">
+                    <div class="container pl-[6rem] max-md:pl-2">
+                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
+                            Event Planning Assistance
+                        </h1>
+                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">Our experienced event planners are here
+                            to assist you every step of the way,<br />
+                            from initial concept to flawless execution.</p>
+                        <div class="mt-12">
+                            <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
+                        rounded-md  hover:text-white">Shop Now</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+            </swiper-slide>
+
+            <swiper-slide>
+
+                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
+                    v-bind:style="{ 'background-image': 'url(' + bgImage1 + ')' }">
+                    <div class="container pl-[6rem] max-md:pl-2">
+                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
+                            Event Planning Assistance
+                        </h1>
+                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">Lorem, ipsum dolor sit amet consectetur
+                            to assist you every step of the way,<br />
+                            from initial concept to flawless execution.</p>
+                        <div class="mt-12">
+                            <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
+                        rounded-md  hover:text-white">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+
+            </swiper-slide>
+
+            <swiper-slide>
+
+                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
+                    v-bind:style="{ 'background-image': 'url(' + bgImage2 + ')' }">
+                    <div class="container pl-[6rem] max-md:pl-2">
+                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
+                            Affordable Excellence:
+                        </h1>
+                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">
+                            We believe that hosting an exceptional event shouldn't break the bank.<br/>
+                            Our competitive pricing packages ensure that you
+                            receive unparalleled value  <br/> without compromising on quality.</p>
+                        <div class="mt-12">
+                            <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
+                        rounded-md  hover:text-white">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+
+            </swiper-slide>
+
+        </swiper>
     </section>
-    <!-- ===== Hero End ===== -->
+    <!-- ===== Swipper End ===== -->
 
 
     <!-- ===== Small Features Start ===== -->
     <section>
-        <div class="bb ze ki yn 2xl:ud-px-12.5">
-            <div class="tc uf zo xf ap zf bp mq">
-                <!-- Small Features Item -->
-                <div class="animate_top kn to/3 tc cg oq">
-                    <div class="tc wf xf cf ae cd rg mh">
-                        <img src="../assets/images/icon-01.svg" alt="Icon" />
+        <div class="container mt-5">
+            <div>
+                <div class="w-10/12 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto justify-center">
+                    <div class=" rounded-sm px-3 py-6 flex justify-center items-center gap-3">
+                        <img src="../assets/images/shape-14.svg" alt="Delivery" class="w-10 h-10 object-contain">
+                        <div>
+                            <h4 class="font-medium text-center capitalize text-[14px]">Versatile Spaces</h4>
+                            <p class="text-gray-500 text-[12px]">From gatherings to grand celebrations.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h4 class="ek yj go kk wm xb">Versatile Spaces</h4>
-                        <p>From intimate gatherings to grand celebrations.</p>
+                    <div
+                        class="border-l border-[#848484] max-md:border-none  rounded-sm px-3 py-6 flex justify-center items-center gap-3">
+                        <img src="../assets/images/shape-05.svg" alt="Delivery" class="w-10 h-10 object-contain">
+                        <div>
+                            <h4 class="font-medium text-center capitalize text-[14px]">Scenic Surroundings</h4>
+                            <p class="text-gray-500 text-[12px]">Enjoy breathtaking views</p>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Small Features Item -->
-                <div class="animate_top kn to/3 tc cg oq">
-                    <div class="tc wf xf cf ae cd rg nh">
-                        <img src="../assets/images/icon-02.svg" alt="Icon" />
-                    </div>
-                    <div>
-                        <h4 class="ek yj go kk wm xb">Scenic Surroundings</h4>
-                        <p>Enjoy breathtaking views and lush surroundings.</p>
-                    </div>
-                </div>
-
-                <!-- Small Features Item -->
-                <div class="animate_top kn to/3 tc cg oq">
-                    <div class="tc wf xf cf ae cd rg oh">
-                        <img src="../assets/images/icon-03.svg" alt="Icon" />
-                    </div>
-                    <div>
-                        <h4 class="ek yj go kk wm xb">Modern Amenities</h4>
-                        <p>Our facilities are equipped with the latest technology.</p>
+                    <div
+                        class="border-l border-[#848484] max-md:border-none rounded-sm px-3 py-6 flex justify-center items-center gap-3">
+                        <img src="../assets/images/shape-09.svg" alt="Delivery" class="w-10 h-10 object-contain">
+                        <div>
+                            <h4 class="font-medium text-center capitalize text-[14px]">Modern Amenities</h4>
+                            <p class="text-gray-500 text-[12px]">Facility equipped with latest technologies</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -673,10 +707,33 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import bannerImage from '../assets/images/slide-1.jpg';
+import bannerImage1 from '../assets/images/slide-3.jpg';
+import bannerImage2 from '../assets/images/slide-4.jpg';
+import bannerImage3 from '../assets/images/slide-2.jpg';
+
 export default {
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    setup() {
+        return {
+            modules: [Autoplay, Pagination, Navigation],
+        };
+    },
     data() {
         return {
-            menuOpen: true
+            menuOpen: true,
+            bgImage: bannerImage,
+            bgImage1: bannerImage1,
+            bgImage2: bannerImage2,
+            bgImage3: bannerImage3,
         };
     },
     methods: {
