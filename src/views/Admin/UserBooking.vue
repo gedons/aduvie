@@ -401,6 +401,11 @@
                                                             Completed
                                                         </div>
                                                     </div>
+                                                    <select v-model="selectedStatus" @change="updateBookingStatus(booking._id)">
+                                                        <option v-for="statusOption in statusOptions" :key="statusOption" :value="statusOption">
+                                                            {{ statusOption }}
+                                                        </option>
+                                                    </select>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
