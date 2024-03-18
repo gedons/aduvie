@@ -387,19 +387,13 @@
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        <!-- Apply color based on booking status -->
-                                                        <div v-if="booking.status === 'pending'"
-                                                            class="text-sm text-yellow-500">
-                                                            Pending
-                                                        </div>
-                                                        <div v-else-if="booking.status === 'booked'"
-                                                            class="text-sm text-red-500">
-                                                            Booked
-                                                        </div>
-                                                        <div v-else-if="booking.status === 'completed'"
-                                                            class="text-sm text-green-500">
-                                                            Completed
-                                                        </div>
+                                                    {{ booking.status }}
+                                                    <select v-model="selectedStatus"
+                                                        @change="updateBookingStatus(booking._id)">
+                                                        <option v-for="statusOption in statusOptions"
+                                                            :key="statusOption" :value="statusOption">{{ statusOption }}
+                                                        </option>
+                                                    </select>
                                                     </div>
                                                 </td>
 
@@ -466,6 +460,8 @@ export default {
             selected: '',
             page: '',
             bookings: [],
+            selectedStatus: '',
+            statusOptions: ['booked', 'completed'],
             isEditMode: false,
             isDeleteMode: false,
             editedBooking: {},
@@ -500,23 +496,6 @@ export default {
                     console.error('Error getting bookings:', error);
                     this.loading = false;
                 });
-        },
-
-        async updateEventStatus(event) {
-            try {
-                const adminToken = localStorage.getItem('adminToken');
-                const response = await axios.put(`${api}/bookings/status`, {
-                    eventId: event._id,
-                    status: event.status
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${adminToken}`
-                    }
-                });
-                console.log(response.data);
-            } catch (error) {
-                console.error('Error updating event status:', error.response.data);
-            }
         },
 
         async confirmDelete() {
@@ -561,6 +540,27 @@ export default {
             }
         },
 
+        async updateBookingStatus(bookingId) {
+            try {
+                const adminToken = localStorage.getItem('adminToken');
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
+                await axios.put(`${api}/bookings/${bookingId}/status`, { status: this.selectedStatus }, config);
+                this.fetchBookings();
+                this.$toast.success('Booking Updated Successfully.', {
+                    timeout: 3000,
+                });
+            } catch (error) {
+                console.error('Error updating booking status:', error.response.data);
+                this.$toast.error('An error occurred while updating the booking. Please try again later.', {
+                    timeout: 3000,
+                });
+            }
+        },
+
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;
         },
@@ -586,7 +586,7 @@ export default {
         formatDate(date) {
             return moment(date).fromNow();
         },
- 
+
 
         openDeleteModal(booking) {
             this.isDeleteMode = true;
