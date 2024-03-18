@@ -435,7 +435,7 @@
                     <label class="mb-2.5 mt-3 block text-black">
                         Event Date
                     </label>
-                    <input type="text" placeholder="Edit date" v-model="editedEvent.date"
+                    <input type="date" placeholder="Edit date" v-model="editedEvent.date"
                         class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
                     <label class="mb-2.5 mt-3 block text-black">
                         User Email
@@ -452,6 +452,8 @@
                         <option value="booked">Booked</option>
                         <option value="completed">Completed</option>
                     </select>
+                    <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
+                    class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>         
                     <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
                         type="submit">Update</button>
                 </form>
