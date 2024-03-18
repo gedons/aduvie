@@ -387,7 +387,7 @@
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        <!-- Apply color based on booking status -->
+                                                        <!-- Apply color based on booking statuss -->
                                                         <div v-if="booking.status === 'pending'"
                                                             class="text-sm text-yellow-500">
                                                             Pending
