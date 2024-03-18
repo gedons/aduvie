@@ -36,7 +36,7 @@
                         <span class="mx-3">Dashboard</span>
                     </router-link>
 
-                    <!-- event link stjart -->
+                    <!-- event link start -->
                     <router-link :to="{ name: 'Events' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +59,7 @@
                     <!-- event link end -->
 
                     <!-- bookin link start -->
-                    <router-link :to="{ name: 'UserBooking' }"
+                    <router-link :to="{ name: 'Index' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg fill="#6B7280" class="w-6 h-6" version="1.1" id="Layer_1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

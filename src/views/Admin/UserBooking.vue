@@ -409,12 +409,9 @@
                                                     </div>
                                                 </td>
 
-                                                <td
-                                                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                    <button @click="openEditModal(booking)"
-                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</button>
+                                                <td>
                                                     <button @click="openDeleteModal(booking)"
-                                                        class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
+                                                        class="ml-4 text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
                                                 </td>
                                             </tr>
 
@@ -430,51 +427,6 @@
             </div>
         </div>
 
-        <!-- edit modal modal -->
-        <div>
-            <div id="modal-bg" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
-            <div id="modal-box"
-                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
-                <!-- Modal content -->
-                <!-- Edit category form -->
-                <form v-if="isEditMode" @submit.prevent="editEvent">
-                    <label class="mb-2.5 mt-3 block text-black">
-                        Event Name
-                    </label>
-                    <input type="text" placeholder="Edit name" v-model="editedEvent.name"
-                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
-                    <label class="mb-2.5 mt-3 block text-black">
-                        Event Date
-                    </label>
-                    <input type="date" placeholder="Edit date" v-model="editedEvent.date"
-                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
-                    <label class="mb-2.5 mt-3 block text-black">
-                        User Email
-                    </label>
-                    <input type="text" placeholder="Edit email" v-model="editedEvent.email"
-                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
-
-                    <label class="mb-2.5 mt-3 block text-black">
-                        Status
-                    </label>
-                    <select v-model="editedEvent.status"
-                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter">
-                        <option value="pending">Pending</option>
-                        <option value="booked">Booked</option>
-                        <option value="completed">Completed</option>
-                    </select>
-                    <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
-                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>
-                    <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
-                        type="submit">Update</button>
-                </form>
-
-                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
-                    @click="closeModal">Close</button>
-            </div>
-        </div>
-        <!-- modal end -->
-
 
         <!-- delete modal -->
         <div>
@@ -483,10 +435,10 @@
                 class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
                 <!-- Delete confirmation -->
                 <div v-if="isDeleteMode">
-                    <p class="font-semibold">Are you sure you want to delete this event?</p>
+                    <p class="font-semibold">Are you sure you want to delete this booking?</p>
                     <div class="flex gap-3">
                         <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
-                            @click="confirmDelete(event)">Yes</button>
+                            @click="confirmDelete(booking)">Yes</button>
                         <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
                             @click="closeModal1">No</button>
                     </div>
@@ -553,7 +505,7 @@ export default {
         async updateEventStatus(event) {
             try {
                 const adminToken = localStorage.getItem('adminToken');
-                const response = await axios.put(`${api}/events/status`, {
+                const response = await axios.put(`${api}/bookings/status`, {
                     eventId: event._id,
                     status: event.status
                 }, {
@@ -564,44 +516,6 @@ export default {
                 console.log(response.data);
             } catch (error) {
                 console.error('Error updating event status:', error.response.data);
-            }
-        },
-
-        async editEvent() {
-            try {
-                const adminToken = localStorage.getItem('adminToken');
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${adminToken}`,
-                    },
-                };
-
-                if (!adminToken) {
-                    localStorage.removeItem('adminToken');
-                    this.$router.push({ name: 'Login' });
-                    return;
-                }
-                await axios.put(`${api}/events/${this.editedEvent._id}`, this.editedEvent, config)
-                    .then((success) => {
-                        if (success) {
-                            this.$toast.success('Event Updated Successfully.', {
-                                timeout: 3000,
-                            });
-                            this.closeModal();
-                            this.fetchEvents();
-                        } else {
-                            this.$toast.error('An Error Occured. try again!', {
-                                timeout: 9000,
-                            });
-                        }
-                    });
-            }
-            catch (error) {
-                if (error) {
-                    this.$toast.error('Event not added. try again!', {
-                        timeout: 3000,
-                    });
-                }
             }
         },
 
@@ -619,16 +533,16 @@ export default {
                     this.$router.push({ name: 'Login' });
                     return;
                 }
-                await axios.delete(`${api}/events/${this.deleteEvent._id}`, config)
+                await axios.delete(`${api}/bookings/${this.deleteBooking._id}/delete`, config)
                     .then((success) => {
                         if (success) {
-                            this.$toast.success('Event Deleted Successfully.', {
+                            this.$toast.success('Booking Deleted Successfully.', {
                                 timeout: 3000,
                             });
                             this.closeModal1();
-                            const eventId = this.deleteEvent._id;
-                            this.events = this.events.filter(event => event._id !== eventId);
-                            this.events.sort((a, b) => {
+                            const bookingId = this.deleteBooking._id;
+                            this.bookings = this.bookings.filter(booking => booking._id !== bookingId);
+                            this.bookings.sort((a, b) => {
                                 const dateA = new Date(a.createdAt).getTime();
                                 const dateB = new Date(b.createdAt).getTime();
                                 return dateB - dateA;
@@ -642,7 +556,7 @@ export default {
 
 
             } catch (error) {
-                console.error('Error deleting Event', error);
+                console.error('Error deleting Booking', error);
                 // Handle error
             }
         },
@@ -672,17 +586,11 @@ export default {
         formatDate(date) {
             return moment(date).fromNow();
         },
+ 
 
-        openEditModal(event) {
-            this.isEditMode = true;
-            this.editedEvent = { ...event };
-            document.getElementById('modal-bg').classList.remove('hidden');
-            document.getElementById('modal-box').classList.remove('hidden');
-        },
-
-        openDeleteModal(event) {
+        openDeleteModal(booking) {
             this.isDeleteMode = true;
-            this.deleteEvent = { ...event };
+            this.deleteBooking = { ...booking };
             document.getElementById('modal-bg4').classList.remove('hidden');
             document.getElementById('modal-box4').classList.remove('hidden');
         },
