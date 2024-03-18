@@ -5,7 +5,9 @@ import Index from '../views/Index.vue';
 import Login from '../views/Login.vue';
 import Dashboard from '../views/Admin/Index.vue';
 import Events from '../views/Admin/Events.vue';
- 
+import AddEvent from '../views/Admin/AddEvent.vue';
+import UserBooking from '../views/Admin/UserBooking.vue';
+
 
 const routes = [
     {
@@ -29,7 +31,9 @@ const routes = [
       },
     },
 
-    { path: "/admin/events", name: "Events", component: Events, meta: { requiresAuth: true }},  
+    { path: "/admin/events", name: "Events", component: Events, meta: { requiresAuth: true }}, 
+    { path: "/admin/addevent", name: "AddEvent", component: AddEvent, meta: { requiresAuth: true }},  
+    { path: "/admin/userbookings", name: "UserBooking", component: UserBooking, meta: { requiresAuth: true }},  
 ];
 
 const router = createRouter({

@@ -59,7 +59,7 @@
                     <!-- event link end -->
 
                     <!-- bookin link start -->
-                    <router-link :to="{ name: 'Index' }"
+                    <router-link :to="{ name: 'UserBooking' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg fill="#6B7280" class="w-6 h-6" version="1.1" id="Layer_1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -285,9 +285,12 @@
 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
 
-                    <div class="container px-6 py-8 mx-auto">                    
-                        <div class="mt-8">
+                    <div class="container px-6 py-8 mx-auto">
+                        <div class="flex">
                             <h3 class="text-3xl font-medium text-gray-700">Events</h3>
+                            <router-link :to="{ name: 'AddEvent' }"
+                                class=" font-medium ml-3 text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">Add
+                                New</router-link>
                         </div>
 
                         <div v-if="loading" class="flex justify-center items-center mt-3">
@@ -339,83 +342,68 @@
                                             <tr>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Image</th>
+                                                    Name</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Title</th>
+                                                    Event Date</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Category</th>
+                                                    User Email</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Price</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Created</th>
+                                                    Status</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                     Actions</th>
 
                                             </tr>
                                         </thead>
-                                        <!-- <div v-if="products.length === 0" class="p-2.5 xl:p-5">
-                                          <p class="font-semibold text-sm leading-5 text-gray-700">No Product Available!!!</p>
-                                      </div> -->
-                                        <tbody class="bg-white">
+                                        <div v-if="events.length === 0" class="p-2.5 xl:p-5">
+                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Event
+                                                Available!!!</p>
+                                        </div>
+                                        <tbody v-for="event in events" :key="event._id" class="bg-white">
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="flex items-center">
-                                                        <div class="flex gap-2">
-                                                            <div>
-                                                                <img class="w-10 h-9 rounded-full" loading="lazy"
-                                                                    alt="">
-                                                            </div>
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ event.name }}</div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900"> {{
+                formatDate(event.date) }}</div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ event.email }}
+                                                    </div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        <!-- Apply color based on event status -->
+                                                        <div v-if="event.status === 'pending'"
+                                                            class="text-sm text-yellow-500">
+                                                            Pending
                                                         </div>
-
-                                                        <label
-                                                            class="ml-2 flex flex-col items-center px-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
-                                                            <svg class="w-8 h-8" fill="currentColor"
-                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                                <path
-                                                                    d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                                                            </svg>
-                                                            <input type='file' ref="inputf" class="hidden"
-                                                                accept="image/*" />
-                                                        </label>
-                                                        <button
-                                                            class="text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">save
-                                                            image</button>
-
+                                                        <div v-else-if="event.status === 'booked'"
+                                                            class="text-sm text-red-500">
+                                                            Booked
+                                                        </div>
+                                                        <div v-else-if="event.status === 'completed'"
+                                                            class="text-sm text-green-500">
+                                                            Completed
+                                                        </div>
                                                     </div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">title
-                                                        name</div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">product
-                                                        title</div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">$6000
-                                                    </div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <span
-                                                        class="inline-flex px-2 text-sm font-semibold leading-5 text-green-800">
-                                                        788</span>
                                                 </td>
 
                                                 <td
                                                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                    <router-link :to="{ name: 'Index' }"
-                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</router-link>
-                                                    <router-link :to="{ name: 'Index' }"
-                                                        class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</router-link>
+                                                    <button @click="openEditModal(event)"
+                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</button>
+                                                    <button @click="openDeleteModal(event)"
+                                                        class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
                                                 </td>
                                             </tr>
 
@@ -430,6 +418,73 @@
                 </main>
             </div>
         </div>
+
+        <!-- edit modal modal -->
+        <div>
+            <div id="modal-bg" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
+            <div id="modal-box"
+                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
+                <!-- Modal content -->
+                <!-- Edit category form -->
+                <form v-if="isEditMode" @submit.prevent="editEvent">
+                    <label class="mb-2.5 mt-3 block text-black">
+                        Event Name
+                    </label>
+                    <input type="text" placeholder="Edit name" v-model="editedEvent.name"
+                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
+                    <label class="mb-2.5 mt-3 block text-black">
+                        Event Date
+                    </label>
+                    <input type="date" placeholder="Edit date" v-model="editedEvent.date"
+                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
+                    <label class="mb-2.5 mt-3 block text-black">
+                        User Email
+                    </label>
+                    <input type="text" placeholder="Edit email" v-model="editedEvent.email"
+                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
+
+                    <label class="mb-2.5 mt-3 block text-black">
+                        Status
+                    </label>
+                    <select v-model="editedEvent.status"
+                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter">
+                        <option value="pending">Pending</option>
+                        <option value="booked">Booked</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
+                    class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>         
+                    <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
+                        type="submit">Update</button>
+                </form>
+
+                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
+                    @click="closeModal">Close</button>
+            </div>
+        </div>
+        <!-- modal end -->
+
+
+        <!-- delete modal -->
+        <div>
+            <div id="modal-bg4" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
+            <div id="modal-box4"
+                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
+                <!-- Delete confirmation -->
+                <div v-if="isDeleteMode">
+                    <p class="font-semibold">Are you sure you want to delete this event?</p>
+                    <div class="flex gap-3">
+                        <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="confirmDelete(event)">Yes</button>
+                        <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="closeModal1">No</button>
+                    </div>
+                </div>
+                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
+                    @click="closeModal1">Close</button>
+            </div>
+        </div>
+        <!-- modal end -->
     </div>
 
 </template>
@@ -448,24 +503,125 @@ export default {
             selected: '',
             page: '',
             events: [],
+            isEditMode: false,
+            isDeleteMode: false,
+            editedEvent: {},
+            deleteEvent: {},
 
         };
     },
-    created() {       
-      this.fetchEvents();
+    created() {
+        this.fetchEvents();
     },
     methods: {
 
         fetchEvents() {
-              axios.get(`${api}/events/all`).then((response) => {
-              this.events = response.data.events;    
-              this.loading = false;       
-              })
-              .catch((error) => {
-              console.error('Error getting events:', error);   
-              this.loading = false;       
-              });      
-          },
+            axios.get(`${api}/events/all`).then((response) => {
+                this.events = response.data;
+                this.loading = false;
+            })
+                .catch((error) => {
+                    console.error('Error getting events:', error);
+                    this.loading = false;
+                });
+        },
+
+        async updateEventStatus(event) {
+            try {
+                const adminToken = localStorage.getItem('adminToken');
+                const response = await axios.put(`${api}/events/status`, {
+                    eventId: event._id,
+                    status: event.status
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`
+                    }
+                });
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error updating event status:', error.response.data);
+            }
+        },
+
+        async editEvent() {
+            try {
+                const adminToken = localStorage.getItem('adminToken');
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
+
+                if (!adminToken) {
+                    localStorage.removeItem('adminToken');
+                    this.$router.push({ name: 'Login' });
+                    return;
+                }
+                await axios.put(`${api}/events/${this.editedEvent._id}`, this.editedEvent, config)
+                    .then((success) => {
+                        if (success) {
+                            this.$toast.success('Event Updated Successfully.', {
+                                timeout: 3000,
+                            });
+                            this.closeModal();
+                            this.fetchEvents();
+                        } else {
+                            this.$toast.error('An Error Occured. try again!', {
+                                timeout: 9000,
+                            });
+                        }
+                    });
+            }
+            catch (error) {
+                if (error) {
+                    this.$toast.error('Event not added. try again!', {
+                        timeout: 3000,
+                    });
+                }
+            }
+        },
+
+        async confirmDelete() {
+            try {
+                const adminToken = localStorage.getItem('adminToken');
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
+
+                if (!adminToken) {
+                    localStorage.removeItem('adminToken');
+                    this.$router.push({ name: 'Login' });
+                    return;
+                }
+                await axios.delete(`${api}/events/${this.deleteEvent._id}`, config)
+                    .then((success) => {
+                        if (success) {
+                            this.$toast.success('Event Deleted Successfully.', {
+                                timeout: 3000,
+                            });
+                            this.closeModal1();
+                            const eventId = this.deleteEvent._id;
+                            this.events = this.events.filter(event => event._id !== eventId);
+                            this.events.sort((a, b) => {
+                                const dateA = new Date(a.createdAt).getTime();
+                                const dateB = new Date(b.createdAt).getTime();
+                                return dateB - dateA;
+                            });
+                        } else {
+                            this.$toast.error('An Error Occured. try again!', {
+                                timeout: 9000,
+                            });
+                        }
+                    });
+
+
+            } catch (error) {
+                console.error('Error deleting Event', error);
+                // Handle error
+            }
+        },
 
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;
@@ -488,6 +644,33 @@ export default {
 
         pageDropdown() {
             this.selected = (this.selected === 'Page') ? '' : 'Page';
+        },
+        formatDate(date) {
+            return moment(date).fromNow();
+        },
+
+        openEditModal(event) {
+            this.isEditMode = true;
+            this.editedEvent = { ...event };
+            document.getElementById('modal-bg').classList.remove('hidden');
+            document.getElementById('modal-box').classList.remove('hidden');
+        },
+
+        openDeleteModal(event) {
+            this.isDeleteMode = true;
+            this.deleteEvent = { ...event };
+            document.getElementById('modal-bg4').classList.remove('hidden');
+            document.getElementById('modal-box4').classList.remove('hidden');
+        },
+
+        closeModal() {
+            document.getElementById('modal-bg').classList.add('hidden');
+            document.getElementById('modal-box').classList.add('hidden');
+        },
+
+        closeModal1() {
+            document.getElementById('modal-bg4').classList.add('hidden');
+            document.getElementById('modal-box4').classList.add('hidden');
         },
 
 
