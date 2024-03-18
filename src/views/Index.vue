@@ -180,7 +180,7 @@
     <section class="i pg qh rm ji hp mt-8">
         <img src="../assets/images/shape-11.svg" alt="Shape" class="of h ga ha ke" />
 
-        <div class="bb ze i va ki xn br">
+        <div class="bb ze i va ki xn br grid grid-cols-1 ">
             <div class="tc uf sn tn xf un gg">
                 <div class="animate_top me/5 ln rj">
                     <h2 class="gk vj zp or kk wm hc">1000</h2>

@@ -4,6 +4,7 @@ import store from '../store';
 import Index from '../views/Index.vue';
 import Login from '../views/Login.vue';
 import Dashboard from '../views/Admin/Index.vue';
+import Events from '../views/Admin/Events.vue';
  
 
 const routes = [
@@ -27,6 +28,8 @@ const routes = [
         requiresAuth: true,
       },
     },
+
+    { path: "/admin/events", name: "Events", component: Events, meta: { requiresAuth: true }},  
 ];
 
 const router = createRouter({
