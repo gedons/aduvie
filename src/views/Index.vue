@@ -125,9 +125,9 @@
                             Affordable Excellence
                         </h1>
                         <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">
-                            We believe that hosting an exceptional event shouldn't break the bank.<br/>
+                            We believe that hosting an exceptional event shouldn't break the bank.<br />
                             Our competitive pricing packages ensure that you
-                            receive unparalleled value  <br/> without compromising on quality.</p>
+                            receive unparalleled value <br /> without compromising on quality.</p>
                         <div class="mt-12">
                             <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
                         rounded-md  hover:text-white">Shop Now</a>
@@ -159,7 +159,7 @@
                         <img src="../assets/images/shape-05.svg" alt="Delivery" class="w-10 h-10 object-contain">
                         <div>
                             <h4 class="font-medium text-center capitalize text-[14px]">Scenic Surroundings</h4>
-                            <p class="text-gray-500 text-[12px]">Enjoy breathtaking views</p>
+                            <p class="text-gray-500 text-[12px]">Enjoy breathtaking views for your occasions.</p>
                         </div>
                     </div>
                     <div
@@ -175,6 +175,33 @@
         </div>
     </section>
     <!-- ===== Small Features End ===== -->
+
+    <!-- ===== Counter Start ===== -->
+    <section class="i pg qh rm ji hp mt-8">
+        <img src="../assets/images/shape-11.svg" alt="Shape" class="of h ga ha ke" />
+
+        <div class="bb ze i va ki xn br">
+            <div class="tc uf sn tn xf un gg">
+                <div class="animate_top me/5 ln rj">
+                    <h2 class="gk vj zp or kk wm hc">1000</h2>
+                    <p class="ek bk aq">BANQUET SEAT CAPACITY</p>
+                </div>
+                <div class="animate_top me/5 ln rj">
+                    <h2 class="gk vj zp or kk wm hc">200</h2>
+                    <p class="ek bk aq">CAR PARKING</p>
+                </div>
+                <div class="animate_top me/5 ln rj">
+                    <h2 class="gk vj zp or kk wm hc">865</h2>
+                    <p class="ek bk aq">THEATRE SIT CAPICITY</p>
+                </div>
+                <div class="animate_top me/5 ln rj">
+                    <h2 class="gk vj zp or kk wm hc">3</h2>
+                    <p class="ek bk aq">DRESSING ROOM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== Counter End ===== -->
 
 
     <!-- ===== About Start ===== -->
