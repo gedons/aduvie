@@ -287,8 +287,8 @@
 
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">Events</h3>
-                            <router-link :to="{ name: 'AddEvent' }"
+                            <h3 class="text-3xl font-medium text-gray-700">Blogs</h3>
+                            <router-link :to="{ name: 'AddBlog' }"
                                 class=" font-medium ml-3 text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">Add
                                 New</router-link>
                         </div>
@@ -342,67 +342,59 @@
                                             <tr>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Name</th>
+                                                    Image</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Event Date</th>
+                                                    Title</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    User Email</th>
+                                                    Content</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Status</th>
+                                                    Date Created</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                     Actions</th>
 
                                             </tr>
                                         </thead>
-                                        <div v-if="events.length === 0" class="p-2.5 xl:p-5">
-                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Event
+                                        <div v-if="blogPosts.length === 0" class="p-2.5 xl:p-5">
+                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Blog
                                                 Available!!!</p>
                                         </div>
-                                        <tbody v-for="event in events" :key="event._id" class="bg-white">
+                                        <tbody v-for="blog in blogPosts" :key="blog._id" class="bg-white">
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ event.name }}</div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900"> {{
-                formatDate(event.date) }}</div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ event.email }}
+                                                        <img class="w-10 h-9 rounded-full"
+                                                            :src="`${back_url}/${blog.image}`" loading="lazy" alt="">
                                                     </div>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        <!-- Apply color based on event status -->
-                                                        <div v-if="event.status === 'pending'"
-                                                            class="text-sm text-yellow-500">
-                                                            Pending
-                                                        </div>
-                                                        <div v-else-if="event.status === 'booked'"
-                                                            class="text-sm text-red-500">
-                                                            Booked
-                                                        </div>
-                                                        <div v-else-if="event.status === 'completed'"
-                                                            class="text-sm text-green-500">
-                                                            Completed
-                                                        </div>
+                                                        {{ blog.title }} </div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ truncateContent(blog.content) }}
+                                                    </div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ formatDate(blog.createdAt) }}
                                                     </div>
                                                 </td>
 
                                                 <td
-                                                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                    <button @click="openEditModal(event)"
-                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</button>
-                                                    <button @click="openDeleteModal(event)"
+                                                    class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                    <router-link :to="{ name: 'ViewBlog', params: { id: blog._id } }"
+                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</router-link>
+                                                    <button @click="openEditModal(blog)"
+                                                        class=" text-sm px-2 py-2 font-semibold text-indigo-400  hover:text-indigo-300">View</button>
+                                                    <button @click="openDeleteModal(blog)"
                                                         class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
                                                 </td>
                                             </tr>
@@ -419,52 +411,6 @@
             </div>
         </div>
 
-        <!-- edit modal modal -->
-        <div>
-            <div id="modal-bg" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
-            <div id="modal-box"
-                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
-                <!-- Modal content -->
-                <!-- Edit category form -->
-                <form v-if="isEditMode" @submit.prevent="editEvent">
-                    <label class="mb-2.5 mt-3 block text-black">
-                        Event Name
-                    </label>
-                    <input type="text" placeholder="Edit name" v-model="editedEvent.name"
-                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
-                    <label class="mb-2.5 mt-3 block text-black">
-                        Event Date
-                    </label>
-                    <input type="date" placeholder="Edit date" v-model="editedEvent.date"
-                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
-                    <label class="mb-2.5 mt-3 block text-black">
-                        User Email
-                    </label>
-                    <input type="text" placeholder="Edit email" v-model="editedEvent.email"
-                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
-
-                    <label class="mb-2.5 mt-3 block text-black">
-                        Status
-                    </label>
-                    <select v-model="editedEvent.status"
-                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter">
-                        <option value="pending">Pending</option>
-                        <option value="booked">Booked</option>
-                        <option value="completed">Completed</option>
-                    </select>
-                    <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
-                    class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>         
-                    <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
-                        type="submit">Update</button>
-                </form>
-
-                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
-                    @click="closeModal">Close</button>
-            </div>
-        </div>
-        <!-- modal end -->
-
-
         <!-- delete modal -->
         <div>
             <div id="modal-bg4" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
@@ -472,10 +418,10 @@
                 class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
                 <!-- Delete confirmation -->
                 <div v-if="isDeleteMode">
-                    <p class="font-semibold">Are you sure you want to delete this event?</p>
+                    <p class="font-semibold">Are you sure you want to delete this blog?</p>
                     <div class="flex gap-3">
                         <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
-                            @click="confirmDelete(event)">Yes</button>
+                            @click="confirmDelete(blog)">Yes</button>
                         <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
                             @click="closeModal1">No</button>
                     </div>
@@ -502,26 +448,27 @@ export default {
             dropdownOpen: false,
             selected: '',
             page: '',
-            events: [],
+            blogPosts: [],
             isEditMode: false,
             isDeleteMode: false,
-            editedEvent: {},
-            deleteEvent: {},
-
+            editedBlog: {},
+            deleteBlog: {},
+            back_url: 'http://localhost:5000',
+            
         };
     },
     created() {
-        this.fetchEvents();
+        this.getAllBlogs();
     },
     methods: {
 
-        fetchEvents() {
-            axios.get(`${api}/events/all`).then((response) => {
-                this.events = response.data;
+        getAllBlogs() {
+            axios.get(`${api}/blogs/all`).then((response) => {
+                this.blogPosts = response.data;
                 this.loading = false;
             })
                 .catch((error) => {
-                    console.error('Error getting events:', error);
+                    console.error('Error getting blog posts:', error);
                     this.loading = false;
                 });
         },
@@ -543,44 +490,6 @@ export default {
             }
         },
 
-        async editEvent() {
-            try {
-                const adminToken = localStorage.getItem('adminToken');
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${adminToken}`,
-                    },
-                };
-
-                if (!adminToken) {
-                    localStorage.removeItem('adminToken');
-                    this.$router.push({ name: 'Login' });
-                    return;
-                }
-                await axios.put(`${api}/events/${this.editedEvent._id}`, this.editedEvent, config)
-                    .then((success) => {
-                        if (success) {
-                            this.$toast.success('Event Updated Successfully.', {
-                                timeout: 3000,
-                            });
-                            this.closeModal();
-                            this.fetchEvents();
-                        } else {
-                            this.$toast.error('An Error Occured. try again!', {
-                                timeout: 9000,
-                            });
-                        }
-                    });
-            }
-            catch (error) {
-                if (error) {
-                    this.$toast.error('Event not added. try again!', {
-                        timeout: 3000,
-                    });
-                }
-            }
-        },
-
         async confirmDelete() {
             try {
                 const adminToken = localStorage.getItem('adminToken');
@@ -595,16 +504,16 @@ export default {
                     this.$router.push({ name: 'Login' });
                     return;
                 }
-                await axios.delete(`${api}/events/${this.deleteEvent._id}`, config)
+                await axios.delete(`${api}/blogs/delete/${this.deleteBlog._id}`, config)
                     .then((success) => {
                         if (success) {
-                            this.$toast.success('Event Deleted Successfully.', {
+                            this.$toast.success('Blog Deleted Successfully.', {
                                 timeout: 3000,
                             });
                             this.closeModal1();
-                            const eventId = this.deleteEvent._id;
-                            this.events = this.events.filter(event => event._id !== eventId);
-                            this.events.sort((a, b) => {
+                            const postId = this.deleteBlog._id;
+                            this.blogPosts = this.blogPosts.filter(event => event._id !== postId);
+                            this.blogPosts.sort((a, b) => {
                                 const dateA = new Date(a.createdAt).getTime();
                                 const dateB = new Date(b.createdAt).getTime();
                                 return dateB - dateA;
@@ -620,6 +529,15 @@ export default {
             } catch (error) {
                 console.error('Error deleting Event', error);
                 // Handle error
+            }
+        },
+
+        truncateContent(content) {
+            const maxLength = 100;
+            if (content.length > maxLength) {
+                return content.substring(0, maxLength) + '...';
+            } else {
+                return content;
             }
         },
 
@@ -649,16 +567,16 @@ export default {
             return moment(date).fromNow();
         },
 
-        openEditModal(event) {
+        openEditModal(blog) {
             this.isEditMode = true;
-            this.editedEvent = { ...event };
+            this.editedBlog = { ...blog };
             document.getElementById('modal-bg').classList.remove('hidden');
             document.getElementById('modal-box').classList.remove('hidden');
         },
 
-        openDeleteModal(event) {
+        openDeleteModal(blog) {
             this.isDeleteMode = true;
-            this.deleteEvent = { ...event };
+            this.deleteBlog = { ...blog };
             document.getElementById('modal-bg4').classList.remove('hidden');
             document.getElementById('modal-box4').classList.remove('hidden');
         },

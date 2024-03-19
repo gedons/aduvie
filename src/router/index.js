@@ -7,6 +7,10 @@ import Dashboard from '../views/Admin/Index.vue';
 import Events from '../views/Admin/Events.vue';
 import AddEvent from '../views/Admin/AddEvent.vue';
 import UserBooking from '../views/Admin/UserBooking.vue';
+import Blogs from '../views/Admin/Blogs.vue';
+import AddBlog from '../views/Admin/AddBlog.vue';
+import ViewBlog from '../views/Admin/ViewBlog.vue';
+
 
 
 const routes = [
@@ -33,6 +37,9 @@ const routes = [
 
     { path: "/admin/events", name: "Events", component: Events, meta: { requiresAuth: true }}, 
     { path: "/admin/addevent", name: "AddEvent", component: AddEvent, meta: { requiresAuth: true }},  
+    { path: "/admin/blogs", name: "Blogs", component: Blogs, meta: { requiresAuth: true }}, 
+    { path: "/admin/addblog", name: "AddBlog", component: AddBlog, meta: { requiresAuth: true }},  
+    { path: "/admin/blog/post/:id", name: "ViewBlog", component: ViewBlog, meta: { requiresAuth: true }},  
     { path: "/admin/userbookings", name: "UserBooking", component: UserBooking, meta: { requiresAuth: true }},  
 ];
 

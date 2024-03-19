@@ -152,7 +152,7 @@
                     <!-- pages link end -->
 
                     <!-- blog link start -->
-                    <router-link :to="{ name: 'Index' }"
+                    <router-link :to="{ name: 'Blogs' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
