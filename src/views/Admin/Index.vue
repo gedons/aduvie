@@ -568,6 +568,11 @@ export default {
 
     methods: {
 
+        logoutAdmin() {           
+            localStorage.removeItem('adminToken');
+            this.$router.push({ name: 'Login' });
+        },
+
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;
         },

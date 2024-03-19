@@ -623,6 +623,11 @@ export default {
             }
         },
 
+        logoutAdmin() {           
+            localStorage.removeItem('adminToken');
+            this.$router.push({ name: 'Login' });
+        },
+
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;
         },
