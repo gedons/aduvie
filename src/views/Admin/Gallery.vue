@@ -355,12 +355,15 @@
                                         <tbody v-for="gallery in galleryImages" :key="gallery._id" class="bg-white">
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                    <div class="flex items-center">
                                                         <img class="w-10 h-9 rounded-full"
                                                             :src="`${back_url}${gallery.imageUrl}`" loading="lazy"
                                                             alt="">
+
+
                                                     </div>
                                                 </td>
+
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
@@ -430,6 +433,8 @@ export default {
             selected: '',
             page: '',
             galleryImages: [],
+            image: null,
+            imageUrl: '',
             isEditMode: false,
             isDeleteMode: false,
             deleteGallery: {},
@@ -500,6 +505,10 @@ export default {
             this.$router.push({ name: 'Login' });
         },
 
+        handleFileUpload(event) {
+            this.image = event.target.files[0];
+        },
+
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;
         },
@@ -544,6 +553,7 @@ export default {
         },
 
 
-    }
+    },
+
 }
 </script>

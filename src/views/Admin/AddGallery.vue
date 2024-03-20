@@ -295,7 +295,7 @@
                                                     Image
                                                 </label>
                                                 <input type="file" @change="handleFileUpload">
-                                                <img v-if="imageUrl" :src="imageUrl" alt="Blog Post Image"
+                                                <img v-if="imageUrl" :src="imageUrl" alt="Image"
                                                     class="preview-image my-5">
                                             </div>
                                         </div>
@@ -366,7 +366,7 @@ export default {
             try {
                 const formData = new FormData();
                 formData.append('image', this.image);
-                formData.append('galleryText', this.HeaderText);
+                formData.append('galleryText', this.galleryText);
                
                 const adminToken = localStorage.getItem('adminToken');
                 const config = {
