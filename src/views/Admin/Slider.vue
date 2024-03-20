@@ -382,15 +382,11 @@
                                                     </div>
                                                 </td>
 
-                                                <!-- <td
-                                                    class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                    <router-link :to="{ name: 'ViewBlog', params: { id: blog._id } }"
-                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</router-link>
-                                                    <button @click="openEditModal(blog)"
-                                                        class=" text-sm px-2 py-2 font-semibold text-indigo-400  hover:text-indigo-300">View</button>
-                                                    <button @click="openDeleteModal(blog)"
+                                                <td
+                                                    class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">                                                                                                      
+                                                    <button @click="openDeleteModal(slider)"
                                                         class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
-                                                </td> -->
+                                                </td>
                                             </tr>
 
 
@@ -412,10 +408,10 @@
                 class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
                 <!-- Delete confirmation -->
                 <div v-if="isDeleteMode">
-                    <p class="font-semibold">Are you sure you want to delete this blog?</p>
+                    <p class="font-semibold">Are you sure you want to delete this Slider?</p>
                     <div class="flex gap-3">
                         <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
-                            @click="confirmDelete(blog)">Yes</button>
+                            @click="confirmDelete(slider)">Yes</button>
                         <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
                             @click="closeModal1">No</button>
                     </div>
@@ -444,9 +440,8 @@ export default {
             page: '',
             sliderImages: [],
             isEditMode: false,
-            isDeleteMode: false,
-            editedBlog: {},
-            deleteBlog: {},
+            isDeleteMode: false,            
+            deleteSlider: {},
             back_url: 'http://localhost:5000',
 
         };
@@ -481,16 +476,16 @@ export default {
                     this.$router.push({ name: 'Login' });
                     return;
                 }
-                await axios.delete(`${api}/blogs/delete/${this.deleteBlog._id}`, config)
+                await axios.delete(`${api}/sliders/slider/${this.deleteSlider._id}`, config)
                     .then((success) => {
                         if (success) {
-                            this.$toast.success('Blog Deleted Successfully.', {
+                            this.$toast.success('Slider Deleted Successfully.', {
                                 timeout: 3000,
                             });
                             this.closeModal1();
-                            const postId = this.deleteBlog._id;
-                            this.blogPosts = this.blogPosts.filter(event => event._id !== postId);
-                            this.blogPosts.sort((a, b) => {
+                            const sliderId = this.deleteSlider._id;
+                            this.sliderImages = this.sliderImages.filter(slider => slider._id !== sliderId);
+                            this.sliderImages.sort((a, b) => {
                                 const dateA = new Date(a.createdAt).getTime();
                                 const dateB = new Date(b.createdAt).getTime();
                                 return dateB - dateA;
@@ -538,18 +533,11 @@ export default {
         },
         formatDate(date) {
             return moment(date).fromNow();
-        },
+        },        
 
-        openEditModal(blog) {
-            this.isEditMode = true;
-            this.editedBlog = { ...blog };
-            document.getElementById('modal-bg').classList.remove('hidden');
-            document.getElementById('modal-box').classList.remove('hidden');
-        },
-
-        openDeleteModal(blog) {
+        openDeleteModal(slider) {
             this.isDeleteMode = true;
-            this.deleteBlog = { ...blog };
+            this.deleteSlider = { ...slider };
             document.getElementById('modal-bg4').classList.remove('hidden');
             document.getElementById('modal-box4').classList.remove('hidden');
         },
