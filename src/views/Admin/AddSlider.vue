@@ -135,9 +135,8 @@
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Slider</router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{ name: 'Slider' }" 
-                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white"
-                                        >Gallery</router-link>
+                                    <router-link :to="{ name: 'Slider' }"
+                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Gallery</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -281,7 +280,7 @@
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
                             <h3 class="text-3xl font-medium text-gray-700">Slider</h3>
-                            <router-link :to="{ name: 'Blogs' }"
+                            <router-link :to="{ name: 'Slider' }"
                                 class="ml-3 font-medium text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">All
                                 Images</router-link>
                         </div>
@@ -293,7 +292,7 @@
                                         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                             <div class="w-full xl:w-1/2">
                                                 <label class="mb-3 block text-black">
-                                                     Image
+                                                    Image
                                                 </label>
                                                 <input type="file" @change="handleFileUpload">
                                                 <img v-if="imageUrl" :src="imageUrl" alt="Blog Post Image"
@@ -305,16 +304,18 @@
                                             <label class="mb-2 block text-black">
                                                 Heading Text
                                             </label>
-                                            <input type="text" id="name" v-model="HeaderText" placeholder="Enter slider heading text"
+                                            <input type="text" id="name" v-model="HeaderText"
+                                                placeholder="Enter slider heading text"
                                                 class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                        </div>       
+                                        </div>
                                         <div class="w-full mb-5 mt-8">
                                             <label class="mb-2 block text-black">
                                                 Body Text
                                             </label>
-                                            <input type="text" id="name" v-model="BodyText" placeholder="Enter slider body text"
+                                            <input type="text" id="name" v-model="BodyText"
+                                                placeholder="Enter slider body text"
                                                 class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                        </div>                                         
+                                        </div>
 
                                         <button type="submit"
                                             class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
@@ -361,7 +362,7 @@ export default {
         };
     },
 
-    
+
     methods: {
 
 
@@ -379,10 +380,10 @@ export default {
 
                 const adminToken = localStorage.getItem('adminToken');
                 const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${adminToken}`,
-                }
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${adminToken}`,
+                    }
                 };
 
                 await axios.post(`${api}/sliders/slider`, formData, config);
@@ -398,7 +399,7 @@ export default {
             }
         },
 
-        logoutAdmin() {           
+        logoutAdmin() {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },
