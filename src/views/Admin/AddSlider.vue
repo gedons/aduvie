@@ -280,59 +280,41 @@
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">Events</h3>
-                            <router-link :to="{ name: 'Events' }"
+                            <h3 class="text-3xl font-medium text-gray-700">Slider</h3>
+                            <router-link :to="{ name: 'Blogs' }"
                                 class="ml-3 font-medium text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">All
-                                Events</router-link>
+                                Images</router-link>
                         </div>
 
                         <div class="flex flex-col mt-8">
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                                <form @submit.prevent="createEvent">
+                                <form @submit.prevent="uploadSliderImage">
                                     <div class="p-6.5">
                                         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                             <div class="w-full xl:w-1/2">
-                                                <label class="mb-2.5 block text-black">
-                                                    Event Name
+                                                <label class="mb-3 block text-black">
+                                                     Image
                                                 </label>
-                                                <input type="text" id="name" v-model="name" placeholder="Event Name"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                            </div>
-
-                                            <div class="w-full xl:w-1/2">
-                                                <label class="mb-2.5 block text-black">
-                                                    Date
-                                                </label>
-                                                <input type="date" id="date" v-model="date" placeholder="Event Date"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                            </div>
-
-                                            <div class="w-full xl:w-1/2">
-                                                <label class="mb-2.5 block text-black">
-                                                    Email
-                                                </label>
-                                                <input type="email" id="email" v-model="email" placeholder="Event Email"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                            </div>
-
-
-                                            <div class="w-full xl:w-1/2">
-
-                                                <input type="hidden" id="status" v-model="status"
-                                                    placeholder="Event Status"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                                <input type="file" @change="handleFileUpload">
+                                                <img v-if="imageUrl" :src="imageUrl" alt="Blog Post Image"
+                                                    class="preview-image my-5">
                                             </div>
                                         </div>
-                                        <div class="mb-6">
-                                            <label class="mb-2.5 mt-3 block text-black">
-                                                Description
+
+                                        <div class="w-full mb-5 mt-8">
+                                            <label class="mb-2 block text-black">
+                                                Heading Text
                                             </label>
-                                            <textarea rows="6" id="description" v-model="description"
-                                                placeholder="Type your message"
-                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input"></textarea>
-                                        </div>
-
-
+                                            <input type="text" id="name" v-model="HeaderText" placeholder="Enter slider heading text"
+                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                        </div>       
+                                        <div class="w-full mb-5 mt-8">
+                                            <label class="mb-2 block text-black">
+                                                Body Text
+                                            </label>
+                                            <input type="text" id="name" v-model="BodyText" placeholder="Enter slider body text"
+                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                        </div>                                         
 
                                         <button type="submit"
                                             class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
@@ -355,7 +337,12 @@
 import axios from 'axios';
 import api from '../../api';
 import moment from 'moment';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CKEditor from "@ckeditor/ckeditor5-vue";
 export default {
+    components: {
+        ckeditor: CKEditor.component
+    },
     data() {
         return {
             sidebarOpen: false,
@@ -363,48 +350,48 @@ export default {
             dropdownOpen: false,
             selected: '',
             page: '',
-            name: '',
-            date: '',
-            email: '',
-            status: 'pending',
-            description: ''
+            title: '',
+            content: '',
+            image: null,
+            HeaderText: '',
+            BodyText: '',
+            imageUrl: '',
+            back_url: 'http://localhost:5000',
+            editor: ClassicEditor
         };
     },
 
+    
     methods: {
 
-        //create event
-        async createEvent() {
+
+        handleFileUpload(event) {
+            this.image = event.target.files[0];
+            this.imageUrl = URL.createObjectURL(this.image);
+        },
+
+        async uploadSliderImage() {
             try {
+                const formData = new FormData();
+                formData.append('image', this.image);
+                formData.append('HeaderText', this.HeaderText);
+                formData.append('BodyText', this.BodyText);
 
                 const adminToken = localStorage.getItem('adminToken');
                 const config = {
-                    headers: {
-                        Authorization: `Bearer ${adminToken}`,
-                    },
-                };
-                const newEvent = {
-                    name: this.name,
-                    email: this.email,
-                    date: this.date,
-                    status: this.status,
-                    description: this.description
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${adminToken}`,
+                }
                 };
 
-                await axios.post(`${api}/events/create`, newEvent, config);
-                this.$router.push({ name: 'Events' });
-
-                this.$toast.success('Event Created Successfully.', {
+                await axios.post(`${api}/sliders/slider`, formData, config);
+                this.$router.push({ name: 'Slider' });
+                this.$toast.success('Image Created Successfully.', {
                     timeout: 3000,
                 });
-                this.$toast.info('Email Sent Successfully.', {
-                    timeout: 6000,
-                });
-
             } catch (error) {
-                console.error('Error creating event:', error.response.data);
-
-                // Display error notification
+                console.error('Error uploading slider image:', error.response.data);
                 this.$toast.error('An error occurred while creating the event. Please try again later.', {
                     timeout: 3000,
                 });
@@ -442,31 +429,14 @@ export default {
             return moment(date).fromNow();
         },
 
-        openEditModal(event) {
-            this.isEditMode = true;
-            this.editedEvent = { ...event };
-            document.getElementById('modal-bg').classList.remove('hidden');
-            document.getElementById('modal-box').classList.remove('hidden');
-        },
-
-        openDeleteModal(event) {
-            this.isDeleteMode = true;
-            this.deleteEvent = { ...event };
-            document.getElementById('modal-bg4').classList.remove('hidden');
-            document.getElementById('modal-box4').classList.remove('hidden');
-        },
-
-        closeModal() {
-            document.getElementById('modal-bg').classList.add('hidden');
-            document.getElementById('modal-box').classList.add('hidden');
-        },
-
-        closeModal1() {
-            document.getElementById('modal-bg4').classList.add('hidden');
-            document.getElementById('modal-box4').classList.add('hidden');
-        },
-
 
     }
 }
 </script>
+
+<!-- <style>
+.preview-image {
+  max-width: 200px;
+  margin-top: 10px;
+}
+</style> -->

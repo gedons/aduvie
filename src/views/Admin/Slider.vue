@@ -135,9 +135,8 @@
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Slider</router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{ name: 'Slider' }" 
-                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white"
-                                        >Gallery</router-link>
+                                    <router-link :to="{ name: 'Slider' }"
+                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Gallery</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -278,75 +277,153 @@
                 </header>
 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">Events</h3>
-                            <router-link :to="{ name: 'Events' }"
-                                class="ml-3 font-medium text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">All
-                                Events</router-link>
+                            <h3 class="text-3xl font-medium text-gray-700">Slider Image</h3>
+                            <router-link :to="{ name: 'AddSlider' }"
+                                class=" font-medium ml-3 text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">Add
+                                New</router-link>
                         </div>
 
-                        <div class="flex flex-col mt-8">
+                        <div v-if="loading" class="flex justify-center items-center mt-3">
+                            <svg class="w-10 h-10" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g transform="translate(2 1)" stroke="#000" stroke-width="1.5">
+                                        <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="1;0;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;1;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;1;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;1;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;1;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;1;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;0;1;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;0;0;1" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div v-else class="flex flex-col mt-8">
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                                <form @submit.prevent="createEvent">
-                                    <div class="p-6.5">
-                                        <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                            <div class="w-full xl:w-1/2">
-                                                <label class="mb-2.5 block text-black">
-                                                    Event Name
-                                                </label>
-                                                <input type="text" id="name" v-model="name" placeholder="Event Name"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                            </div>
+                                <div
+                                    class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                                    <table class="min-w-full">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Image</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Title</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Content</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Date Created</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Actions</th>
 
-                                            <div class="w-full xl:w-1/2">
-                                                <label class="mb-2.5 block text-black">
-                                                    Date
-                                                </label>
-                                                <input type="date" id="date" v-model="date" placeholder="Event Date"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                            </div>
-
-                                            <div class="w-full xl:w-1/2">
-                                                <label class="mb-2.5 block text-black">
-                                                    Email
-                                                </label>
-                                                <input type="email" id="email" v-model="email" placeholder="Event Email"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                            </div>
-
-
-                                            <div class="w-full xl:w-1/2">
-
-                                                <input type="hidden" id="status" v-model="status"
-                                                    placeholder="Event Status"
-                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                            </div>
+                                            </tr>
+                                        </thead>
+                                        <div v-if="blogPosts.length === 0" class="p-2.5 xl:p-5">
+                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Blog
+                                                Available!!!</p>
                                         </div>
-                                        <div class="mb-6">
-                                            <label class="mb-2.5 mt-3 block text-black">
-                                                Description
-                                            </label>
-                                            <textarea rows="6" id="description" v-model="description"
-                                                placeholder="Type your message"
-                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input"></textarea>
-                                        </div>
+                                        <tbody v-for="blog in blogPosts" :key="blog._id" class="bg-white">
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        <img class="w-10 h-9 rounded-full"
+                                                            :src="`${back_url}/${blog.image}`" loading="lazy" alt="">
+                                                    </div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ blog.title }} </div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ truncateContent(blog.content) }}
+                                                    </div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ formatDate(blog.createdAt) }}
+                                                    </div>
+                                                </td>
+
+                                                <td
+                                                    class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                    <router-link :to="{ name: 'ViewBlog', params: { id: blog._id } }"
+                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</router-link>
+                                                    <button @click="openEditModal(blog)"
+                                                        class=" text-sm px-2 py-2 font-semibold text-indigo-400  hover:text-indigo-300">View</button>
+                                                    <button @click="openDeleteModal(blog)"
+                                                        class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
+                                                </td>
+                                            </tr>
 
 
 
-                                        <button type="submit"
-                                            class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
-                                            Save
-                                        </button>
-                                    </div>
-                                </form>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </main>
             </div>
         </div>
+
+        <!-- delete modal -->
+        <div>
+            <div id="modal-bg4" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
+            <div id="modal-box4"
+                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
+                <!-- Delete confirmation -->
+                <div v-if="isDeleteMode">
+                    <p class="font-semibold">Are you sure you want to delete this blog?</p>
+                    <div class="flex gap-3">
+                        <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="confirmDelete(blog)">Yes</button>
+                        <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="closeModal1">No</button>
+                    </div>
+                </div>
+                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
+                    @click="closeModal1">Close</button>
+            </div>
+        </div>
+        <!-- modal end -->
     </div>
 
 </template>
@@ -358,60 +435,89 @@ import moment from 'moment';
 export default {
     data() {
         return {
+
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
             selected: '',
             page: '',
-            name: '',
-            date: '',
-            email: '',
-            status: 'pending',
-            description: ''
+            blogPosts: [],
+            isEditMode: false,
+            isDeleteMode: false,
+            editedBlog: {},
+            deleteBlog: {},
+            back_url: 'http://localhost:5000',
+
         };
     },
-
+    created() {
+        this.getAllSliderImages();
+    },
     methods: {
 
-        //create event
-        async createEvent() {
+        async getAllSliderImages() {
             try {
+                const response = await axios.get(`${api}/sliders/slider`);
+                this.sliderImages = response.data;
+            } catch (error) {
+                console.error('Error fetching slider images:', error.response.data);
+                this.$toast.error('Failed to fetch slider images.');
+            }
+        },
 
+       
+        async confirmDelete() {
+            try {
                 const adminToken = localStorage.getItem('adminToken');
                 const config = {
                     headers: {
                         Authorization: `Bearer ${adminToken}`,
                     },
                 };
-                const newEvent = {
-                    name: this.name,
-                    email: this.email,
-                    date: this.date,
-                    status: this.status,
-                    description: this.description
-                };
 
-                await axios.post(`${api}/events/create`, newEvent, config);
-                this.$router.push({ name: 'Events' });
+                if (!adminToken) {
+                    localStorage.removeItem('adminToken');
+                    this.$router.push({ name: 'Login' });
+                    return;
+                }
+                await axios.delete(`${api}/blogs/delete/${this.deleteBlog._id}`, config)
+                    .then((success) => {
+                        if (success) {
+                            this.$toast.success('Blog Deleted Successfully.', {
+                                timeout: 3000,
+                            });
+                            this.closeModal1();
+                            const postId = this.deleteBlog._id;
+                            this.blogPosts = this.blogPosts.filter(event => event._id !== postId);
+                            this.blogPosts.sort((a, b) => {
+                                const dateA = new Date(a.createdAt).getTime();
+                                const dateB = new Date(b.createdAt).getTime();
+                                return dateB - dateA;
+                            });
+                        } else {
+                            this.$toast.error('An Error Occured. try again!', {
+                                timeout: 9000,
+                            });
+                        }
+                    });
 
-                this.$toast.success('Event Created Successfully.', {
-                    timeout: 3000,
-                });
-                this.$toast.info('Email Sent Successfully.', {
-                    timeout: 6000,
-                });
 
             } catch (error) {
-                console.error('Error creating event:', error.response.data);
-
-                // Display error notification
-                this.$toast.error('An error occurred while creating the event. Please try again later.', {
-                    timeout: 3000,
-                });
+                console.error('Error deleting Event', error);
+                // Handle error
             }
         },
 
-        logoutAdmin() {           
+        truncateContent(content) {
+            const maxLength = 100;
+            if (content.length > maxLength) {
+                return content.substring(0, maxLength) + '...';
+            } else {
+                return content;
+            }
+        },
+
+        logoutAdmin() {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },
@@ -442,16 +548,16 @@ export default {
             return moment(date).fromNow();
         },
 
-        openEditModal(event) {
+        openEditModal(blog) {
             this.isEditMode = true;
-            this.editedEvent = { ...event };
+            this.editedBlog = { ...blog };
             document.getElementById('modal-bg').classList.remove('hidden');
             document.getElementById('modal-box').classList.remove('hidden');
         },
 
-        openDeleteModal(event) {
+        openDeleteModal(blog) {
             this.isDeleteMode = true;
-            this.deleteEvent = { ...event };
+            this.deleteBlog = { ...blog };
             document.getElementById('modal-bg4').classList.remove('hidden');
             document.getElementById('modal-box4').classList.remove('hidden');
         },
