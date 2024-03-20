@@ -338,10 +338,10 @@
                                                     Image</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Title</th>
+                                                    Header Text</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Content</th>
+                                                    Body Text</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                     Date Created</th>
@@ -351,37 +351,38 @@
 
                                             </tr>
                                         </thead>
-                                        <div v-if="blogPosts.length === 0" class="p-2.5 xl:p-5">
-                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Blog
+                                        <div v-if="sliderImages.length === 0" class="p-2.5 xl:p-5">
+                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Image
                                                 Available!!!</p>
                                         </div>
-                                        <tbody v-for="blog in blogPosts" :key="blog._id" class="bg-white">
+                                        <tbody v-for="slider in sliderImages" :key="slider._id" class="bg-white">
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
                                                         <img class="w-10 h-9 rounded-full"
-                                                            :src="`${back_url}/${blog.image}`" loading="lazy" alt="">
+                                                            :src="`${back_url}${slider.imageUrl}`" loading="lazy"
+                                                            alt="">
                                                     </div>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ blog.title }} </div>
+                                                        {{ slider.HeaderText }} </div>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ truncateContent(blog.content) }}
+                                                        {{ slider.BodyText }}
                                                     </div>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ formatDate(blog.createdAt) }}
+                                                        {{ formatDate(slider.createdAt) }}
                                                     </div>
                                                 </td>
 
-                                                <td
+                                                <!-- <td
                                                     class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">
                                                     <router-link :to="{ name: 'ViewBlog', params: { id: blog._id } }"
                                                         class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</router-link>
@@ -389,7 +390,7 @@
                                                         class=" text-sm px-2 py-2 font-semibold text-indigo-400  hover:text-indigo-300">View</button>
                                                     <button @click="openDeleteModal(blog)"
                                                         class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
-                                                </td>
+                                                </td> -->
                                             </tr>
 
 
@@ -441,7 +442,7 @@ export default {
             dropdownOpen: false,
             selected: '',
             page: '',
-            blogPosts: [],
+            sliderImages: [],
             isEditMode: false,
             isDeleteMode: false,
             editedBlog: {},
@@ -465,7 +466,7 @@ export default {
             }
         },
 
-       
+
         async confirmDelete() {
             try {
                 const adminToken = localStorage.getItem('adminToken');
@@ -505,15 +506,6 @@ export default {
             } catch (error) {
                 console.error('Error deleting Event', error);
                 // Handle error
-            }
-        },
-
-        truncateContent(content) {
-            const maxLength = 100;
-            if (content.length > maxLength) {
-                return content.substring(0, maxLength) + '...';
-            } else {
-                return content;
             }
         },
 
