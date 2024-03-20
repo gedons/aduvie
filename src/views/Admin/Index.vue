@@ -317,7 +317,7 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">7</h4>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{ totalBlog }}</h4>
                                             <div class="text-gray-500">Blog Posts</div>
                                         </div>
                                     </div>
@@ -341,7 +341,7 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">6</h4>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{totalEvent}}</h4>
                                             <div class="text-gray-500">Total Events</div>
                                         </div>
                                     </div>
@@ -370,7 +370,7 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">3</h4>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{totalBooking}}</h4>
                                             <div class="text-gray-500">User Bookings</div>
                                         </div>
                                     </div>
@@ -403,7 +403,7 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">5</h4>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{ totalAdmin }}</h4>
                                             <div class="text-gray-500">Admin Account</div>
                                         </div>
                                     </div>
@@ -541,8 +541,8 @@
             </div>
         </div>
 
-         <!-- edit modal modal -->
-         <div>
+        <!-- edit modal modal -->
+        <div>
             <div id="modal-bg" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
             <div id="modal-box"
                 class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
@@ -575,7 +575,7 @@
                         <option value="completed">Completed</option>
                     </select>
                     <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
-                    class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>         
+                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>
                     <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
                         type="submit">Update</button>
                 </form>
@@ -583,7 +583,7 @@
                 <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
                     @click="closeModal">Close</button>
             </div>
-         </div>
+        </div>
         <!-- modal end -->
 
 
@@ -626,6 +626,10 @@ export default {
             selected: '',
             page: '',
             events: [],
+            totalAdmin: 0,
+            totalBlog: 0,
+            totalEvent: 0,
+            totalBooking : 0,
             isEditMode: false,
             isDeleteMode: false,
             editedEvent: {},
@@ -636,6 +640,10 @@ export default {
 
     created() {
         this.fetchEvents();
+        this.fetchAdminCount();
+        this.fetchBlogCount();
+        this.fetchEventCount();
+        this.fetchBookingCount();
     },
     methods: {
 
@@ -747,7 +755,43 @@ export default {
             }
         },
 
-        logoutAdmin() {           
+        fetchAdminCount() {
+            axios.get(`${api}/auth/admin/total-admin`).then((response) => {
+                this.totalAdmin = response.data.totalAdmin;
+            })
+                .catch((error) => {
+                    console.error('Error getting admins:', error);
+                });
+        },
+
+        fetchBlogCount() {
+            axios.get(`${api}/blogs/total-blog`).then((response) => {
+                this.totalBlog = response.data.totalBlog;
+            })
+                .catch((error) => {
+                    console.error('Error getting blogs:', error);
+                });
+        },
+
+        fetchEventCount() {
+            axios.get(`${api}/events/total-event`).then((response) => {
+                this.totalEvent = response.data.totalEvent;
+            })
+                .catch((error) => {
+                    console.error('Error getting events:', error);
+                });
+        },
+
+        fetchBookingCount() {
+            axios.get(`${api}/bookings/total-booking`).then((response) => {
+                this.totalBooking = response.data.totalBooking;
+            })
+                .catch((error) => {
+                    console.error('Error getting bookings:', error);
+                });
+        },
+
+        logoutAdmin() {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },
