@@ -135,11 +135,9 @@
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Slider</router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{ name: 'Slider' }" 
-                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white"
-                                        >Gallery</router-link>
+                                    <router-link :to="{ name: 'Gallery' }"
+                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Gallery</router-link>
                                 </li>
-                                
                                 
                             </ul>
                         </div>

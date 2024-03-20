@@ -279,15 +279,15 @@
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">Add Slider</h3>
-                            <router-link :to="{ name: 'Slider' }"
+                            <h3 class="text-3xl font-medium text-gray-700">Add Gallery</h3>
+                            <router-link :to="{ name: 'Gallery' }"
                                 class="ml-3 font-medium text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">All
                                 Images</router-link>
                         </div>
 
                         <div class="flex flex-col mt-8">
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                                <form @submit.prevent="uploadSliderImage">
+                                <form @submit.prevent="uploadGalleryImage">
                                     <div class="p-6.5">
                                         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                             <div class="w-full xl:w-1/2">
@@ -302,20 +302,12 @@
 
                                         <div class="w-full mb-5 mt-8">
                                             <label class="mb-2 block text-black">
-                                                Heading Text
+                                                Image Text
                                             </label>
-                                            <input type="text" id="name" v-model="HeaderText"
-                                                placeholder="Enter slider heading text"
+                                            <input type="text" id="name" v-model="galleryText"
+                                                placeholder="Enter image text"
                                                 class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                        </div>
-                                        <div class="w-full mb-5 mt-8">
-                                            <label class="mb-2 block text-black">
-                                                Body Text
-                                            </label>
-                                            <input type="text" id="name" v-model="BodyText"
-                                                placeholder="Enter slider body text"
-                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                        </div>
+                                        </div>                                        
 
                                         <button type="submit"
                                             class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
@@ -354,8 +346,7 @@ export default {
             title: '',
             content: '',
             image: null,
-            HeaderText: '',
-            BodyText: '',
+            galleryText: '',          
             imageUrl: '',
             back_url: 'http://localhost:5000',
             editor: ClassicEditor
@@ -371,13 +362,12 @@ export default {
             this.imageUrl = URL.createObjectURL(this.image);
         },
 
-        async uploadSliderImage() {
+        async uploadGalleryImage() {
             try {
                 const formData = new FormData();
                 formData.append('image', this.image);
-                formData.append('HeaderText', this.HeaderText);
-                formData.append('BodyText', this.BodyText);
-
+                formData.append('galleryText', this.HeaderText);
+               
                 const adminToken = localStorage.getItem('adminToken');
                 const config = {
                     headers: {
@@ -386,14 +376,14 @@ export default {
                     }
                 };
 
-                await axios.post(`${api}/sliders/slider`, formData, config);
-                this.$router.push({ name: 'Slider' });
+                await axios.post(`${api}/galleries/gallery`, formData, config);
+                this.$router.push({ name: 'Gallery' });
                 this.$toast.success('Image Created Successfully.', {
                     timeout: 3000,
                 });
             } catch (error) {
                 console.error('Error uploading slider image:', error.response.data);
-                this.$toast.error('An error occurred while creating the event. Please try again later.', {
+                this.$toast.error('An error occurred while creating the gallery. Please try again later.', {
                     timeout: 3000,
                 });
             }

@@ -135,7 +135,7 @@
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Slider</router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{ name: 'Slider' }"
+                                    <router-link :to="{ name: 'Gallery' }"
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Gallery</router-link>
                                 </li>
                             </ul>
@@ -280,8 +280,8 @@
 
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">Slider Image</h3>
-                            <router-link :to="{ name: 'AddSlider' }"
+                            <h3 class="text-3xl font-medium text-gray-700">Gallery Image</h3>
+                            <router-link :to="{ name: 'AddGallery' }"
                                 class=" font-medium ml-3 text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">Add
                                 New</router-link>
                         </div>
@@ -338,10 +338,7 @@
                                                     Image</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Header Text</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Body Text</th>
+                                                    Image Text</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                     Date Created</th>
@@ -351,40 +348,34 @@
 
                                             </tr>
                                         </thead>
-                                        <div v-if="sliderImages.length === 0" class="p-2.5 xl:p-5">
+                                        <div v-if="galleryImages.length === 0" class="p-2.5 xl:p-5">
                                             <p class="font-semibold text-sm leading-5 text-gray-700">No Image
                                                 Available!!!</p>
                                         </div>
-                                        <tbody v-for="slider in sliderImages" :key="slider._id" class="bg-white">
+                                        <tbody v-for="gallery in galleryImages" :key="gallery._id" class="bg-white">
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
                                                         <img class="w-10 h-9 rounded-full"
-                                                            :src="`${back_url}${slider.imageUrl}`" loading="lazy"
+                                                            :src="`${back_url}${gallery.imageUrl}`" loading="lazy"
                                                             alt="">
                                                     </div>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ slider.HeaderText }} </div>
+                                                        {{ gallery.galleryText }} </div>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ slider.BodyText }}
-                                                    </div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ formatDate(slider.createdAt) }}
+                                                        {{ formatDate(gallery.createdAt) }}
                                                     </div>
                                                 </td>
 
                                                 <td
                                                     class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                    <button @click="openDeleteModal(slider)"
+                                                    <button @click="openDeleteModal(gallery)"
                                                         class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
                                                 </td>
                                             </tr>
@@ -408,10 +399,10 @@
                 class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
                 <!-- Delete confirmation -->
                 <div v-if="isDeleteMode">
-                    <p class="font-semibold">Are you sure you want to delete this Slider?</p>
+                    <p class="font-semibold">Are you sure you want to delete this Gallery?</p>
                     <div class="flex gap-3">
                         <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
-                            @click="confirmDelete(slider)">Yes</button>
+                            @click="confirmDelete(gallery)">Yes</button>
                         <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
                             @click="closeModal1">No</button>
                     </div>
@@ -438,26 +429,26 @@ export default {
             dropdownOpen: false,
             selected: '',
             page: '',
-            sliderImages: [],
+            galleryImages: [],
             isEditMode: false,
             isDeleteMode: false,
-            deleteSlider: {},
+            deleteGallery: {},
             back_url: 'http://localhost:5000',
 
         };
     },
     created() {
-        this.getAllSliderImages();
+        this.getAllGalleryImages();
     },
     methods: {
 
-        async getAllSliderImages() {
+        async getAllGalleryImages() {
             try {
-                const response = await axios.get(`${api}/sliders/slider`);
-                this.sliderImages = response.data;
+                const response = await axios.get(`${api}/galleries/gallery`);
+                this.galleryImages = response.data;
             } catch (error) {
-                console.error('Error fetching slider images:', error.response.data);
-                this.$toast.error('Failed to fetch slider images.');
+                console.error('Error fetching gallery images:', error.response.data);
+                this.$toast.error('Failed to fetch gallery images.');
             }
         },
 
@@ -476,16 +467,16 @@ export default {
                     this.$router.push({ name: 'Login' });
                     return;
                 }
-                await axios.delete(`${api}/sliders/slider/${this.deleteSlider._id}`, config)
+                await axios.delete(`${api}/galleries/gallery/${this.deleteGallery._id}`, config)
                     .then((success) => {
                         if (success) {
-                            this.$toast.success('Slider Deleted Successfully.', {
+                            this.$toast.success('Gallery Deleted Successfully.', {
                                 timeout: 3000,
                             });
                             this.closeModal1();
-                            const sliderId = this.deleteSlider._id;
-                            this.sliderImages = this.sliderImages.filter(slider => slider._id !== sliderId);
-                            this.sliderImages.sort((a, b) => {
+                            const galleryId = this.deleteGallery._id;
+                            this.galleryImages = this.galleryImages.filter(slider => slider._id !== galleryId);
+                            this.galleryImages.sort((a, b) => {
                                 const dateA = new Date(a.createdAt).getTime();
                                 const dateB = new Date(b.createdAt).getTime();
                                 return dateB - dateA;
@@ -535,9 +526,9 @@ export default {
             return moment(date).fromNow();
         },
 
-        openDeleteModal(slider) {
+        openDeleteModal(gallery) {
             this.isDeleteMode = true;
-            this.deleteSlider = { ...slider };
+            this.deleteGallery = { ...gallery };
             document.getElementById('modal-bg4').classList.remove('hidden');
             document.getElementById('modal-box4').classList.remove('hidden');
         },

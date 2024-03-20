@@ -14,6 +14,7 @@ import AdminSetting from '../views/Admin/AdminSetting.vue';
 import Slider from '../views/Admin/Slider.vue';
 import AddSlider from '../views/Admin/AddSlider.vue';
 import Gallery from '../views/Admin/Gallery.vue';
+import AddGallery from '../views/Admin/AddGallery.vue';
 
 
 
@@ -49,6 +50,7 @@ const routes = [
     { path: "/admin/slider", name: "Slider", component: Slider, meta: { requiresAuth: true }}, 
     { path: "/admin/addslider", name: "AddSlider", component: AddSlider, meta: { requiresAuth: true }}, 
     { path: "/admin/gallery", name: "Gallery", component: Gallery, meta: { requiresAuth: true }},  
+    { path: "/admin/addgallery", name: "AddGallery", component: AddGallery, meta: { requiresAuth: true }}, 
 ];
 
 const router = createRouter({
