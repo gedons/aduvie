@@ -442,7 +442,8 @@ export default {
             isEditMode: false,
             isDeleteMode: false,            
             deleteSlider: {},
-            back_url: 'http://localhost:5000',
+            //back_url: 'http://localhost:5000',
+            back_url:'https://aduvieapi.onrender.com'
 
         };
     },

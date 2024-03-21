@@ -438,7 +438,8 @@ export default {
             isEditMode: false,
             isDeleteMode: false,
             deleteGallery: {},
-            back_url: 'http://localhost:5000',
+           // back_url: 'http://localhost:5000',
+            back_url:'https://aduvieapi.onrender.com'
 
         };
     },

@@ -355,7 +355,8 @@ export default {
             bgImage3: bannerImage3,
             sliderImages: [],
             blogPosts: [],
-            back_url: 'http://localhost:5000',
+            //back_url: 'http://localhost:5000',
+            back_url:'https://aduvieapi.onrender.com'
         };
     },
 

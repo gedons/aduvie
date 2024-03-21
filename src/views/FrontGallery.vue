@@ -355,9 +355,10 @@ export default {
             bgImage2: bannerImage2,
             bgImage3: bannerImage3,
             galleryImages: [],
-            back_url: 'http://localhost:5000',
+            //back_url: 'http://localhost:5000',
             isModalVisible: false,
-            selectedImage: ''
+            selectedImage: '',
+            back_url:'https://aduvieapi.onrender.com'
         };
     },
 
