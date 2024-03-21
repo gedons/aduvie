@@ -15,6 +15,11 @@ import Slider from '../views/Admin/Slider.vue';
 import AddSlider from '../views/Admin/AddSlider.vue';
 import Gallery from '../views/Admin/Gallery.vue';
 import AddGallery from '../views/Admin/AddGallery.vue';
+import FrontGallery from '../views/FrontGallery.vue';
+import Blog from '../views/Blog.vue';
+import BlogView from '../views/BlogView.vue';
+import Contact from '../views/Contact.vue';
+import Book from '../views/Book.vue';
 
 
 
@@ -29,6 +34,13 @@ const routes = [
       name: 'Login',
       component: Login,
     },
+
+    // front routes
+    { path: "/gallery", name: "FrontGallery", component: FrontGallery }, 
+    { path: "/blog", name: "Blog", component: Blog }, 
+    { path: "/blog/post/:id", name: "BlogView", component: BlogView }, 
+    { path: "/contact", name: "Contact", component: Contact },  
+    { path: "/book-event", name: "Book", component: Book }, 
 
     // //admin routes
     {

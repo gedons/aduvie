@@ -31,15 +31,18 @@
                 <!-- desktop Navigation -->
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="menuOpen">
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
+                        <li><router-link :to="{ name: 'Index' }"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
-                        <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
-                                Us</a></li>
+                        <li><router-link :to="{ name: 'FrontGallery' }"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Blog' }"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Contact' }"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                Us</router-link></li>
                     </ul>
                 </nav>
 
@@ -47,13 +50,13 @@
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="!menuOpen">
                         <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
                         <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
                         </li>
                         <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
-                        <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
+                        <li><a href="#" class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
                                 Us</a></li>
                     </ul>
                 </nav>
@@ -221,7 +224,7 @@
                     <div>
 
                         <img src="../assets/images/1.jpg" alt="About" class="ib border rounded-lg lg:mt-20" />
-                        <img src="../assets/images/2.jpg" alt="About"  class="border rounded-lg lg:mt-20"/>
+                        <img src="../assets/images/2.jpg" alt="About" class="border rounded-lg lg:mt-20" />
                     </div>
                     <div>
 
@@ -339,41 +342,58 @@
         <!-- Section Title End -->
 
         <div class="bb ye ki xn vq jb jo">
-            <div class="wc qf pn xo zf iq">
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="../assets/images/blog-01.png" alt="Blog" />
+            <div v-if="loading" class="flex justify-center items-center mt-3">
+                <svg class="w-10 h-10" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd">
+                        <g transform="translate(2 1)" stroke="#000" stroke-width="1.5">
+                            <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="1;0;0;0;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;1;0;0;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;1;0;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;1;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;1;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;1;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;0;1;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;0;0;1"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+                    </g>
+                </svg>
+            </div>
 
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Free advertising for your online business</a>
-                        </h4>
-                    </div>
+            <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div v-if="latestBlogPost.length === 0" class="p-2.5 xl:p-5">
+                    <p class="font-semibold text-sm leading-5 text-gray-700">No Blog Available!!!</p>
                 </div>
-
                 <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
+                <div v-else v-for="blog in latestBlogPost" :key="blog._id" class="animate_top sg vk rm xm">
                     <div class="c rc i z-1 pg">
-                        <img class="w-full" src="../assets/images/blog-02.png" alt="Blog" />
+                        <img class="w-full h-48" :src="`${back_url}/${blog.image}`" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
+                            <router-link :to="{ name: 'BlogView', params: { id: blog._id } }" class="vc ek rg lk gh sl ml il gi hi">Read More</router-link>
                         </div>
                     </div>
 
@@ -381,42 +401,15 @@
                         <div class="tc uf wf ag jq">
                             <div class="tc wf ag">
                                 <img src="../assets/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
+                                <p>Admin</p>
                             </div>
                             <div class="tc wf ag">
                                 <img src="../assets/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
+                                <p>{{ formatDate(blog.createdAt) }}</p>
                             </div>
                         </div>
                         <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">9 simple ways to improve your design skills</a>
-                        </h4>
-                    </div>
-                </div>
-
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="../assets/images/blog-03.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
+                            <a href="blog-single.html"> {{ blog.title }}</a>
                         </h4>
                     </div>
                 </div>
@@ -745,6 +738,7 @@
 import axios from 'axios';
 import api from '../api';
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import moment from 'moment';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -766,18 +760,21 @@ export default {
     },
     data() {
         return {
+            loading: true,
             menuOpen: true,
             bgImage: bannerImage,
             bgImage1: bannerImage1,
             bgImage2: bannerImage2,
             bgImage3: bannerImage3,
             sliderImages: [],
+            latestBlogPost: [],
             back_url: 'http://localhost:5000',
         };
     },
 
     created() {
         this.getAllSliderImages();
+        this.getLatestBlogPost();
     },
 
     methods: {
@@ -794,6 +791,19 @@ export default {
                 this.$toast.error('Failed to fetch slider images.');
                 this.loading = false;
             }
+        },
+        getLatestBlogPost() {
+            axios.get(`${api}/blogs/latest`).then((response) => {
+                this.latestBlogPost = response.data;
+                this.loading = false;
+            })
+                .catch((error) => {
+                    console.error('Error getting blog posts:', error);
+                    this.loading = false;
+                });
+        },
+        formatDate(date) {
+            return moment(date).fromNow();
         },
     }
 };
