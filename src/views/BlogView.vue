@@ -83,7 +83,7 @@
                 <div class="ro">
                     <div
                         class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
-                        <img  :src="`${back_url}/${blogPost.image}`" alt="Blog" />
+                        <img :src="`${back_url}/${blogPost.image}`" alt="Blog" />
 
                         <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb gb">{{ blogPost.title }}</h2>
 
@@ -180,14 +180,58 @@
 
                     <div class="animate_top">
                         <h4 class="tj kk wm qb">More Posts</h4>
+                        <div v-if="loading" class="flex justify-center items-center mt-3">
+                            <svg class="w-10 h-10" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g transform="translate(2 1)" stroke="#000" stroke-width="1.5">
+                                        <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="1;0;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;1;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;1;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;1;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;1;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;1;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;0;1;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;0;0;1" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
 
-                        <div>
-                            <div class="tc fg 2xl:ud-gap-6 qb">
-                                <img src="../assets/images/blog-small-01.png" alt="Blog" />
+                        <div v-else>
+                            <div v-if="blogPosts.length === 0" class="p-2.5 xl:p-5">
+                                <p class="font-semibold text-sm leading-5 text-gray-700">No Blog Available!!!</p>
+                            </div>
+                            <div v-else v-for="blog in blogPosts" :key="blog._id" class="tc fg 2xl:ud-gap-6 qb">
+                                <img class="w-32 h-auto" :src="`${back_url}/${blog.image}`" alt="Blog" />
                                 <h5 class="wj kk wm xl bn ml il">
-                                    <a href="#">Free advertising for your online business</a>
+                                    <router-link :to="{ name: 'BlogView', params: { id: blog._id } }">{{ blog.title
+                                        }}</router-link>
                                 </h5>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -375,8 +419,9 @@ export default {
             bgImage2: bannerImage2,
             bgImage3: bannerImage3,
             blogPost: [],
-            back_url: 'http://localhost:5000',
-            //back_url: 'https://aduvieapi.onrender.com'
+            blogPosts: [],
+            //back_url: 'http://localhost:5000',
+            back_url: 'https://aduvieapi.onrender.com'
         };
     },
 
@@ -397,7 +442,7 @@ export default {
                 console.error('Error fetching blog post:', error.response.data);
             }
         },
-         getBlogPost() {
+        getBlogPost() {
             axios.get(`${api}/blogs/all`).then((response) => {
                 this.blogPosts = response.data;
                 this.loading = false;
