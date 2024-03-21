@@ -30,7 +30,7 @@
 
                 <!-- desktop Navigation -->
                 <nav>
-                    <ul class="tc _o sf yo cg ep" v-if="menuOpen">
+                    <ul class="tc _o sf yo cg ep lg:ml-10" v-if="menuOpen">
                         <li><router-link :to="{ name: 'Index' }"
                                 class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
@@ -393,7 +393,9 @@
                         <img class="w-full h-48" :src="`${back_url}/${blog.image}`" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <router-link :to="{ name: 'BlogView', params: { id: blog._id } }" class="vc ek rg lk gh sl ml il gi hi">Read More</router-link>
+                            <router-link :to="{ name: 'BlogView', params: { title: blog.title } }"
+                                class="vc ek rg lk gh sl ml il gi hi bg-indigo-500 hover:bg-indigo-400">Read
+                                More</router-link>
                         </div>
                     </div>
 
@@ -409,7 +411,8 @@
                             </div>
                         </div>
                         <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html"> {{ blog.title }}</a>
+                            <router-link :to="{ name: 'BlogView', params: { title: blog.title } }"> {{ blog.title
+                                }}</router-link>
                         </h4>
                     </div>
                 </div>

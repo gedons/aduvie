@@ -38,7 +38,7 @@ const routes = [
     // front routes
     { path: "/gallery", name: "FrontGallery", component: FrontGallery }, 
     { path: "/blog", name: "Blog", component: Blog }, 
-    { path: "/blog/post/:id", name: "BlogView", component: BlogView }, 
+    { path: "/blog/post/:title", name: "BlogView", component: BlogView }, 
     { path: "/contact", name: "Contact", component: Contact },  
     { path: "/book-event", name: "Book", component: Book }, 
 
