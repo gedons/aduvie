@@ -217,16 +217,16 @@
         <div class="bb ze ki xn wq">
             <div class="tc wf gg qq">
                 <!-- About Images -->
-                <div class="animate_left xc gn gg jn/2 i">
+                <div class="animate_left xc gn gg jn/2 i flex flex-col-reverse md:flex-row">
                     <div>
-                        <img src="../assets/images/shape-05.svg" alt="Shape" class="h -ud-left-5 x" />
-                        <img src="../assets/images/about-01.png" alt="About" class="ib" />
-                        <img src="../assets/images/about-02.png" alt="About" />
+
+                        <img src="../assets/images/1.jpg" alt="About" class="ib border rounded-lg lg:mt-20" />
+                        <img src="../assets/images/2.jpg" alt="About"  class="border rounded-lg lg:mt-20"/>
                     </div>
                     <div>
+
+                        <img src="../assets/images/3.jpg" alt="About" class="ob gb w-52 border rounded-lg lg:mt-20" />
                         <img src="../assets/images/shape-06.svg" alt="Shape" />
-                        <img src="../assets/images/about-03.png" alt="About" class="ob gb" />
-                        <img src="../assets/images/shape-07.svg" alt="Shape" class="bb" />
                     </div>
                 </div>
 
