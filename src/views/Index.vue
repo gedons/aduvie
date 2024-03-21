@@ -31,16 +31,17 @@
                 <!-- desktop Navigation -->
                 <nav>
                     <ul class="tc _o sf yo cg ep lg:ml-10" v-if="menuOpen">
-                        <li><router-link :to="{ name: 'Index' }"
+                        <li><router-link :to="{ name: 'Index' }" active-class="active" exact-active-class="active"
                                 class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
-                        <li><router-link :to="{ name: 'FrontGallery' }"
+                        <li><router-link :to="{ name: 'FrontGallery' }" active-class="active"
+                                exact-active-class="active"
                                 class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
                         </li>
-                        <li><router-link :to="{ name: 'Blog' }"
+                        <li><router-link :to="{ name: 'Blog' }" active-class="active" exact-active-class="active"
                                 class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
                         </li>
-                        <li><router-link :to="{ name: 'Contact' }"
+                        <li><router-link :to="{ name: 'Contact' }" active-class="active" exact-active-class="active"
                                 class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
                                 Us</router-link></li>
                     </ul>
@@ -49,15 +50,19 @@
                 <!-- mobile Navigation -->
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="!menuOpen">
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
+                        <li><router-link :to="{ name: 'Index' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
-                        <li><a href="#" class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
-                                Us</a></li>
+                        <li><router-link :to="{ name: 'FrontGallery' }" active-class="active"
+                                exact-active-class="active"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Blog' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Contact' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                Us</router-link></li>
                     </ul>
                 </nav>
 
@@ -390,7 +395,7 @@
                 <!-- Blog Item -->
                 <div v-else v-for="blog in latestBlogPost" :key="blog._id" class="animate_top sg vk rm xm">
                     <div class="c rc i z-1 pg">
-                        <img class="w-full h-48" :src="`${back_url}/${blog.image}`" alt="Blog" />
+                        <img class="w-full h-48 border rounded-lg" :src="`${back_url}/${blog.image}`" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
                             <router-link :to="{ name: 'BlogView', params: { title: blog.title } }"
@@ -811,3 +816,10 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.active {
+    background-color: #6366f1;
+    color: #f9fafb;
+}
+</style>
