@@ -588,9 +588,9 @@
                     </p>
                 </div>
                 <div class="animate_right bf">
-                    <a href="#" class="vc ek kk hh rg ol il cm gi hi">
+                    <router-link :to="{name: 'FrontGallery'}" class="vc ek kk hh rg ol il cm gi hi">
                         Event Gallery
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>
