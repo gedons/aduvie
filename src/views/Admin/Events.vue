@@ -489,7 +489,7 @@ import moment from 'moment';
 export default {
     data() {
         return {
-
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,

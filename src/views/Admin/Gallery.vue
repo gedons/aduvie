@@ -426,7 +426,7 @@ import moment from 'moment';
 export default {
     data() {
         return {
-
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
@@ -451,9 +451,11 @@ export default {
             try {
                 const response = await axios.get(`${api}/galleries/gallery`);
                 this.galleryImages = response.data;
+                this.loading = false;
             } catch (error) {
                 console.error('Error fetching gallery images:', error.response.data);
                 this.$toast.error('Failed to fetch gallery images.');
+                this.loading = false;
             }
         },
 

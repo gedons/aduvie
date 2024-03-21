@@ -331,10 +331,25 @@
                                                 class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input"></textarea>
                                         </div>
 
+                                        <button v-if="loading" :disabled="loading" type="submit"
+                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray"
+                                            :class="{
+                'cursor-not-allowed': loading,
+                'hover:bg-gray-700': loading,
+            }">
+                                            <svg class="animate-spin mr-3 h-5 w-5 text-white"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                                    stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor"
+                                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                                </path>
+                                            </svg>
+                                            Saving...
+                                        </button>
 
-
-                                        <button type="submit"
-                                            class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
+                                        <button v-else type="submit"
+                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
                                             Save
                                         </button>
                                     </div>
@@ -357,6 +372,7 @@ import moment from 'moment';
 export default {
     data() {
         return {
+            loading: false,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
@@ -375,7 +391,7 @@ export default {
         //create event
         async createEvent() {
             try {
-
+                this.loading = true;
                 const adminToken = localStorage.getItem('adminToken');
                 const config = {
                     headers: {
@@ -399,6 +415,7 @@ export default {
                 this.$toast.info('Email Sent Successfully.', {
                     timeout: 6000,
                 });
+                this.loading = false;
 
             } catch (error) {
                 console.error('Error creating event:', error.response.data);
@@ -407,10 +424,11 @@ export default {
                 this.$toast.error('An error occurred while creating the event. Please try again later.', {
                     timeout: 3000,
                 });
+                this.loading = false;
             }
         },
 
-        logoutAdmin() {           
+        logoutAdmin() {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },

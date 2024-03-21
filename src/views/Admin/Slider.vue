@@ -432,7 +432,7 @@ import moment from 'moment';
 export default {
     data() {
         return {
-
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
@@ -455,9 +455,11 @@ export default {
             try {
                 const response = await axios.get(`${api}/sliders/slider`);
                 this.sliderImages = response.data;
+                this.loading = false;
             } catch (error) {
                 console.error('Error fetching slider images:', error.response.data);
                 this.$toast.error('Failed to fetch slider images.');
+                this.loading = false;
             }
         },
 

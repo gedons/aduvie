@@ -69,76 +69,55 @@
     <!-- ===== Header End ===== -->
 
     <!-- ===== Swipper Start ===== -->
-    <section class="mt-28">
-        <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+
+    <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
         delay: 4500,
         disableOnInteraction: false,
     }" :pagination="{
         clickable: true,
     }" :navigation="false" :modules="modules">
+        <div v-if="sliderImages.length === 0" class="p-2.5 xl:p-5">
             <swiper-slide>
 
                 <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
                     v-bind:style="{ 'background-image': 'url(' + bgImage + ')' }">
                     <div class="container pl-[6rem] max-md:pl-2">
                         <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
-                            Event Planning Assistance
-                        </h1>
-                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">Our experienced event planners are here
-                            to assist you every step of the way,<br />
-                            from initial concept to flawless execution.</p>
-                        <div class="mt-12">
-                            <a href="#" class="bg-[#6366F1]  hover:bg-primary text-white px-8 py-3 font-medium 
-                        rounded-md  hover:text-white">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-
-            </swiper-slide>
-
-            <swiper-slide>
-
-                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
-                    v-bind:style="{ 'background-image': 'url(' + bgImage1 + ')' }">
-                    <div class="container pl-[6rem] max-md:pl-2">
-                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
-                            Event Planning Assistance
+                            best clothing wears <br> available for you
                         </h1>
                         <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">Lorem, ipsum dolor sit amet consectetur
-                            to assist you every step of the way,<br />
-                            from initial concept to flawless execution.</p>
-                        <!-- <div class="mt-12">
-                            <a href="#" class="bg-[#6366F1]  hover:bg-primary text-white px-8 py-3 font-medium 
-                        rounded-md  hover:text-white">Shop Now</a>
-                        </div> -->
-                    </div>
-                </div>
-
-            </swiper-slide>
-
-            <swiper-slide>
-
-                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
-                    v-bind:style="{ 'background-image': 'url(' + bgImage2 + ')' }">
-                    <div class="container pl-[6rem] max-md:pl-2">
-                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
-                            Affordable Excellence
-                        </h1>
-                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">
-                            We believe that hosting an exceptional event shouldn't break the bank.<br />
-                            Our competitive pricing packages ensure that you
-                            receive unparalleled value <br /> without compromising on quality.</p>
+                            adipisicing elit. Aperiam <br>
+                            accusantium perspiciatis, sapiente
+                            magni eos dolorum ex quos dolores odio</p>
                         <div class="mt-12">
-                            <a href="#" class="bg-[#6366F1]  hover:bg-primary text-white px-8 py-3 font-medium 
-                        rounded-md  hover:text-white">Book Now</a>
+                            <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
+                        rounded-md  hover:text-white">Shop Now</a>
                         </div>
                     </div>
                 </div>
 
             </swiper-slide>
+        </div>
+        <swiper-slide v-else v-for="slider in sliderImages" :key="slider._id">
 
-        </swiper>
-    </section>
+            <div class="transition bg-cover bg-no-repeat bg-center py-[10rem]"
+                v-bind:style="{ 'background-image': 'url(' + slider.imageUrl + ')' }">
+                <div class="container pl-[6rem] max-md:pl-2">
+                    <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
+                        {{ slider.HeaderText }}
+                    </h1>
+                    <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">{{ slider.BodyText }}</p>
+                    <div class="mt-12">
+                        <router-link :to="{ name: 'Index' }" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
+                    rounded-md  hover:text-white">Blog</router-link>
+                    </div>
+                </div>
+            </div>
+
+        </swiper-slide>
+
+
+    </swiper>
     <!-- ===== Swipper End ===== -->
 
 
@@ -763,6 +742,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import api from '../api';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -790,12 +771,29 @@ export default {
             bgImage1: bannerImage1,
             bgImage2: bannerImage2,
             bgImage3: bannerImage3,
+            sliderImages: []
         };
     },
+
+    created() {
+        this.getAllSliderImages();
+    },
+
     methods: {
         toggleMenu() {
             this.menuOpen = !this.menuOpen;
-        }
+        },
+        async getAllSliderImages() {
+            try {
+                const response = await axios.get(`${api}/sliders/slider`);
+                this.sliderImages = response.data;
+                this.loading = false;
+            } catch (error) {
+                console.error('Error fetching slider images:', error.response.data);
+                this.$toast.error('Failed to fetch slider images.');
+                this.loading = false;
+            }
+        },
     }
 };
 </script>

@@ -613,7 +613,7 @@ import moment from 'moment';
 export default {
     data() {
         return {
-
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
@@ -638,6 +638,7 @@ export default {
         this.fetchBlogCount();
         this.fetchEventCount();
         this.fetchBookingCount();
+        
     },
     methods: {
 

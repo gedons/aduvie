@@ -291,7 +291,7 @@
                                                 <label class="mb-3 block text-black">
                                                     New Password
                                                 </label>
-                                                <input type="password" id="name" v-model="newPassword"
+                                                <input type="password" id="newPassword" v-model="newPassword"
                                                     placeholder="New Password"
                                                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
                                             </div>
@@ -300,7 +300,7 @@
                                                 <label class="mb-3 block text-black">
                                                     Confrim Password
                                                 </label>
-                                                <input type="password" id="name" v-model="confirmPassword"
+                                                <input type="password" id="confirmPassword" v-model="confirmPassword"
                                                     placeholder="Confirm Password"
                                                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
                                             </div>
@@ -324,8 +324,7 @@
                                                 <label class="mb-3 block text-black">
                                                     Username
                                                 </label>
-                                                <input type="text" id="username" v-model="username"
-                                                    placeholder="Admin Username"
+                                                <input type="text" v-model="username" placeholder="Admin Username"
                                                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
                                             </div>
 
@@ -333,7 +332,7 @@
                                                 <label class="mb-3 block text-black">
                                                     Email
                                                 </label>
-                                                <input type="text" id="email" v-model="email" placeholder="Admin Email"
+                                                <input type="email" v-model="email" placeholder="Admin Email"
                                                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
                                             </div>
                                         </div>
@@ -341,8 +340,7 @@
                                             <label class="mb-3 block text-black">
                                                 Password
                                             </label>
-                                            <input type="password" id="password" v-model="password"
-                                                placeholder="Admin Password"
+                                            <input type="password" v-model="password" placeholder="Admin Password"
                                                 class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
                                         </div>
 
@@ -427,9 +425,9 @@ export default {
                     email: this.email,
                     password: this.password
                 }, {
-                headers: {
-                    'Authorization': `Bearer ${adminToken}`
-                }
+                    headers: {
+                        'Authorization': `Bearer ${adminToken}`
+                    }
                 });
                 this.$toast.success(response.data.msg);
             } catch (error) {

@@ -370,9 +370,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ truncateContent(blog.content) }}
-                                                    </div>
+                                                    <div v-html="truncateContent(blog.content)" class="text-sm leading-5 font-semibold text-gray-900"></div>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -435,7 +433,7 @@ import moment from 'moment';
 export default {
     data() {
         return {
-
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,

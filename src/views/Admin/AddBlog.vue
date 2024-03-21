@@ -312,15 +312,34 @@
                                             <label class="mb-2.5 mt-3 block text-black">
                                                 Post Content
                                             </label>
-                                            <ckeditor :editor="editor" v-model="content"></ckeditor>
+                                            <ckeditor class="font-semibold text-sx" :editor="editor" v-model="content">
+                                            </ckeditor>
                                         </div>
 
 
 
-                                        <button type="submit"
-                                            class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
+                                        <button v-if="loading" :disabled="loading" type="submit"
+                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray"
+                                            :class="{
+                'cursor-not-allowed': loading,
+                'hover:bg-gray-700': loading,
+            }">
+                                            <svg class="animate-spin mr-3 h-5 w-5 text-white"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                                    stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor"
+                                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                                </path>
+                                            </svg>
+                                            Saving...
+                                        </button>
+
+                                        <button v-else type="submit"
+                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
                                             Save
                                         </button>
+
                                     </div>
                                 </form>
                             </div>
@@ -346,6 +365,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
@@ -360,7 +380,7 @@ export default {
         };
     },
 
-    
+
     methods: {
 
 
@@ -370,27 +390,30 @@ export default {
         },
 
         async createBlogPost() {
+            this.loading = true;
             const formData = new FormData();
             formData.append('title', this.title);
             formData.append('content', this.content);
             formData.append('image', this.image);
-            
+
             try {
                 const adminToken = localStorage.getItem('adminToken');
                 const response = await axios.post(`${api}/blogs/create`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${adminToken}`
-                }
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${adminToken}`
+                    }
                 });
-                                 
+
                 this.$router.push({ name: 'Blogs' });
+                this.loading = false;
             } catch (error) {
                 console.error('Error adding blog post:', error.response.data);
+                this.loading = false;
             }
         },
 
-        logoutAdmin() {           
+        logoutAdmin() {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },
