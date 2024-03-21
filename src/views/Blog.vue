@@ -145,7 +145,7 @@
                         <img class="w-full h-48 border rounded-lg" :src="`${back_url}/${blog.image}`" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <router-link :to="{ name: 'BlogView', params: { title: blog.title } }"
+                            <router-link :to="{ name: 'BlogView', params: { id: blog._id } }"
                                 class="vc ek rg lk gh sl ml il gi hi bg-indigo-500 hover:bg-indigo-400">Read
                                 More</router-link>
                         </div>
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                         <h4 class="ek tj ml il kk wm xl eq lb">
-                            <router-link :to="{ name: 'BlogView', params: { title: blog.title } }"> {{ blog.title
+                            <router-link :to="{ name: 'BlogView', params: { id: blog._id } }"> {{ blog.title
                                 }}</router-link>
                         </h4>
                     </div>
@@ -355,8 +355,8 @@ export default {
             bgImage3: bannerImage3,
             sliderImages: [],
             blogPosts: [],
-            //back_url: 'http://localhost:5000',
-            back_url:'https://aduvieapi.onrender.com'
+            back_url: 'http://localhost:5000',
+            //back_url:'https://aduvieapi.onrender.com'
         };
     },
 
