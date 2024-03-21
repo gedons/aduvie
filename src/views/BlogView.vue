@@ -32,17 +32,17 @@
                 <nav>
                     <ul class="tc _o sf yo cg ep lg:ml-10" v-if="menuOpen">
                         <li><router-link :to="{ name: 'Index' }" active-class="active" exact-active-class="active"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
                         <li><router-link :to="{ name: 'FrontGallery' }" active-class="active"
                                 exact-active-class="active"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
                         </li>
                         <li><router-link :to="{ name: 'Blog' }" active-class="active" exact-active-class="active"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
                         </li>
                         <li><router-link :to="{ name: 'Contact' }" active-class="active" exact-active-class="active"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Contact
                                 Us</router-link></li>
                     </ul>
                 </nav>
@@ -51,14 +51,14 @@
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="!menuOpen">
                         <li><router-link :to="{ name: 'Index' }" active-class="active" exact-active-class="active"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
                         <li><router-link :to="{ name: 'FrontGallery' }" active-class="active"
                                 exact-active-class="active"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
                         </li>
                         <li><router-link :to="{ name: 'Blog' }" active-class="active" exact-active-class="active"
-                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
                         </li>
                         <li><router-link :to="{ name: 'Contact' }" active-class="active" exact-active-class="active"
                                 class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
@@ -68,7 +68,7 @@
 
                 <div class="tc wf ig pb no">
                     <a href="signup.html" :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                        class="lk gh dk rg tc wf xf _l gi hi  bg-indigo-500">Book Your Event</a>
+                        class="lk gh dk rg tc wf xf _l gi hi  bg-sky">Book Your Event</a>
                 </div>
             </div>
             <!-- Navigation Links -->
@@ -227,9 +227,8 @@
                             </div>
                             <div v-else v-for="blog in blogPosts" :key="blog._id" class="tc fg 2xl:ud-gap-6 qb">
                                 <img class="w-32 h-auto" :src="`${back_url}/${blog.image}`" alt="Blog" />
-                                <h5 class="wj kk wm xl bn ml il">
-                                    <router-link :to="{ name: 'BlogView', params: { id: blog._id } }">{{ blog.title
-                                        }}</router-link>
+                                <h5 class="wj kk wm xl bn ml il  hover:text-sky">
+                                    <a :href="`/blog/post/${blog._id}`">{{ blog.title }}</a>
                                 </h5>
                             </div>
                         </div>
@@ -461,7 +460,7 @@ export default {
 
 <style scoped>
 .active {
-    background-color: #6366f1;
+    background-color: #478AC9;
     color: #f9fafb;
 }
 </style>
