@@ -30,37 +30,45 @@
 
                 <!-- desktop Navigation -->
                 <nav>
-                    <ul class="tc _o sf yo cg ep" v-if="menuOpen">
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
+                    <ul class="tc _o sf yo cg ep lg:ml-10" v-if="menuOpen">
+                        <li><router-link :to="{ name: 'Index' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
-                        <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
-                                Us</a></li>
+                        <li><router-link :to="{ name: 'FrontGallery' }" active-class="active"
+                                exact-active-class="active"
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Blog' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Contact' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                Us</router-link></li>
                     </ul>
                 </nav>
 
                 <!-- mobile Navigation -->
                 <nav>
                     <ul class="tc _o sf yo cg ep" v-if="!menuOpen">
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Home</a></li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</a>
+                        <li><router-link :to="{ name: 'Index' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Home</router-link>
                         </li>
-                        <li><a href="#"
-                                class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Blog</a></li>
-                        <li><a href="#" class="xl hover:bg-indigo-400 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
-                                Us</a></li>
+                        <li><router-link :to="{ name: 'FrontGallery' }" active-class="active"
+                                exact-active-class="active"
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Gallery</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Blog' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-sky hover:text-yellow-50 rounded-lg px-3 py-3">Blog</router-link>
+                        </li>
+                        <li><router-link :to="{ name: 'Contact' }" active-class="active" exact-active-class="active"
+                                class="xl hover:bg-indigo-500 hover:text-yellow-50 rounded-lg px-3 py-3">Contact
+                                Us</router-link></li>
                     </ul>
                 </nav>
 
                 <div class="tc wf ig pb no">
                     <a href="signup.html" :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                        class="lk gh dk rg tc wf xf _l gi hi  bg-indigo-500">Book Your Event</a>
+                        class="lk gh dk rg tc wf xf _l gi hi  bg-sky">Book Your Event</a>
                 </div>
             </div>
             <!-- Navigation Links -->
@@ -69,73 +77,52 @@
     <!-- ===== Header End ===== -->
 
     <!-- ===== Swipper Start ===== -->
-    <section>
+    <section class="mt-28">
         <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
         delay: 4500,
         disableOnInteraction: false,
     }" :pagination="{
         clickable: true,
-    }" :navigation="true" :modules="modules">
-            <swiper-slide>
+    }" :navigation="false" :modules="modules">
+            <div v-if="sliderImages.length === 0" class="p-2.5 xl:p-5">
+                <swiper-slide>
 
-                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
-                    v-bind:style="{ 'background-image': 'url(' + bgImage + ')' }">
+                    <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
+                        v-bind:style="{ 'background-image': 'url(' + bgImage + ')' }">
+                        <div class="container pl-[6rem] max-md:pl-2">
+                            <h1 class="max-md:text-4xl text-6xl text-white bg-opacity-40 font-medium mb-4 capitalize">
+                                Aduvie Event<br> Center
+                            </h1>
+                            <p class="text-white bg-opacity-40 max-md:text-[14px]">Let us raise a glass to your next
+                                special occasion at Aduvie Event Center, <br>
+                                where memories are made and shared with love.</p>
+                            <div class="mt-12">
+                                <a href="#" class="bg-sky  hover:bg-primary text-white px-8 py-3 font-medium 
+                            rounded-md  hover:text-white">Book now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </swiper-slide>
+            </div>
+            <swiper-slide v-else v-for="slider in sliderImages" :key="slider._id">
+
+                <div class="transition bg-cover bg-no-repeat bg-center py-[10rem]"
+                    v-bind:style="{ 'background-image': 'url(' + back_url + slider.imageUrl + ')' }">
                     <div class="container pl-[6rem] max-md:pl-2">
-                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
-                            Event Planning Assistance
+                        <h1 class="max-md:text-4xl text-6xl text-white bg-opacity-40 font-medium mb-4 capitalize">
+                            {{ slider.HeaderText }}
                         </h1>
-                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">Our experienced event planners are here
-                            to assist you every step of the way,<br />
-                            from initial concept to flawless execution.</p>
+                        <p class="text-white bg-opacity-40 max-md:text-[14px]">{{ slider.BodyText }}</p>
                         <div class="mt-12">
-                            <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
-                        rounded-md  hover:text-white">Shop Now</a>
+                            <router-link :to="{ name: 'Index' }" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
+                        rounded-md  hover:text-white">Book Now</router-link>
                         </div>
                     </div>
                 </div>
 
             </swiper-slide>
 
-            <swiper-slide>
-
-                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
-                    v-bind:style="{ 'background-image': 'url(' + bgImage1 + ')' }">
-                    <div class="container pl-[6rem] max-md:pl-2">
-                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
-                            Event Planning Assistance
-                        </h1>
-                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">Lorem, ipsum dolor sit amet consectetur
-                            to assist you every step of the way,<br />
-                            from initial concept to flawless execution.</p>
-                        <div class="mt-12">
-                            <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
-                        rounded-md  hover:text-white">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-
-            </swiper-slide>
-
-            <swiper-slide>
-
-                <div class="transition bg-cover  bg-no-repeat bg-center  py-[10rem]"
-                    v-bind:style="{ 'background-image': 'url(' + bgImage2 + ')' }">
-                    <div class="container pl-[6rem] max-md:pl-2">
-                        <h1 class="max-md:text-4xl text-6xl text-[#000] bg-opacity-40 font-medium mb-4 capitalize">
-                            Affordable Excellence
-                        </h1>
-                        <p class="text-[#000] bg-opacity-40 max-md:text-[14px]">
-                            We believe that hosting an exceptional event shouldn't break the bank.<br />
-                            Our competitive pricing packages ensure that you
-                            receive unparalleled value <br /> without compromising on quality.</p>
-                        <div class="mt-12">
-                            <a href="#" class="bg-[#000]  hover:bg-primary text-white px-8 py-3 font-medium 
-                        rounded-md  hover:text-white">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-
-            </swiper-slide>
 
         </swiper>
     </section>
@@ -143,12 +130,22 @@
 
 
     <!-- ===== Small Features Start ===== -->
-    <section>
-        <div class="container mt-5">
+    <section class="flex justify-center">
+        <div class="container py-12">
             <div>
                 <div class="w-10/12 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto justify-center">
                     <div class=" rounded-sm px-3 py-6 flex justify-center items-center gap-3">
-                        <img src="../assets/images/shape-14.svg" alt="Delivery" class="w-10 h-10 object-contain">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M19 9.77806V16.2C19 17.8801 19 18.7202 18.673 19.3619C18.3854 19.9264 17.9265 20.3854 17.362 20.673C16.7202 21 15.8802 21 14.2 21H9.8C8.11984 21 7.27976 21 6.63803 20.673C6.07354 20.3854 5.6146 19.9264 5.32698 19.3619C5 18.7202 5 17.8801 5 16.2V9.7774M21 12L15.5668 5.96393C14.3311 4.59116 13.7133 3.90478 12.9856 3.65138C12.3466 3.42882 11.651 3.42887 11.0119 3.65153C10.2843 3.90503 9.66661 4.59151 8.43114 5.96446L3 12M14 12C14 13.1045 13.1046 14 12 14C10.8954 14 10 13.1045 10 12C10 10.8954 10.8954 9.99996 12 9.99996C13.1046 9.99996 14 10.8954 14 12Z"
+                                    stroke="#478AC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
                         <div>
                             <h4 class="font-medium text-center capitalize text-[14px]">Versatile Spaces</h4>
                             <p class="text-gray-500 text-[12px]">From gatherings to grand celebrations.</p>
@@ -156,18 +153,37 @@
                     </div>
                     <div
                         class="border-l border-[#848484] max-md:border-none  rounded-sm px-3 py-6 flex justify-center items-center gap-3">
-                        <img src="../assets/images/shape-05.svg" alt="Delivery" class="w-10 h-10 object-contain">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M16.3426 21H21L17 15.5H21L16.881 10H21L14.0435 3L9.5 7.5M3 16L7.42372 11.9784C7.8038 11.6329 7.99384 11.4601 8.20914 11.3947C8.39876 11.337 8.60124 11.337 8.79086 11.3947C9.00616 11.4601 9.1962 11.6329 9.57628 11.9784L14 16M5 14.1818V19.4C5 19.9601 5 20.2401 5.10899 20.454C5.20487 20.6422 5.35785 20.7951 5.54601 20.891C5.75992 21 6.03995 21 6.6 21H10.4C10.9601 21 11.2401 21 11.454 20.891C11.6422 20.7951 11.7951 20.6422 11.891 20.454C12 20.2401 12 19.9601 12 19.4L12 14.1818"
+                                    stroke="#478AC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
                         <div>
                             <h4 class="font-medium text-center capitalize text-[14px]">Scenic Surroundings</h4>
-                            <p class="text-gray-500 text-[12px]">Enjoy breathtaking views for your occasions.</p>
+                            <p class="text-gray-500 text-[12px]">Enjoy a lush, luxury and breathtaking view.</p>
                         </div>
                     </div>
                     <div
                         class="border-l border-[#848484] max-md:border-none rounded-sm px-3 py-6 flex justify-center items-center gap-3">
-                        <img src="../assets/images/shape-09.svg" alt="Delivery" class="w-10 h-10 object-contain">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M14.2788 2.15224C13.9085 2 13.439 2 12.5 2C11.561 2 11.0915 2 10.7212 2.15224C10.2274 2.35523 9.83509 2.74458 9.63056 3.23463C9.53719 3.45834 9.50065 3.7185 9.48635 4.09799C9.46534 4.65568 9.17716 5.17189 8.69017 5.45093C8.20318 5.72996 7.60864 5.71954 7.11149 5.45876C6.77318 5.2813 6.52789 5.18262 6.28599 5.15102C5.75609 5.08178 5.22018 5.22429 4.79616 5.5472C4.47814 5.78938 4.24339 6.1929 3.7739 6.99993C3.30441 7.80697 3.06967 8.21048 3.01735 8.60491C2.94758 9.1308 3.09118 9.66266 3.41655 10.0835C3.56506 10.2756 3.77377 10.437 4.0977 10.639C4.57391 10.936 4.88032 11.4419 4.88029 12C4.88026 12.5581 4.57386 13.0639 4.0977 13.3608C3.77372 13.5629 3.56497 13.7244 3.41645 13.9165C3.09108 14.3373 2.94749 14.8691 3.01725 15.395C3.06957 15.7894 3.30432 16.193 3.7738 17C4.24329 17.807 4.47804 18.2106 4.79606 18.4527C5.22008 18.7756 5.75599 18.9181 6.28589 18.8489C6.52778 18.8173 6.77305 18.7186 7.11133 18.5412C7.60852 18.2804 8.2031 18.27 8.69012 18.549C9.17714 18.8281 9.46533 19.3443 9.48635 19.9021C9.50065 20.2815 9.53719 20.5417 9.63056 20.7654C9.83509 21.2554 10.2274 21.6448 10.7212 21.8478C11.0915 22 11.561 22 12.5 22C13.439 22 13.9085 22 14.2788 21.8478C14.7726 21.6448 15.1649 21.2554 15.3694 20.7654C15.4628 20.5417 15.4994 20.2815 15.5137 19.902C15.5347 19.3443 15.8228 18.8281 16.3098 18.549C16.7968 18.2699 17.3914 18.2804 17.8886 18.5412C18.2269 18.7186 18.4721 18.8172 18.714 18.8488C19.2439 18.9181 19.7798 18.7756 20.2038 18.4527C20.5219 18.2105 20.7566 17.807 21.2261 16.9999C21.6956 16.1929 21.9303 15.7894 21.9827 15.395C22.0524 14.8691 21.9088 14.3372 21.5835 13.9164C21.4349 13.7243 21.2262 13.5628 20.9022 13.3608C20.4261 13.0639 20.1197 12.558 20.1197 11.9999C20.1197 11.4418 20.4261 10.9361 20.9022 10.6392C21.2263 10.4371 21.435 10.2757 21.5836 10.0835C21.9089 9.66273 22.0525 9.13087 21.9828 8.60497C21.9304 8.21055 21.6957 7.80703 21.2262 7C20.7567 6.19297 20.522 5.78945 20.2039 5.54727C19.7799 5.22436 19.244 5.08185 18.7141 5.15109C18.4722 5.18269 18.2269 5.28136 17.8887 5.4588C17.3915 5.71959 16.7969 5.73002 16.3099 5.45096C15.8229 5.17191 15.5347 4.65566 15.5136 4.09794C15.4993 3.71848 15.4628 3.45833 15.3694 3.23463C15.1649 2.74458 14.7726 2.35523 14.2788 2.15224ZM12.5 15C14.1695 15 15.5228 13.6569 15.5228 12C15.5228 10.3431 14.1695 9 12.5 9C10.8305 9 9.47716 10.3431 9.47716 12C9.47716 13.6569 10.8305 15 12.5 15Z"
+                                    fill="#478AC9"></path>
+                            </g>
+                        </svg>
                         <div>
                             <h4 class="font-medium text-center capitalize text-[14px]">Modern Amenities</h4>
-                            <p class="text-gray-500 text-[12px]">Facility equipped with latest technologies</p>
+                            <p class="text-gray-500 text-[12px]">Latest technologies available on ground.</p>
                         </div>
                     </div>
                 </div>
@@ -184,19 +200,19 @@
             <div class="tc uf sn tn xf un gg">
                 <div class="animate_top me/5 ln rj">
                     <h2 class="gk vj zp or kk wm hc">1000</h2>
-                    <p class="ek bk aq">BANQUET SEAT CAPACITY</p>
+                    <p class="ek bk aq">Banquet Seat</p>
                 </div>
                 <div class="animate_top me/5 ln rj">
                     <h2 class="gk vj zp or kk wm hc">200</h2>
-                    <p class="ek bk aq">CAR PARKING</p>
+                    <p class="ek bk aq">Car Parking</p>
                 </div>
                 <div class="animate_top me/5 ln rj">
                     <h2 class="gk vj zp or kk wm hc">865</h2>
-                    <p class="ek bk aq">THEATRE SIT CAPICITY</p>
+                    <p class="ek bk aq">Theatre Seat</p>
                 </div>
                 <div class="animate_top me/5 ln rj">
                     <h2 class="gk vj zp or kk wm hc">3</h2>
-                    <p class="ek bk aq">DRESSING ROOM</p>
+                    <p class="ek bk aq">Dressing Room</p>
                 </div>
             </div>
         </div>
@@ -209,22 +225,22 @@
         <div class="bb ze ki xn wq">
             <div class="tc wf gg qq">
                 <!-- About Images -->
-                <div class="animate_left xc gn gg jn/2 i">
+                <div class="animate_left xc gn gg jn/2 i flex flex-col-reverse md:flex-row">
                     <div>
-                        <img src="../assets/images/shape-05.svg" alt="Shape" class="h -ud-left-5 x" />
-                        <img src="../assets/images/about-01.png" alt="About" class="ib" />
-                        <img src="../assets/images/about-02.png" alt="About" />
+
+                        <img src="../assets/images/1.jpg" alt="About" class="ib border rounded-lg lg:mt-20" />
+                        <img src="../assets/images/2.jpg" alt="About" class="border rounded-lg lg:mt-20" />
                     </div>
                     <div>
+
+                        <img src="../assets/images/3.jpg" alt="About" class="ob gb w-52 border rounded-lg lg:mt-20" />
                         <img src="../assets/images/shape-06.svg" alt="Shape" />
-                        <img src="../assets/images/about-03.png" alt="About" class="ob gb" />
-                        <img src="../assets/images/shape-07.svg" alt="Shape" class="bb" />
                     </div>
                 </div>
 
                 <!-- About Content -->
                 <div class="animate_right jn/2">
-                    <h4 class="ek yj mk gb">Why Aduvie Events</h4>
+                    <h4 class="ek yj mk gb text-sky">Why Aduvie Events</h4>
                     <h2 class="fk vj zp pr kk wm qb">We understand that selecting the perfect venue is crucial for the
                         success of your event.</h2>
                     <p class="uo">Our event center boasts modern and versatile spaces equipped with state-of-the-art
@@ -331,41 +347,60 @@
         <!-- Section Title End -->
 
         <div class="bb ye ki xn vq jb jo">
-            <div class="wc qf pn xo zf iq">
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="../assets/images/blog-01.png" alt="Blog" />
+            <div v-if="loading" class="flex justify-center items-center mt-3">
+                <svg class="w-10 h-10" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd">
+                        <g transform="translate(2 1)" stroke="#000" stroke-width="1.5">
+                            <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="1;0;0;0;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;1;0;0;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;1;0;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;1;0;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;1;0;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;1;0;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;0;1;0"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#000">
+                                <animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;0;0;1"
+                                    calcMode="linear" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+                    </g>
+                </svg>
+            </div>
 
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Free advertising for your online business</a>
-                        </h4>
-                    </div>
+            <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div v-if="latestBlogPost.length === 0" class="p-2.5 xl:p-5">
+                    <p class="font-semibold text-sm leading-5 text-gray-700">No Blog Available!!!</p>
                 </div>
-
                 <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
+                <div v-else v-for="blog in latestBlogPost" :key="blog._id" class="animate_top sg vk rm xm">
                     <div class="c rc i z-1 pg">
-                        <img class="w-full" src="../assets/images/blog-02.png" alt="Blog" />
+                        <img class="w-full h-48 border rounded-lg" :src="`${back_url}/${blog.image}`" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
+                            <router-link :to="{ name: 'BlogView', params: { id: blog._id } }"
+                                class="vc ek rg lk gh sl ml il gi hi bg-[#478AC9] hover:bg-[#88bef0] ">Read
+                                More</router-link>
                         </div>
                     </div>
 
@@ -373,42 +408,17 @@
                         <div class="tc uf wf ag jq">
                             <div class="tc wf ag">
                                 <img src="../assets/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
+                                <p>Admin</p>
                             </div>
                             <div class="tc wf ag">
                                 <img src="../assets/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
+                                <p>{{ formatDate(blog.createdAt) }}</p>
                             </div>
                         </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">9 simple ways to improve your design skills</a>
-                        </h4>
-                    </div>
-                </div>
-
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="../assets/images/blog-03.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="../assets/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
+                        <h4 class="ek tj ml il kk wm xl eq lb hover:text-[#478AC9]">
+                            <router-link class="hover:text-[#478AC9]"
+                                :to="{ name: 'BlogView', params: { id: blog._id } }"> {{ blog.title
+                                }}</router-link>
                         </h4>
                     </div>
                 </div>
@@ -552,7 +562,7 @@
                         </div>
 
                         <div class="tc xf">
-                            <button class="vc rg lk gh ml il hi gi _l">Send Message</button>
+                            <button class="vc rg lk gh ml il hi gi _l bg-[#478AC9]">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -562,7 +572,7 @@
     <!-- ===== Contact End ===== -->
 
     <!-- ===== CTA Start ===== -->
-    <section class="i pg gh ji">
+    <section class="i pg gh ji bg-sky">
         <!-- Bg Shape -->
         <img class="h p q" src="../assets/images/shape-16.svg" alt="Bg Shape" />
 
@@ -579,9 +589,9 @@
                     </p>
                 </div>
                 <div class="animate_right bf">
-                    <a href="#" class="vc ek kk hh rg ol il cm gi hi">
+                    <router-link :to="{ name: 'FrontGallery' }" class="vc ek kk hh rg ol il cm gi hi">
                         Event Gallery
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -610,7 +620,7 @@
                                         <g clip-path="url(#clip0_48_1499)">
                                             <path
                                                 d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47 14 5.5 16 5.5H17.5V2.14C17.174 2.097 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z"
-                                                fill="" />
+                                                fill="#478AC9" />
                                         </g>
                                         <defs>
                                             <clipPath id="clip0_48_1499">
@@ -627,7 +637,7 @@
                                         <g clip-path="url(#clip0_48_1502)">
                                             <path
                                                 d="M22.162 5.65593C21.3985 5.99362 20.589 6.2154 19.76 6.31393C20.6337 5.79136 21.2877 4.96894 21.6 3.99993C20.78 4.48793 19.881 4.82993 18.944 5.01493C18.3146 4.34151 17.4803 3.89489 16.5709 3.74451C15.6615 3.59413 14.7279 3.74842 13.9153 4.18338C13.1026 4.61834 12.4564 5.30961 12.0771 6.14972C11.6978 6.98983 11.6067 7.93171 11.818 8.82893C10.1551 8.74558 8.52832 8.31345 7.04328 7.56059C5.55823 6.80773 4.24812 5.75098 3.19799 4.45893C2.82628 5.09738 2.63095 5.82315 2.63199 6.56193C2.63199 8.01193 3.36999 9.29293 4.49199 10.0429C3.828 10.022 3.17862 9.84271 2.59799 9.51993V9.57193C2.59819 10.5376 2.93236 11.4735 3.54384 12.221C4.15532 12.9684 5.00647 13.4814 5.95299 13.6729C5.33661 13.84 4.6903 13.8646 4.06299 13.7449C4.32986 14.5762 4.85 15.3031 5.55058 15.824C6.25117 16.345 7.09712 16.6337 7.96999 16.6499C7.10247 17.3313 6.10917 17.8349 5.04687 18.1321C3.98458 18.4293 2.87412 18.5142 1.77899 18.3819C3.69069 19.6114 5.91609 20.2641 8.18899 20.2619C15.882 20.2619 20.089 13.8889 20.089 8.36193C20.089 8.18193 20.084 7.99993 20.076 7.82193C20.8949 7.2301 21.6016 6.49695 22.163 5.65693L22.162 5.65593Z"
-                                                fill="" />
+                                                fill="#478AC9" />
                                         </g>
                                         <defs>
                                             <clipPath id="clip0_48_1502">
@@ -644,7 +654,7 @@
                                         <g clip-path="url(#clip0_48_1505)">
                                             <path
                                                 d="M6.94 5.00002C6.93974 5.53046 6.72877 6.03906 6.35351 6.41394C5.97825 6.78883 5.46944 6.99929 4.939 6.99902C4.40857 6.99876 3.89997 6.78779 3.52508 6.41253C3.1502 6.03727 2.93974 5.52846 2.94 4.99802C2.94027 4.46759 3.15124 3.95899 3.5265 3.5841C3.90176 3.20922 4.41057 2.99876 4.941 2.99902C5.47144 2.99929 5.98004 3.21026 6.35492 3.58552C6.72981 3.96078 6.94027 4.46959 6.94 5.00002ZM7 8.48002H3V21H7V8.48002ZM13.32 8.48002H9.34V21H13.28V14.43C13.28 10.77 18.05 10.43 18.05 14.43V21H22V13.07C22 6.90002 14.94 7.13002 13.28 10.16L13.32 8.48002Z"
-                                                fill="" />
+                                                fill="#478AC9" />
                                         </g>
                                         <defs>
                                             <clipPath id="clip0_48_1505">
@@ -662,10 +672,10 @@
                             <h4 class="kk wm tj ec">Quick Links</h4>
 
                             <ul>
-                                <li><a href="#" class="sc xl vb">Home</a></li>
-                                <li><a href="#" class="sc xl vb">Gallery</a></li>
-                                <li><a href="#" class="sc xl vb">Blog</a></li>
-                                <li><a href="#" class="sc xl vb">Contact Us</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">Home</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">Gallery</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">Blog</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">Contact Us</a></li>
                             </ul>
                         </div>
 
@@ -673,10 +683,10 @@
                             <h4 class="kk wm tj ec">Services</h4>
 
                             <ul>
-                                <li><a href="#" class="sc xl vb">Catering Services</a></li>
-                                <li><a href="#" class="sc xl vb">Décor and Design</a></li>
-                                <li><a href="#" class="sc xl vb">On-Site Staffing</a></li>
-                                <li><a href="#" class="sc xl vb">Vendor Coordination</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">Catering Services</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">Décor and Design</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">On-Site Staffing</a></li>
+                                <li><a href="#" class="sc xl vb hover:text-[#478AC9]">Vendor Coordination</a></li>
                             </ul>
                         </div>
 
@@ -716,9 +726,9 @@
             <div class="bh ch pm tc uf sf yo wf xf ap cg fp bj">
                 <div class="animate_top">
                     <ul class="tc wf gg">
-                        <li><a href="#" class="xl">English</a></li>
-                        <li><a href="#" class="xl">Privacy Policy</a></li>
-                        <li><a href="#" class="xl">Support</a></li>
+                        <li><a href="#" class="xl hover:text-[#478AC9]">English</a></li>
+                        <li><a href="#" class="xl hover:text-[#478AC9]">Privacy Policy</a></li>
+                        <li><a href="#" class="xl hover:text-[#478AC9]">Support</a></li>
                     </ul>
                 </div>
 
@@ -734,12 +744,15 @@
 </template>
 
 <script>
+import axios from 'axios';
+import api from '../api';
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import moment from 'moment';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import bannerImage from '../assets/images/slide-1.jpg';
+import bannerImage from '../assets/images/banner.jpg';
 import bannerImage1 from '../assets/images/slide-3.jpg';
 import bannerImage2 from '../assets/images/slide-4.jpg';
 import bannerImage3 from '../assets/images/slide-2.jpg';
@@ -756,17 +769,59 @@ export default {
     },
     data() {
         return {
+            loading: true,
             menuOpen: true,
             bgImage: bannerImage,
             bgImage1: bannerImage1,
             bgImage2: bannerImage2,
             bgImage3: bannerImage3,
+            sliderImages: [],
+            latestBlogPost: [],
+            //back_url: 'http://localhost:5000',
+            back_url: 'https://aduvieapi.onrender.com'
         };
     },
+
+    created() {
+        this.getAllSliderImages();
+        this.getLatestBlogPost();
+    },
+
     methods: {
         toggleMenu() {
             this.menuOpen = !this.menuOpen;
-        }
+        },
+        async getAllSliderImages() {
+            try {
+                const response = await axios.get(`${api}/sliders/slider`);
+                this.sliderImages = response.data;
+                this.loading = false;
+            } catch (error) {
+                console.error('Error fetching slider images:', error.response.data);
+                this.$toast.error('Failed to fetch slider images.');
+                this.loading = false;
+            }
+        },
+        getLatestBlogPost() {
+            axios.get(`${api}/blogs/latest`).then((response) => {
+                this.latestBlogPost = response.data;
+                this.loading = false;
+            })
+                .catch((error) => {
+                    console.error('Error getting blog posts:', error);
+                    this.loading = false;
+                });
+        },
+        formatDate(date) {
+            return moment(date).fromNow();
+        },
     }
 };
 </script>
+
+<style scoped>
+.active {
+    background-color: #478AC9;
+    color: #f9fafb;
+}
+</style>

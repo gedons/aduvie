@@ -131,20 +131,14 @@
                             :class="(selected === 'Page') ? 'block' : 'hidden'">
                             <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                                 <li>
-                                    <router-link :to="{ name: 'Index' }"
-                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Banner</router-link>
+                                    <router-link :to="{ name: 'Slider' }"
+                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Slider</router-link>
                                 </li>
                                 <li>
-                                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white"
-                                        href="form-layout.html">Ads</a>
+                                    <router-link :to="{ name: 'Gallery' }"
+                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Gallery</router-link>
                                 </li>
-                                <li>
-                                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white"
-                                        href="form-layout.html">Faqs</a>
-                                </li>
-                                <li>
-
-                                </li>
+                                
                             </ul>
                         </div>
                         <!-- Dropdown Menu End -->
@@ -152,7 +146,7 @@
                     <!-- pages link end -->
 
                     <!-- blog link start -->
-                    <router-link :to="{ name: 'Index' }"
+                    <router-link :to="{ name: 'Blogs' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -169,7 +163,7 @@
                     <!-- blog link end -->
 
                     <!-- settings link start -->
-                    <router-link :to="{ name: 'Index' }"
+                    <router-link :to="{ name: 'AdminSetting' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -317,8 +311,8 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">7</h4>
-                                            <div class="text-gray-500">New Users</div>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{ totalBlog }}</h4>
+                                            <div class="text-gray-500">Blog Posts</div>
                                         </div>
                                     </div>
                                 </div>
@@ -341,31 +335,11 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">6</h4>
-                                            <div class="text-gray-500">Total Orders</div>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{totalEvent}}</h4>
+                                            <div class="text-gray-500">Total Events</div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
-                                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
-                                        <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full">
-                                            <svg class="w-8 h-8 text-white" viewBox="0 0 28 28" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.99998 11.2H21L22.4 23.8H5.59998L6.99998 11.2Z" fill="currentColor"
-                                                    stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
-                                                <path
-                                                    d="M9.79999 8.4C9.79999 6.08041 11.6804 4.2 14 4.2C16.3196 4.2 18.2 6.08041 18.2 8.4V12.6C18.2 14.9197 16.3196 16.8 14 16.8C11.6804 16.8 9.79999 14.9197 9.79999 12.6V8.4Z"
-                                                    stroke="currentColor" stroke-width="2"></path>
-                                            </svg>
-                                        </div>
-        
-                                        <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">{{ totalProducts }}</h4>
-                                            <div class="text-gray-500">Available Products</div>
-                                        </div>
-                                    </div>
-                                </div> -->
 
                                 <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
                                     <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
@@ -390,8 +364,41 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">5000</h4>
-                                            <div class="text-gray-500">Total Income</div>
+                                            <h4 class="text-2xl font-semibold text-gray-700"> {{totalBooking}} </h4>
+                                            <div class="text-gray-500">User Bookings</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="flex flex-wrap -mx-6">
+                                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                                        <div class="p-3 bg-green-600 bg-opacity-75 rounded-full">
+                                            <svg fill="#ffffff" class="w-8 h-8" viewBox="0 0 1024 1024"
+                                                xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <path
+                                                        d="M277.675 981.521c5.657 0 10.24-4.583 10.24-10.24V499.514c0-5.651-4.588-10.24-10.24-10.24h-81.92c-5.652 0-10.24 4.589-10.24 10.24v471.767c0 5.657 4.583 10.24 10.24 10.24h81.92zm0 40.96h-81.92c-28.278 0-51.2-22.922-51.2-51.2V499.514c0-28.271 22.924-51.2 51.2-51.2h81.92c28.276 0 51.2 22.929 51.2 51.2v471.767c0 28.278-22.922 51.2-51.2 51.2zm275.456-40.96c5.657 0 10.24-4.583 10.24-10.24V408.777c0-5.657-4.583-10.24-10.24-10.24h-81.92a10.238 10.238 0 00-10.24 10.24v562.504c0 5.657 4.583 10.24 10.24 10.24h81.92zm0 40.96h-81.92c-28.278 0-51.2-22.922-51.2-51.2V408.777c0-28.278 22.922-51.2 51.2-51.2h81.92c28.278 0 51.2 22.922 51.2 51.2v562.504c0 28.278-22.922 51.2-51.2 51.2zm275.456-40.016c5.657 0 10.24-4.583 10.24-10.24V318.974c0-5.651-4.588-10.24-10.24-10.24h-81.92c-5.652 0-10.24 4.589-10.24 10.24v653.251c0 5.657 4.583 10.24 10.24 10.24h81.92zm0 40.96h-81.92c-28.278 0-51.2-22.922-51.2-51.2V318.974c0-28.271 22.924-51.2 51.2-51.2h81.92c28.276 0 51.2 22.929 51.2 51.2v653.251c0 28.278-22.922 51.2-51.2 51.2zM696.848 40.96l102.39.154c11.311.017 20.494-9.138 20.511-20.449S810.611.171 799.3.154L696.91 0c-11.311-.017-20.494 9.138-20.511 20.449s9.138 20.494 20.449 20.511z">
+                                                    </path>
+                                                    <path
+                                                        d="M778.789 20.571l-.307 101.827c-.034 11.311 9.107 20.508 20.418 20.542s20.508-9.107 20.542-20.418l.307-101.827C819.783 9.384 810.642.187 799.331.153s-20.508 9.107-20.542 20.418z">
+                                                    </path>
+                                                    <path
+                                                        d="M163.84 317.682h154.184a51.207 51.207 0 0036.211-14.999L457.208 199.71a10.263 10.263 0 017.237-3.003h159.754a51.235 51.235 0 0036.198-14.976l141.13-141.13c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0L631.447 152.755a10.265 10.265 0 01-7.248 2.992H464.445a51.226 51.226 0 00-36.201 14.999L325.271 273.719a10.244 10.244 0 01-7.248 3.003H163.839c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </div>
+
+                                        <div class="mx-5">
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{ totalAdmin }}</h4>
+                                            <div class="text-gray-500">Admin Account</div>
                                         </div>
                                     </div>
                                 </div>
@@ -451,83 +458,68 @@
                                             <tr>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Image</th>
+                                                    Name</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Title</th>
+                                                    Event Date</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Category</th>
+                                                    User Email</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Price</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Created</th>
+                                                    Status</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                     Actions</th>
 
                                             </tr>
                                         </thead>
-                                        <!-- <div v-if="products.length === 0" class="p-2.5 xl:p-5">
-                                          <p class="font-semibold text-sm leading-5 text-gray-700">No Product Available!!!</p>
-                                      </div> -->
-                                        <tbody class="bg-white">
+                                        <div v-if="events.length === 0" class="p-2.5 xl:p-5">
+                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Event
+                                                Available!!!</p>
+                                        </div>
+                                        <tbody v-for="event in events" :key="event._id" class="bg-white">
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="flex items-center">
-                                                        <div class="flex gap-2">
-                                                            <div>
-                                                                <img class="w-10 h-9 rounded-full" loading="lazy"
-                                                                    alt="">
-                                                            </div>
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ event.name }}</div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900"> {{
+                formatDate(event.date) }}</div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ event.email }}
+                                                    </div>
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        <!-- Apply color based on event status -->
+                                                        <div v-if="event.status === 'pending'"
+                                                            class="text-sm text-yellow-500">
+                                                            Pending
                                                         </div>
-
-                                                        <label
-                                                            class="ml-2 flex flex-col items-center px-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
-                                                            <svg class="w-8 h-8" fill="currentColor"
-                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                                <path
-                                                                    d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                                                            </svg>
-                                                            <input type='file' ref="inputf" class="hidden"
-                                                                accept="image/*" />
-                                                        </label>
-                                                        <button
-                                                            class="text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">save
-                                                            image</button>
-
+                                                        <div v-else-if="event.status === 'booked'"
+                                                            class="text-sm text-red-500">
+                                                            Booked
+                                                        </div>
+                                                        <div v-else-if="event.status === 'completed'"
+                                                            class="text-sm text-green-500">
+                                                            Completed
+                                                        </div>
                                                     </div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">title
-                                                        name</div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">product
-                                                        title</div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">$6000
-                                                    </div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <span
-                                                        class="inline-flex px-2 text-sm font-semibold leading-5 text-green-800">
-                                                        788</span>
                                                 </td>
 
                                                 <td
                                                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                    <router-link :to="{ name: 'Index' }"
-                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</router-link>
-                                                    <router-link :to="{ name: 'Index' }"
-                                                        class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</router-link>
+                                                    <button @click="openEditModal(event)"
+                                                        class=" text-sm px-2 py-2 font-semibold text-gray-900  hover:text-gray-800">Edit</button>
+                                                    <button @click="openDeleteModal(event)"
+                                                        class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
                                                 </td>
                                             </tr>
 
@@ -542,6 +534,74 @@
                 </main>
             </div>
         </div>
+
+        <!-- edit modal modal -->
+        <div>
+            <div id="modal-bg" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
+            <div id="modal-box"
+                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
+                <!-- Modal content -->
+                <!-- Edit category form -->
+                <form v-if="isEditMode" @submit.prevent="editEvent">
+                    <label class="mb-2.5 mt-3 block text-black">
+                        Event Name
+                    </label>
+                    <input type="text" placeholder="Edit name" v-model="editedEvent.name"
+                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
+                    <label class="mb-2.5 mt-3 block text-black">
+                        Event Date
+                    </label>
+                    <input type="date" placeholder="Edit date" v-model="editedEvent.date"
+                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
+                    <label class="mb-2.5 mt-3 block text-black">
+                        User Email
+                    </label>
+                    <input type="text" placeholder="Edit email" v-model="editedEvent.email"
+                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
+
+                    <label class="mb-2.5 mt-3 block text-black">
+                        Status
+                    </label>
+                    <select v-model="editedEvent.status"
+                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter">
+                        <option value="pending">Pending</option>
+                        <option value="booked">Booked</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
+                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>
+                    <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
+                        type="submit">Update</button>
+                </form>
+
+                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
+                    @click="closeModal">Close</button>
+            </div>
+        </div>
+        <!-- modal end -->
+
+
+        <!-- delete modal -->
+        <div>
+            <div id="modal-bg4" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
+            <div id="modal-box4"
+                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
+                <!-- Delete confirmation -->
+                <div v-if="isDeleteMode">
+                    <p class="font-semibold">Are you sure you want to delete this event?</p>
+                    <div class="flex gap-3">
+                        <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="confirmDelete(event)">Yes</button>
+                        <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="closeModal1">No</button>
+                    </div>
+                </div>
+                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
+                    @click="closeModal1">Close</button>
+            </div>
+        </div>
+        <!-- modal end -->
+
     </div>
 
 </template>
@@ -553,20 +613,183 @@ import moment from 'moment';
 export default {
     data() {
         return {
-
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
             selected: '',
             page: '',
-
+            events: [],
+            totalAdmin: 0,
+            totalBlog: 0,
+            totalEvent: 0,
+            totalBooking : 0,
+            isEditMode: false,
+            isDeleteMode: false,
+            editedEvent: {},
+            deleteEvent: {},
 
         };
     },
 
-
-
+    created() {
+        this.fetchEvents();
+        this.fetchAdminCount();
+        this.fetchBlogCount();
+        this.fetchEventCount();
+        this.fetchBookingCount();
+        
+    },
     methods: {
+
+        fetchEvents() {
+            axios.get(`${api}/events/all`).then((response) => {
+                this.events = response.data;
+                this.loading = false;
+            })
+                .catch((error) => {
+                    console.error('Error getting events:', error);
+                    this.loading = false;
+                });
+        },
+
+        async updateEventStatus(event) {
+            try {
+                const adminToken = localStorage.getItem('adminToken');
+                const response = await axios.put(`${api}/events/status`, {
+                    eventId: event._id,
+                    status: event.status
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`
+                    }
+                });
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error updating event status:', error.response.data);
+            }
+        },
+
+        async editEvent() {
+            try {
+                const adminToken = localStorage.getItem('adminToken');
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
+
+                if (!adminToken) {
+                    localStorage.removeItem('adminToken');
+                    this.$router.push({ name: 'Login' });
+                    return;
+                }
+                await axios.put(`${api}/events/${this.editedEvent._id}`, this.editedEvent, config)
+                    .then((success) => {
+                        if (success) {
+                            this.$toast.success('Event Updated Successfully.', {
+                                timeout: 3000,
+                            });
+                            this.closeModal();
+                            this.fetchEvents();
+                        } else {
+                            this.$toast.error('An Error Occured. try again!', {
+                                timeout: 9000,
+                            });
+                        }
+                    });
+            }
+            catch (error) {
+                if (error) {
+                    this.$toast.error('Event not added. try again!', {
+                        timeout: 3000,
+                    });
+                }
+            }
+        },
+
+        async confirmDelete() {
+            try {
+                const adminToken = localStorage.getItem('adminToken');
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
+
+                if (!adminToken) {
+                    localStorage.removeItem('adminToken');
+                    this.$router.push({ name: 'Login' });
+                    return;
+                }
+                await axios.delete(`${api}/events/${this.deleteEvent._id}`, config)
+                    .then((success) => {
+                        if (success) {
+                            this.$toast.success('Event Deleted Successfully.', {
+                                timeout: 3000,
+                            });
+                            this.closeModal1();
+                            const eventId = this.deleteEvent._id;
+                            this.events = this.events.filter(event => event._id !== eventId);
+                            this.events.sort((a, b) => {
+                                const dateA = new Date(a.createdAt).getTime();
+                                const dateB = new Date(b.createdAt).getTime();
+                                return dateB - dateA;
+                            });
+                        } else {
+                            this.$toast.error('An Error Occured. try again!', {
+                                timeout: 9000,
+                            });
+                        }
+                    });
+
+
+            } catch (error) {
+                console.error('Error deleting Event', error);
+                // Handle error
+            }
+        },
+
+        fetchAdminCount() {
+            axios.get(`${api}/auth/admin/total-admin`).then((response) => {
+                this.totalAdmin = response.data.totalAdmin;
+            })
+                .catch((error) => {
+                    console.error('Error getting admins:', error);
+                });
+        },
+
+        fetchBlogCount() {
+            axios.get(`${api}/blogs/total-blog`).then((response) => {
+                this.totalBlog = response.data.totalBlog;
+            })
+                .catch((error) => {
+                    console.error('Error getting blogs:', error);
+                });
+        },
+
+        fetchEventCount() {
+            axios.get(`${api}/events/total-event`).then((response) => {
+                this.totalEvent = response.data.totalEvent;
+            })
+                .catch((error) => {
+                    console.error('Error getting events:', error);
+                });
+        },
+
+        fetchBookingCount() {
+            axios.get(`${api}/bookings/total-booking`).then((response) => {
+                this.totalBooking = response.data.totalBooking;
+            })
+                .catch((error) => {
+                    console.error('Error getting bookings:', error);
+                });
+        },
+
+        logoutAdmin() {
+            localStorage.removeItem('adminToken');
+            this.$router.push({ name: 'Login' });
+        },
 
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;
@@ -589,6 +812,33 @@ export default {
 
         pageDropdown() {
             this.selected = (this.selected === 'Page') ? '' : 'Page';
+        },
+        formatDate(date) {
+            return moment(date).fromNow();
+        },
+
+        openEditModal(event) {
+            this.isEditMode = true;
+            this.editedEvent = { ...event };
+            document.getElementById('modal-bg').classList.remove('hidden');
+            document.getElementById('modal-box').classList.remove('hidden');
+        },
+
+        openDeleteModal(event) {
+            this.isDeleteMode = true;
+            this.deleteEvent = { ...event };
+            document.getElementById('modal-bg4').classList.remove('hidden');
+            document.getElementById('modal-box4').classList.remove('hidden');
+        },
+
+        closeModal() {
+            document.getElementById('modal-bg').classList.add('hidden');
+            document.getElementById('modal-box').classList.add('hidden');
+        },
+
+        closeModal1() {
+            document.getElementById('modal-bg4').classList.add('hidden');
+            document.getElementById('modal-box4').classList.add('hidden');
         },
 
 

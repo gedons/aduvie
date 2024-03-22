@@ -131,19 +131,12 @@
                             :class="(selected === 'Page') ? 'block' : 'hidden'">
                             <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                                 <li>
-                                    <router-link :to="{ name: 'Index' }"
-                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Banner</router-link>
+                                    <router-link :to="{ name: 'Slider' }"
+                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Slider</router-link>
                                 </li>
                                 <li>
-                                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white"
-                                        href="form-layout.html">Ads</a>
-                                </li>
-                                <li>
-                                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white"
-                                        href="form-layout.html">Faqs</a>
-                                </li>
-                                <li>
-
+                                    <router-link :to="{ name: 'Gallery' }"
+                                        class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Gallery</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -152,7 +145,7 @@
                     <!-- pages link end -->
 
                     <!-- blog link start -->
-                    <router-link :to="{ name: 'Index' }"
+                    <router-link :to="{ name: 'Blogs' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -169,7 +162,7 @@
                     <!-- blog link end -->
 
                     <!-- settings link start -->
-                    <router-link :to="{ name: 'Index' }"
+                    <router-link :to="{ name: 'AdminSetting' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -496,7 +489,7 @@ import moment from 'moment';
 export default {
     data() {
         return {
-
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
@@ -621,6 +614,11 @@ export default {
                 console.error('Error deleting Event', error);
                 // Handle error
             }
+        },
+
+        logoutAdmin() {           
+            localStorage.removeItem('adminToken');
+            this.$router.push({ name: 'Login' });
         },
 
         toggleSidebar() {

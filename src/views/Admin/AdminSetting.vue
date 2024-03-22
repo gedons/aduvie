@@ -59,7 +59,7 @@
                     <!-- event link end -->
 
                     <!-- bookin link start -->
-                    <router-link :to="{ name: 'Index' }"
+                    <router-link :to="{ name: 'UserBooking' }"
                         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg fill="#6B7280" class="w-6 h-6" version="1.1" id="Layer_1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -277,177 +277,86 @@
                 </header>
 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">User Bookings</h3>
+                            <h3 class="text-3xl font-medium text-gray-700">Admin Update Password</h3>
                         </div>
 
-                        <div v-if="loading" class="flex justify-center items-center mt-3">
-                            <svg class="w-10 h-10" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
-                                <g fill="none" fill-rule="evenodd">
-                                    <g transform="translate(2 1)" stroke="#000" stroke-width="1.5">
-                                        <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="1;0;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                        <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="0;1;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                        <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="0;0;1;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                        <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="0;0;0;1;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                        <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="0;0;0;0;1;0;0;0" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                        <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="0;0;0;0;0;1;0;0" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                        <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="0;0;0;0;0;0;1;0" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                        <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#000">
-                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
-                                                values="0;0;0;0;0;0;0;1" calcMode="linear" repeatCount="indefinite" />
-                                        </circle>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-                        <div v-else class="flex flex-col mt-8">
+                        <div class="flex flex-col mt-8">
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                                <div
-                                    class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                                    <table class="min-w-full">
-                                        <thead>
-                                            <tr>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    User Details</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    User Email</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Date</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Status</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Event Name</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Actions</th>
+                                <form @submit.prevent="updatePassword">
+                                    <div class="p-6.5">
+                                        <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                                            <div class="w-full xl:w-1/2">
+                                                <label class="mb-3 block text-black">
+                                                    New Password
+                                                </label>
+                                                <input type="password" id="newPassword" v-model="newPassword"
+                                                    placeholder="New Password"
+                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                            </div>
 
-                                            </tr>
-                                        </thead>
-                                        <div v-if="bookings.length === 0" class="p-2.5 xl:p-5">
-                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Event
-                                                Available!!!</p>
+                                            <div class="w-full xl:w-1/2">
+                                                <label class="mb-3 block text-black">
+                                                    Confrim Password
+                                                </label>
+                                                <input type="password" id="confirmPassword" v-model="confirmPassword"
+                                                    placeholder="Confirm Password"
+                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                            </div>
                                         </div>
-                                        <tbody v-for="booking in bookings" :key="booking._id" class="bg-white">
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ booking.firstName }} {{ booking.lastName }}
-                                                        <p
-                                                            class="text-xs font-medium leading-4 tracking-wider text-left text-gray-500">
-                                                            {{ booking.phone }}</p>
-                                                    </div>
-                                                </td>
 
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ booking.email }}
-                                                    </div>
-                                                </td>
+                                        <button type="submit"
+                                            class="flex mt-5 justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
+                                            Update
+                                        </button>
+                                    </div>
+                                </form>
 
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ formatDate(booking.date) }}
-                                                    </div>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        <!-- Apply color based on booking status -->
-                                                        <div v-if="booking.status === 'pending'"
-                                                            class="text-sm text-yellow-500">
-                                                            Pending
-                                                        </div>
-                                                        <div v-else-if="booking.status === 'booked'"
-                                                            class="text-sm text-red-500">
-                                                            Booked
-                                                        </div>
-                                                        <div v-else-if="booking.status === 'completed'"
-                                                            class="text-sm text-green-500">
-                                                            Completed
-                                                        </div>
-                                                    </div>
-                                                    <select v-model="selectedStatus"
-                                                        @change="updateBookingStatus(booking._id)">
-                                                        <option v-for="statusOption in statusOptions"
-                                                            :key="statusOption" :value="statusOption">
-                                                            {{ statusOption }}
-                                                        </option>
-                                                    </select>
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
-                                                        {{ booking.eventId.name }}
-                                                    </div>
-                                                </td>
-
-                                                <td>
-                                                    <button @click="openDeleteModal(booking)"
-                                                        class="ml-4 text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
-                                                </td>
-                                            </tr>
-
-
-
-                                        </tbody>
-                                    </table>
+                                <div class="flex mt-10 mb-5">
+                                    <h3 class="text-3xl font-medium text-gray-700">Create Sub-Admin</h3>
                                 </div>
+
+                                <form @submit.prevent="createSubAdmin">
+                                    <div class="p-6.5">
+                                        <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                                            <div class="w-full xl:w-1/2">
+                                                <label class="mb-3 block text-black">
+                                                    Username
+                                                </label>
+                                                <input type="text" v-model="username" placeholder="Admin Username"
+                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                            </div>
+
+                                            <div class="w-full xl:w-1/2">
+                                                <label class="mb-3 block text-black">
+                                                    Email
+                                                </label>
+                                                <input type="email" v-model="email" placeholder="Admin Email"
+                                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <label class="mb-3 block text-black">
+                                                Password
+                                            </label>
+                                            <input type="password" v-model="password" placeholder="Admin Password"
+                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                        </div>
+
+                                        <button type="submit"
+                                            class="flex mt-5 justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
+                                            Create
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+
                     </div>
                 </main>
             </div>
         </div>
-
-
-        <!-- delete modal -->
-        <div>
-            <div id="modal-bg4" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
-            <div id="modal-box4"
-                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
-                <!-- Delete confirmation -->
-                <div v-if="isDeleteMode">
-                    <p class="font-semibold">Are you sure you want to delete this booking?</p>
-                    <div class="flex gap-3">
-                        <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
-                            @click="confirmDelete(booking)">Yes</button>
-                        <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
-                            @click="closeModal1">No</button>
-                    </div>
-                </div>
-                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
-                    @click="closeModal1">Close</button>
-            </div>
-        </div>
-        <!-- modal end -->
     </div>
 
 </template>
@@ -456,118 +365,78 @@
 import axios from 'axios';
 import api from '../../api';
 import moment from 'moment';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CKEditor from "@ckeditor/ckeditor5-vue";
 export default {
+    components: {
+        ckeditor: CKEditor.component
+    },
     data() {
         return {
-
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
             selected: '',
             page: '',
-            bookings: [],
-            selectedStatus: '',
-            statusOptions: ['booked', 'completed'],
-            isEditMode: false,
-            isDeleteMode: false,
-            editedBooking: {},
-            deleteBooking: {},
-
+            newPassword: '',
+            confirmPassword: '',
+            back_url: 'http://localhost:5000',
+            editor: ClassicEditor
         };
     },
-    created() {
-        this.fetchBookings();
-    },
+
+
     methods: {
 
-        fetchBookings() {
-            const adminToken = localStorage.getItem('adminToken');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${adminToken}`,
-                },
-            };
 
-            if (!adminToken) {
-                localStorage.removeItem('adminToken');
-                this.$router.push({ name: 'Login' });
+        handleImageUpload(event) {
+            this.image = event.target.files[0];
+            this.imageUrl = URL.createObjectURL(this.image);
+        },
+
+        async updatePassword() {
+            if (this.newPassword !== this.confirmPassword) {
+                this.$toast.error('New password and confirm password do not match');
                 return;
             }
-            axios.get(`${api}/bookings/all`, config).then((response) => {
-                this.bookings = response.data;
-                this.loading = false;
 
-            })
-                .catch((error) => {
-                    console.error('Error getting bookings:', error);
-                    this.loading = false;
-                });
-        },
-
-        async confirmDelete() {
             try {
                 const adminToken = localStorage.getItem('adminToken');
-                const config = {
+                const response = await axios.put(`${api}/auth/admin/update-password`, {
+                    newPassword: this.newPassword,
+                    confirmPassword: this.confirmPassword
+                }, {
                     headers: {
-                        Authorization: `Bearer ${adminToken}`,
-                    },
-                };
-
-                if (!adminToken) {
-                    localStorage.removeItem('adminToken');
-                    this.$router.push({ name: 'Login' });
-                    return;
-                }
-                await axios.delete(`${api}/bookings/${this.deleteBooking._id}/delete`, config)
-                    .then((success) => {
-                        if (success) {
-                            this.$toast.success('Booking Deleted Successfully.', {
-                                timeout: 3000,
-                            });
-                            this.closeModal1();
-                            const bookingId = this.deleteBooking._id;
-                            this.bookings = this.bookings.filter(booking => booking._id !== bookingId);
-                            this.bookings.sort((a, b) => {
-                                const dateA = new Date(a.createdAt).getTime();
-                                const dateB = new Date(b.createdAt).getTime();
-                                return dateB - dateA;
-                            });
-                        } else {
-                            this.$toast.error('An Error Occured. try again!', {
-                                timeout: 9000,
-                            });
-                        }
-                    });
-
-
+                        'Authorization': `Bearer ${adminToken}`
+                    }
+                });
+                this.$toast.success(response.data.msg);
             } catch (error) {
-                console.error('Error deleting Booking', error);
-                // Handle error
+                console.error('Error updating password:', error.response.data);
+                this.$toast.error('Password update failed. Please try again.');
             }
         },
 
-        async updateBookingStatus(bookingId) {
+        async createSubAdmin() {
             try {
                 const adminToken = localStorage.getItem('adminToken');
-                const config = {
+                const response = await axios.post(`${api}/auth/admin/sub-admin`, {
+                    username: this.username,
+                    email: this.email,
+                    password: this.password
+                }, {
                     headers: {
-                        Authorization: `Bearer ${adminToken}`,
-                    },
-                };
-                await axios.put(`${api}/bookings/${bookingId}/status`, { status: this.selectedStatus }, config);
-                this.fetchBookings();
-                this.$toast.success('Booking Updated Successfully.', {
-                    timeout: 3000,
+                        'Authorization': `Bearer ${adminToken}`
+                    }
                 });
+                this.$toast.success(response.data.msg);
             } catch (error) {
-                console.error('Error updating booking status:', error.response.data);
-                this.$toast.error('An error occurred while updating the booking. Please try again later.', {
-                    timeout: 3000,
-                });
+                console.error('Error creating sub-admin:', error.response.data);
+                this.$toast.error('Sub-admin creation failed. Please try again.');
             }
         },
 
-        logoutAdmin() {           
+        logoutAdmin() {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },
@@ -599,24 +468,13 @@ export default {
         },
 
 
-        openDeleteModal(booking) {
-            this.isDeleteMode = true;
-            this.deleteBooking = { ...booking };
-            document.getElementById('modal-bg4').classList.remove('hidden');
-            document.getElementById('modal-box4').classList.remove('hidden');
-        },
-
-        closeModal() {
-            document.getElementById('modal-bg').classList.add('hidden');
-            document.getElementById('modal-box').classList.add('hidden');
-        },
-
-        closeModal1() {
-            document.getElementById('modal-bg4').classList.add('hidden');
-            document.getElementById('modal-box4').classList.add('hidden');
-        },
-
-
     }
 }
 </script>
+
+<!-- <style>
+.preview-image {
+  max-width: 200px;
+  margin-top: 10px;
+}
+</style> -->
