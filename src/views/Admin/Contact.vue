@@ -142,7 +142,7 @@
                                 <li>
                                     <router-link :to="{ name: 'AdminContact' }"
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Contact</router-link>
-                                        
+
                                 </li>
                             </ul>
                         </div>
@@ -224,7 +224,7 @@
 
                             <div v-show="dropdownOpen"
                                 class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
-                                style="display: none;">                                
+                                style="display: none;">
                                 <router-link :to="{ name: 'AdminSetting' }"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Settings</router-link>
                                 <a @click="logoutAdmin"
@@ -235,78 +235,160 @@
                 </header>
 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">Blog</h3>
-                            <router-link :to="{ name: 'Blogs' }"
-                                class="ml-3 font-medium text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">All
-                                Posts</router-link>
+                            <h3 class="text-3xl font-medium text-gray-700">Contact</h3>
+                            <router-link :to="{ name: 'SendEmail' }"
+                                class=" font-medium ml-3 text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">Send
+                                Email</router-link>
                         </div>
 
-                        <div class="flex flex-col mt-8">
+                        <div v-if="loading" class="flex justify-center items-center mt-3">
+                            <svg class="w-10 h-10" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g transform="translate(2 1)" stroke="#000" stroke-width="1.5">
+                                        <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="1;0;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;1;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;1;0;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;1;0;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;1;0;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;1;0;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;0;1;0" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                        <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#000">
+                                            <animate attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                                values="0;0;0;0;0;0;0;1" calcMode="linear" repeatCount="indefinite" />
+                                        </circle>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div v-else class="flex flex-col mt-8">
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                                <form @submit.prevent="createBlogPost">
-                                    <div class="p-6.5">
-                                        <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                            <div class="w-full xl:w-1/2">
-                                                <label class="mb-3 block text-black">
-                                                    Post Image
-                                                </label>
-                                                <input type="file" @change="handleImageUpload">
-                                                <img v-if="imageUrl" :src="imageUrl" alt="Blog Post Image"
-                                                    class="preview-image my-5">
-                                            </div>
+                                <div
+                                    class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                                    <table class="min-w-full">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Name</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Email</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Phone</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Subject</th>
+
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Date Created</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Actions</th>
+
+                                            </tr>
+                                        </thead>
+                                        <div v-if="contactMessages.length === 0" class="p-2.5 xl:p-5">
+                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Contact Message
+                                                Available!!!</p>
                                         </div>
+                                        <tbody v-for="contact in contactMessages" :key="contact._id" class="bg-white">
+                                            <tr>
 
-                                        <div class="w-full mb-5 mt-8">
-                                            <label class="mb-2 block text-black">
-                                                Post Title
-                                            </label>
-                                            <input type="text" id="name" v-model="title" placeholder="Post Title"
-                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
-                                        </div>
+                                                <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ contact.name }} </div>
+                                                </td>
 
-                                        <div class="mb-6">
-                                            <label class="mb-2.5 mt-3 block text-black">
-                                                Post Content
-                                            </label>
-                                            <ckeditor class="font-semibold text-sx" :editor="editor" v-model="content">
-                                            </ckeditor>
-                                        </div>
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ contact.email }} </div>
+                                                </td>
 
 
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ contact.phone }} </div>
+                                                </td>
 
-                                        <button v-if="loading" :disabled="loading" type="submit"
-                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray"
-                                            :class="{
-                'cursor-not-allowed': loading,
-                'hover:bg-gray-700': loading,
-            }">
-                                            <svg class="animate-spin mr-3 h-5 w-5 text-white"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                                    stroke-width="4"></circle>
-                                                <path class="opacity-75" fill="currentColor"
-                                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                                                </path>
-                                            </svg>
-                                            Saving...
-                                        </button>
 
-                                        <button v-else type="submit"
-                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
-                                            Save
-                                        </button>
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ contact.subject }} </div>
+                                                </td>
 
-                                    </div>
-                                </form>
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        {{ formatDate(contact.createdAt) }}
+                                                    </div>
+                                                </td>
+
+                                                <td
+                                                    class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                    <button @click="openEditModal(contact)"
+                                                        class=" text-sm px-2 py-2 font-semibold text-indigo-400  hover:text-indigo-300">Email</button>
+                                                    <button @click="openDeleteModal(contact)"
+                                                        class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
+                                                </td>
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </main>
             </div>
         </div>
+
+        <!-- delete modal -->
+        <div>
+            <div id="modal-bg4" class="w-full h-full  bg-[#848A97] top-0 absolute hidden opacity-80"></div>
+            <div id="modal-box4"
+                class="sm:w-[385px] sm:min-w-[40vw] min-w-[80vw] min-h-[25vh] flex-col justify-between items-center gap-2 -translate-y-1/2 p-6 bg-[#FFFFFF] rounded-lg top-1/2 left-1/2 -translate-x-1/2 absolute hidden">
+                <!-- Delete confirmation -->
+                <div v-if="isDeleteMode">
+                    <p class="font-semibold">Are you sure you want to delete this message?</p>
+                    <div class="flex gap-3">
+                        <button class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="confirmDelete(contact)">Yes</button>
+                        <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md mt-3 text-white"
+                            @click="closeModal1">No</button>
+                    </div>
+                </div>
+                <button id="modal-close" class="p-3 w-full text-gray-900  hover:bg-gray-200 rounded-md mt-3"
+                    @click="closeModal1">Close</button>
+            </div>
+        </div>
+        <!-- modal end -->
     </div>
 
 </template>
@@ -315,59 +397,101 @@
 import axios from 'axios';
 import api from '../../api';
 import moment from 'moment';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import CKEditor from "@ckeditor/ckeditor5-vue";
 export default {
-    components: {
-        ckeditor: CKEditor.component
-    },
     data() {
         return {
-            loading: false,
+            loading: true,
             sidebarOpen: false,
             notificationOpen: false,
             dropdownOpen: false,
             selected: '',
             page: '',
-            title: '',
-            content: '',
-            image: null,
-            imageUrl: '',
-            back_url: 'http://localhost:5000',
-            editor: ClassicEditor
+            contactMessages: [],
+            isEditMode: false,
+            isDeleteMode: false,            
+            deleteContact: {},
+            //back_url: 'http://localhost:5000',
+            back_url: 'https://aduvieapi.onrender.com'
+
         };
     },
-
-
+    created() {
+        this.getContactMessages();
+    },
     methods: {
 
+        getContactMessages() {
+            const adminToken = localStorage.getItem('adminToken');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${adminToken}`,
+                },
+            };
 
-        handleImageUpload(event) {
-            this.image = event.target.files[0];
-            this.imageUrl = URL.createObjectURL(this.image);
+            if (!adminToken) {
+                localStorage.removeItem('adminToken');
+                this.$router.push({ name: 'Login' });
+                return;
+            }
+
+            axios.get(`${api}/contacts/messages`, config).then((response) => {
+                this.contactMessages = response.data;
+                this.loading = false;
+            })
+                .catch((error) => {
+                    console.error('Error getting blog posts:', error);
+                    this.loading = false;
+                });
         },
 
-        async createBlogPost() {
-            this.loading = true;
-            const formData = new FormData();
-            formData.append('title', this.title);
-            formData.append('content', this.content);
-            formData.append('image', this.image);
-
+        async confirmDelete() {
             try {
                 const adminToken = localStorage.getItem('adminToken');
-                const response = await axios.post(`${api}/blogs/create`, formData, {
+                const config = {
                     headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': `Bearer ${adminToken}`
-                    }
-                });
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
 
-                this.$router.push({ name: 'Blogs' });
-                this.loading = false;
+                if (!adminToken) {
+                    localStorage.removeItem('adminToken');
+                    this.$router.push({ name: 'Login' });
+                    return;
+                }
+                await axios.delete(`${api}/contacts/messages/${this.deleteContact._id}`, config)
+                    .then((success) => {
+                        if (success) {
+                            this.$toast.success('Message Deleted Successfully.', {
+                                timeout: 3000,
+                            });
+                            this.closeModal1();
+                            const messageId = this.deleteContact._id;
+                            this.contactMessages = this.contactMessages.filter(contact => contact._id !== messageId);
+                            this.contactMessages.sort((a, b) => {
+                                const dateA = new Date(a.createdAt).getTime();
+                                const dateB = new Date(b.createdAt).getTime();
+                                return dateB - dateA;
+                            });
+                        } else {
+                            this.$toast.error('An Error Occured. try again!', {
+                                timeout: 9000,
+                            });
+                        }
+                    });
+
+
             } catch (error) {
-                console.error('Error adding blog post:', error.response.data);
-                this.loading = false;
+                console.error('Error deleting Event', error);
+                // Handle error
+            }
+        },
+
+        truncateContent(content) {
+            const maxLength = 100;
+            if (content.length > maxLength) {
+                return content.substring(0, maxLength) + '...';
+            } else {
+                return content;
             }
         },
 
@@ -403,13 +527,24 @@ export default {
         },
 
 
+        openDeleteModal(contact) {
+            this.isDeleteMode = true;
+            this.deleteContact = { ...contact };
+            document.getElementById('modal-bg4').classList.remove('hidden');
+            document.getElementById('modal-box4').classList.remove('hidden');
+        },
+
+        closeModal() {
+            document.getElementById('modal-bg').classList.add('hidden');
+            document.getElementById('modal-box').classList.add('hidden');
+        },
+
+        closeModal1() {
+            document.getElementById('modal-bg4').classList.add('hidden');
+            document.getElementById('modal-box4').classList.add('hidden');
+        },
+
+
     }
 }
 </script>
-
-<!-- <style>
-.preview-image {
-  max-width: 200px;
-  margin-top: 10px;
-}
-</style> -->
