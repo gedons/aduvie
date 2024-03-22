@@ -461,21 +461,16 @@
 
                     <div class="fb">
                         <h4 class="wj kk wm cc">Email Address</h4>
-                        <p><a href="#">support@startup.com</a></p>
+                        <p><a href="#">support@auduvieevents.com</a></p>
                     </div>
                     <div class="fb">
                         <h4 class="wj kk wm cc">Office Location</h4>
-                        <p>76/A, Green valle, Califonia USA.</p>
+                        <p>1 Aduvie Close, Off Aduvie Way, Jahi, Jiru, Nigeria</p>
                     </div>
                     <div class="fb">
                         <h4 class="wj kk wm cc">Phone Number</h4>
-                        <p><a href="#">+234 54 3433 2231</a></p>
+                        <p><a href="#">+234 803 718 5130</a></p>
                     </div>
-                    <div class="fb">
-                        <h4 class="wj kk wm cc">Skype Email</h4>
-                        <p><a href="#">example@yourmail.com</a></p>
-                    </div>
-
                     <span class="rc nd rh tm lc fb"></span>
 
                     <div>
@@ -493,7 +488,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href=" https://x.com/aduvieschool?s=20" class="c tc wf xf ie ld rg ml il tl hover:bg-white">
+                                <a href=" https://x.com/aduvieschool?s=20"
+                                    class="c tc wf xf ie ld rg ml il tl hover:bg-white">
                                     <svg class="th lm ml il" width="20" height="16" viewBox="0 0 20 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path

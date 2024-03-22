@@ -75,7 +75,7 @@
         </div>
     </header>
     <!-- ===== Header End ===== -->
-    >
+    
 
     <!-- ===== Contact Start ===== -->
     <section class="i pg fh rm ji gp uq">
@@ -111,21 +111,16 @@
 
                     <div class="fb">
                         <h4 class="wj kk wm cc">Email Address</h4>
-                        <p><a href="#">support@startup.com</a></p>
+                        <p><a href="#">support@auduvieevents.com</a></p>
                     </div>
                     <div class="fb">
                         <h4 class="wj kk wm cc">Office Location</h4>
-                        <p>76/A, Green valle, Califonia USA.</p>
+                        <p>1 Aduvie Close, Off Aduvie Way, Jahi, Jiru, Nigeria</p>
                     </div>
                     <div class="fb">
                         <h4 class="wj kk wm cc">Phone Number</h4>
-                        <p><a href="#">+234 54 3433 2231</a></p>
+                        <p><a href="#">+234 803 718 5130</a></p>
                     </div>
-                    <div class="fb">
-                        <h4 class="wj kk wm cc">Skype Email</h4>
-                        <p><a href="#">example@yourmail.com</a></p>
-                    </div>
-
                     <span class="rc nd rh tm lc fb"></span>
 
                     <div>
