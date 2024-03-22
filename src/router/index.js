@@ -17,6 +17,7 @@ import Gallery from '../views/Admin/Gallery.vue';
 import AddGallery from '../views/Admin/AddGallery.vue';
 import AdminContact from '../views/Admin/Contact.vue';
 import SendEmail from '../views/Admin/SendEmail.vue';
+import ViewSendEmail from '../views/Admin/ViewSendEmail.vue';
 import FrontGallery from '../views/FrontGallery.vue';
 import Blog from '../views/Blog.vue';
 import BlogView from '../views/BlogView.vue';
@@ -67,6 +68,7 @@ const routes = [
     { path: "/admin/addgallery", name: "AddGallery", component: AddGallery, meta: { requiresAuth: true }}, 
     { path: "/admin/contact", name: "AdminContact", component: AdminContact, meta: { requiresAuth: true }}, 
     { path: "/admin/sendemail", name: "SendEmail", component: SendEmail, meta: { requiresAuth: true }}, 
+    { path: "/admin/sendemail/:id", name: "ViewSendEmail", component: ViewSendEmail, meta: { requiresAuth: true }}, 
 ];
 
 const router = createRouter({

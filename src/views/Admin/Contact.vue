@@ -239,7 +239,7 @@
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
                             <h3 class="text-3xl font-medium text-gray-700">Contact</h3>
-                            <router-link :to="{ name: 'SendEmail' }"
+                            <router-link :to="{ name: 'AdminContact' }"
                                 class=" font-medium ml-3 text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">Send
                                 Email</router-link>
                         </div>
@@ -350,8 +350,10 @@
 
                                                 <td
                                                     class="px-6 py-4 text-sm leading-5 flex text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                    <button @click="openEditModal(contact)"
-                                                        class=" text-sm px-2 py-2 font-semibold text-indigo-400  hover:text-indigo-300">Email</button>
+                                                    <router-link
+                                                        :to="{ name: 'ViewSendEmail', params: { id: contact._id } }"
+                                                        class=" text-sm px-2 py-2 font-semibold text-indigo-500  hover:text-indigo-400">Send
+                                                        Mail</router-link>
                                                     <button @click="openDeleteModal(contact)"
                                                         class=" text-sm font-semibold px-2 py-2 text-red-500 hover:text-red-400">Delete</button>
                                                 </td>
@@ -397,6 +399,7 @@
 import axios from 'axios';
 import api from '../../api';
 import moment from 'moment';
+import axiosRetry from 'axios-retry';
 export default {
     data() {
         return {
@@ -408,7 +411,7 @@ export default {
             page: '',
             contactMessages: [],
             isEditMode: false,
-            isDeleteMode: false,            
+            isDeleteMode: false,
             deleteContact: {},
             //back_url: 'http://localhost:5000',
             back_url: 'https://aduvieapi.onrender.com'
@@ -433,7 +436,7 @@ export default {
                 this.$router.push({ name: 'Login' });
                 return;
             }
-
+            axiosRetry(axios, { retries: 3 });
             axios.get(`${api}/contacts/messages`, config).then((response) => {
                 this.contactMessages = response.data;
                 this.loading = false;

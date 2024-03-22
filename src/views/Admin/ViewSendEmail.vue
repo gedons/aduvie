@@ -142,7 +142,7 @@
                                 <li>
                                     <router-link :to="{ name: 'AdminContact' }"
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Contact</router-link>
-                                        
+
                                 </li>
                             </ul>
                         </div>
@@ -224,7 +224,7 @@
 
                             <div v-show="dropdownOpen"
                                 class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
-                                style="display: none;">                                
+                                style="display: none;">
                                 <router-link :to="{ name: 'AdminSetting' }"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Settings</router-link>
                                 <a @click="logoutAdmin"
@@ -237,51 +237,45 @@
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                     <div class="container px-6 py-8 mx-auto">
                         <div class="flex">
-                            <h3 class="text-3xl font-medium text-gray-700">Blog</h3>
-                            <router-link :to="{ name: 'Blogs' }"
+                            <h3 class="text-3xl font-medium text-gray-700">Send Email</h3>
+                            <router-link :to="{ name: 'AdminContact' }"
                                 class="ml-3 font-medium text-white px-4 py-2 bg-gray-900 rounded-md hover:bg-gray-700">All
-                                Posts</router-link>
+                                Messages</router-link>
                         </div>
 
                         <div class="flex flex-col mt-8">
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                                <form @submit.prevent="createBlogPost">
+                                <form @submit.prevent="sendEmail">
                                     <div class="p-6.5">
-                                        <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                            <div class="w-full xl:w-1/2">
-                                                <label class="mb-3 block text-black">
-                                                    Post Image
-                                                </label>
-                                                <input type="file" @change="handleImageUpload">
-                                                <img v-if="imageUrl" :src="imageUrl" alt="Blog Post Image"
-                                                    class="preview-image my-5">
-                                            </div>
-                                        </div>
+
 
                                         <div class="w-full mb-5 mt-8">
                                             <label class="mb-2 block text-black">
-                                                Post Title
+                                                Email
                                             </label>
-                                            <input type="text" id="name" v-model="title" placeholder="Post Title"
-                                                class="w-full rounded text-gray-900 border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
+                                            <input type="email" v-model="email" placeholder="User Email" disabled
+                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent text-gray-900 py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter" />
+                                        </div>
+                                        <div class="w-full mb-5 mt-8">
+                                            <label class="mb-2 block text-black">
+                                                Subject
+                                            </label>
+                                            <input type="text" v-model="subject" placeholder="Email Subject" required
+                                                class="w-full rounded border-[1.5px] text-gray-900 border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
                                         </div>
 
                                         <div class="mb-6 text-gray-900 text-sm">
                                             <label class="mb-2.5 mt-3 block text-black">
-                                                Post Content
+                                                Message
                                             </label>
-                                            <ckeditor class="font-semibold text-sx" :editor="editor" v-model="content">
-                                            </ckeditor>
+                                            <ckeditor :editor="editor" v-model="message"></ckeditor>
                                         </div>
 
-
-
-                                        <button v-if="loading" :disabled="loading" type="submit"
-                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray"
-                                            :class="{
+                                        <button v-if="loading" :disabled="loading" type="submit" :class="{
                 'cursor-not-allowed': loading,
                 'hover:bg-gray-700': loading,
-            }">
+            }"
+                                            class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
                                             <svg class="animate-spin mr-3 h-5 w-5 text-white"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
@@ -290,14 +284,13 @@
                                                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                                                 </path>
                                             </svg>
-                                            Saving...
+                                            Sending...
                                         </button>
 
                                         <button v-else type="submit"
-                                            class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
-                                            Save
+                                            class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
+                                            Send
                                         </button>
-
                                     </div>
                                 </form>
                             </div>
@@ -329,44 +322,75 @@ export default {
             dropdownOpen: false,
             selected: '',
             page: '',
-            title: '',
-            content: '',
-            image: null,
-            imageUrl: '',
+            email: '',
+            subject: '',
+            message: '',
             back_url: 'http://localhost:5000',
             editor: ClassicEditor
         };
     },
 
+    created() {
+        const messageId = this.$route.params.id;
+        this.getEmail(messageId);
+    },
 
     methods: {
 
-
-        handleImageUpload(event) {
-            this.image = event.target.files[0];
-            this.imageUrl = URL.createObjectURL(this.image);
-        },
-
-        async createBlogPost() {
-            this.loading = true;
-            const formData = new FormData();
-            formData.append('title', this.title);
-            formData.append('content', this.content);
-            formData.append('image', this.image);
-
+        async getEmail(messageId) {
             try {
+                this.loading = true;
                 const adminToken = localStorage.getItem('adminToken');
-                const response = await axios.post(`${api}/blogs/create`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': `Bearer ${adminToken}`
-                    }
-                });
 
-                this.$router.push({ name: 'Blogs' });
+                if (!adminToken) {
+                    localStorage.removeItem('adminToken');
+                    this.$router.push({ name: 'Login' });
+                    return;
+                }
+
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
+
+                const response = await axios.get(`${api}/contacts/message/${messageId}`, config);
+                const { email } = response.data;
+                this.email = email;
                 this.loading = false;
             } catch (error) {
-                console.error('Error adding blog post:', error.response.data);
+                console.error('Error fetching message:', error.response.data);
+                this.loading = false;
+            }
+        },
+
+
+        async sendEmail() {
+            this.loading = true;
+            const adminToken = localStorage.getItem('adminToken');
+            try {
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${adminToken}`,
+                    },
+                };
+                const response = await axios.post(`${api}/contacts/send-email`, {
+                    email: this.email,
+                    subject: this.subject,
+                    message: this.message
+                }, config);
+                this.$toast.success('Mail Sent Successfully.', {
+                    timeout: 3000,
+                });          
+                this.subject = '';
+                this.message = '';
+                this.loading = false;
+            } catch (error) {
+                console.error('Error sending mail:', error.response.data);
+
+                this.$toast.error('Mail Not Sent. Try again!', {
+                    timeout: 3000,
+                });
                 this.loading = false;
             }
         },
@@ -375,6 +399,7 @@ export default {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },
+
 
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;

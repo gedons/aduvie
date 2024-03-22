@@ -4,7 +4,7 @@
             <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
                 class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
 
-                <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
+           <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
                 class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
                 <div class="flex items-center justify-center mt-8">
                     <div class="flex items-center">
@@ -232,7 +232,7 @@
                             </div>
                         </div>
                     </div>
-                </header>>
+                </header>
 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                     <div class="container px-6 py-8 mx-auto">
@@ -313,7 +313,8 @@ export default {
             content: '',
             image: null,
             imageUrl: '',
-            back_url: 'http://localhost:5000',
+            //back_url: 'http://localhost:5000',
+            back_url:'https://aduvieapi.onrender.com',
             editor: ClassicEditor
         };
     },
