@@ -21,7 +21,7 @@ const routes = [
       component: Login,
     },
 
-    // //admin routes
+    // //admin routese
     {
       path: '/admin/dashboard',
       name: 'Dashboard',
