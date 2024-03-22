@@ -514,43 +514,58 @@
                 </div>
 
                 <div class="animate_top w-full nn/5 vo/3 vk sg hh sm yh tq">
-                    <form action="https://formbold.com/s/unique_form_id" method="POST">
+                    <form @submit.prevent="submitContactForm">
                         <div class="tc sf yo ap zf ep qb">
                             <div class="vd to/2">
                                 <label class="rc ac" for="fullname">Full name</label>
-                                <input type="text" name="fullname" id="fullname" placeholder="Devid Wonder"
-                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" />
+                                <input type="text" v-model="name" placeholder="Devid Wonder"
+                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" required/>
                             </div>
 
                             <div class="vd to/2">
                                 <label class="rc ac" for="email">Email address</label>
-                                <input type="email" name="email" id="email" placeholder="example@gmail.com"
-                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" />
+                                <input type="email" v-model="email" placeholder="example@gmail.com"
+                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" required/>
                             </div>
                         </div>
 
                         <div class="tc sf yo ap zf ep qb">
                             <div class="vd to/2">
                                 <label class="rc ac" for="phone">Phone number</label>
-                                <input type="text" name="phone" id="phone" placeholder="+234 54 3433 223"
-                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" />
+                                <input type="text" v-model="phone" placeholder="+234 54 3433 223"
+                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" required/>
                             </div>
 
                             <div class="vd to/2">
                                 <label class="rc ac" for="subject">Subject</label>
-                                <input type="text" for="subject" id="subject" placeholder="Type your subject"
-                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" />
+                                <input type="text" v-model="subject" placeholder="Type your subject"
+                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi" required/>
                             </div>
                         </div>
 
                         <div class="fb">
                             <label class="rc ac" for="message">Message</label>
-                            <textarea placeholder="Message" rows="4" name="message" id="message"
+                            <textarea placeholder="Message" rows="4" v-model="message"
                                 class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 ci"></textarea>
                         </div>
 
                         <div class="tc xf">
-                            <button class="vc rg lk gh ml il hi gi _l bg-[#478AC9]">Send Message</button>
+                            <button v-if="loading" :disabled="loading" 
+                                :class="{
+                                    'cursor-not-allowed': loading,
+                                    'hover:bg-gray-700': loading,
+                                }" class="vc rg lk gh ml il hi gi _l bg-[#478AC9]">
+                                <svg class="animate-spin mr-3 h-5 w-5 text-white"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                </path>
+                                </svg>
+                                Sending...
+                            </button>
+                            <button v-else class="vc rg lk gh ml il hi gi _l bg-[#478AC9]">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -765,6 +780,11 @@ export default {
             bgImage3: bannerImage3,
             sliderImages: [],
             latestBlogPost: [],
+            name: '',
+            email: '',
+            phone: '',
+            subject: '',
+            message: '',
             //back_url: 'http://localhost:5000',
             back_url: 'https://aduvieapi.onrender.com'
         };
@@ -799,6 +819,33 @@ export default {
                     console.error('Error getting blog posts:', error);
                     this.loading = false;
                 });
+        },
+        async submitContactForm() {
+            try {
+                this.loading = true;
+                const response = await axios.post(`${api}/contacts/submit`, {
+                    name: this.name,
+                    email: this.email,
+                    phone: this.phone,
+                    subject: this.subject,
+                    message: this.message
+                });
+                this.$toast.success('Message sent successfully. We will be in touch', {
+                    timeout: 3000,
+                });
+                this.name = '';
+                this.email = '';
+                this.phone = '';
+                this.subject = '';
+                this.message = '';
+                this.loading = false;
+            } catch (error) {
+                console.error('Error submitting contact form:', error.response.data);
+                this.$toast.error('An error occurred while sending a form. Please try again later.', {
+                    timeout: 3000,
+                });
+                this.loading = false;
+            }
         },
         formatDate(date) {
             return moment(date).fromNow();

@@ -320,9 +320,9 @@
                                         <button v-if="loading" :disabled="loading" type="submit"
                                         class="flex justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray"
                                         :class="{
-            'cursor-not-allowed': loading,
-            'hover:bg-gray-700': loading,
-        }">
+                                            'cursor-not-allowed': loading,
+                                            'hover:bg-gray-700': loading,
+                                        }">
                                         <svg class="animate-spin mr-3 h-5 w-5 text-white"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
