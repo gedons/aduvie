@@ -67,8 +67,8 @@
                 </nav>
 
                 <div class="tc wf ig pb no">
-                    <a href="signup.html" :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                        class="lk gh dk rg tc wf xf _l gi hi  bg-sky">Book Your Event</a>
+                    <router-link :to="{name: 'Book'}" :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
+                    class="lk gh dk rg tc wf xf _l gi hi  bg-sky">Book Your Event</router-link>
                 </div>
             </div>
             <!-- Navigation Links -->
