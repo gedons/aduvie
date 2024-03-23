@@ -310,7 +310,7 @@
                                             </tr>
                                         </thead>
                                         <div v-if="bookings.length === 0" class="p-2.5 xl:p-5">
-                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Event
+                                            <p class="font-semibold text-sm leading-5 text-gray-700">No Booking
                                                 Available!!!</p>
                                         </div>
                                         <tbody v-for="booking in bookings" :key="booking._id" class="bg-white">
