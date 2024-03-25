@@ -7,6 +7,7 @@ import Dashboard from '../views/Admin/Index.vue';
 import Events from '../views/Admin/Events.vue';
 import AddEvent from '../views/Admin/AddEvent.vue';
 import UserBooking from '../views/Admin/UserBooking.vue';
+import ViewUserBooking from '../views/Admin/ViewUserBooking.vue';
 import Blogs from '../views/Admin/Blogs.vue';
 import AddBlog from '../views/Admin/AddBlog.vue';
 import ViewBlog from '../views/Admin/ViewBlog.vue';
@@ -61,6 +62,7 @@ const routes = [
     { path: "/admin/addblog", name: "AddBlog", component: AddBlog, meta: { requiresAuth: true }},  
     { path: "/admin/blog/post/:id", name: "ViewBlog", component: ViewBlog, meta: { requiresAuth: true }},  
     { path: "/admin/userbookings", name: "UserBooking", component: UserBooking, meta: { requiresAuth: true }},  
+    { path: "/admin/userbookings/:id", name: "ViewUserBooking", component: ViewUserBooking, meta: { requiresAuth: true }}, 
     { path: "/admin/adminsettings", name: "AdminSetting", component: AdminSetting, meta: { requiresAuth: true }}, 
     { path: "/admin/slider", name: "Slider", component: Slider, meta: { requiresAuth: true }}, 
     { path: "/admin/addslider", name: "AddSlider", component: AddSlider, meta: { requiresAuth: true }}, 

@@ -147,7 +147,7 @@
                         </div>
 
                         <div class="tc sf yo ap zf ep qb">
-                            <div class="vd to/2">
+                            <!-- <div class="vd to/2">
                                 <label class="rc ac" for="email">Select Event </label>
                                 <select id="eventId" v-model="eventId">
                                     <option>None</option>
@@ -155,7 +155,7 @@
                                         v-for="event in pendingEvents" :key="event._id" :value="event._id">{{ event.name
                                         }}</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <!-- <div class="vd to/2">
                                 <label class="rc ac" for="email">Select Event (optional)</label>
                                 <select id="eventId" v-model="eventId" @change="updateEventDate">
@@ -399,9 +399,9 @@ export default {
             email: '',
             phone: '',
             date: '',
-            eventId: '',
+            //eventId: '',
             description: '',
-            pendingEvents: [],
+            //pendingEvents: [],
             events: [],
             calendarOptions: {
                 initialView: 'dayGridMonth',  
@@ -414,7 +414,7 @@ export default {
         };
     },
     mounted() {
-        this.fetchPendingEvents();
+        //this.fetchPendingEvents();
         this.fetchEventDates();
     },
 
@@ -427,49 +427,61 @@ export default {
             }
         },
 
-        async fetchPendingEvents() {
-            try {
-                const response = await axios.get(`${api}/events/pending`);
-                this.pendingEvents = response.data;
-            } catch (error) {
-                console.error('Error fetching pending events:', error.response.data);
-            }
-        },
+        // async fetchPendingEvents() {
+        //     try {
+        //         const response = await axios.get(`${api}/events/pending`);
+        //         this.pendingEvents = response.data;
+        //     } catch (error) {
+        //         console.error('Error fetching pending events:', error.response.data);
+        //     }
+        // },
         async bookEvent() {
             try {
                 this.loading = true;
-                const response = await axios.post(`${api}/bookings/book`, {
+                // Check if the date is already booked
+                const response = await axios.post(`${api}/bookings/check-date`, { date: this.date });
+                
+                if (response.data.msg === 'Date already booked') {
+                    this.$toast.error('This date is already booked. Please select a different date.', {
+                        timeout: 3000,
+                    });
+                    this.loading = false;
+                    return;
+                }
+
+                // Proceed with booking if the date is available
+                const bookingResponse = await axios.post(`${api}/bookings/book`, {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     email: this.email,
                     phone: this.phone,
                     date: this.date,
-                    eventId: this.eventId,
-                   // date: this.selectedEvent ? this.selectedEvent.date : this.date,
-                    //eventId: this.selectedEvent ? this.selectedEvent._id : this.eventId,
                     description: this.description
                 });
-                console.log('Booking successful:', response.data.msg);
-                this.$toast.success('Booking Successfully. Check your email for details', {
+
+                console.log('Booking successful:', bookingResponse.data.msg);
+                this.$toast.success('Booking Successful. Check your email for details', {
                     timeout: 6000,
                 });
-                this.loading = false;
+
                 // Clear form fields after successful booking
                 this.firstName = '';
                 this.lastName = '';
                 this.email = '';
                 this.phone = '';
                 this.date = '';
-                this.eventId = '';
                 this.description = '';
+
+                this.loading = false;
             } catch (error) {
                 console.error('Error booking event:', error.response.data);
-                this.$toast.error('An error occurred while sending a form. Please try again later.', {
+                this.$toast.error('An error occurred while sending the form. Please try again later.', {
                     timeout: 3000,
                 });
                 this.loading = false;
             }
         },
+
 
         async fetchEventDates() {
             try {
