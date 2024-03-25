@@ -4,7 +4,7 @@
             <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
                 class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
 
-                <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
+            <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
                 class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
                 <div class="flex items-center justify-center mt-8">
                     <div class="flex items-center">
@@ -142,7 +142,7 @@
                                 <li>
                                     <router-link :to="{ name: 'AdminContact' }"
                                         class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out text-gray-500 hover:text-white">Contact</router-link>
-                                        
+
                                 </li>
                             </ul>
                         </div>
@@ -224,7 +224,7 @@
 
                             <div v-show="dropdownOpen"
                                 class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
-                                style="display: none;">                                
+                                style="display: none;">
                                 <router-link :to="{ name: 'AdminSetting' }"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Settings</router-link>
                                 <a @click="logoutAdmin"
@@ -404,7 +404,7 @@
                         <option value="completed">Completed</option>
                     </select>
                     <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
-                    class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>         
+                        class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>
                     <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
                         type="submit">Update</button>
                 </form>
@@ -574,7 +574,7 @@ export default {
             }
         },
 
-        logoutAdmin() {           
+        logoutAdmin() {
             localStorage.removeItem('adminToken');
             this.$router.push({ name: 'Login' });
         },
@@ -602,7 +602,7 @@ export default {
             this.selected = (this.selected === 'Page') ? '' : 'Page';
         },
         formatDate(date) {
-            return moment(date).fromNow();
+            return moment(date).format('YYYY-MM-DD');
         },
 
         openEditModal(event) {

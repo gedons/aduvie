@@ -350,6 +350,11 @@ export default {
         async createEvent() {
             try {
                 this.loading = true;
+
+                // Extract date without time
+                const selectedDate = new Date(this.date);
+                const formattedDate = selectedDate.toISOString().split('T')[0];
+
                 const adminToken = localStorage.getItem('adminToken');
                 const config = {
                     headers: {

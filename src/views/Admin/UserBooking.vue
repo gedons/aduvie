@@ -558,7 +558,7 @@ export default {
             this.selected = (this.selected === 'Page') ? '' : 'Page';
         },
         formatDate(date) {
-            return moment(date).fromNow();
+            return moment(date).format('YYYY-MM-DD');
         },
 
 

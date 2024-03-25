@@ -420,12 +420,12 @@ export default {
 
     methods: {
 
-        updateEventDate() {
-            this.selectedEvent = this.pendingEvents.find(event => event._id === this.eventId);
-            if (this.selectedEvent) {
-                this.selectedEvent.date = new Date(this.selectedEvent.date).toISOString().split('T')[0];
-            }
-        },
+        // updateEventDate() {
+        //     this.selectedEvent = this.pendingEvents.find(event => event._id === this.eventId);
+        //     if (this.selectedEvent) {
+        //         this.selectedEvent.date = new Date(this.selectedEvent.date).toISOString().split('T')[0];
+        //     }
+        // },
 
         // async fetchPendingEvents() {
         //     try {
@@ -438,6 +438,10 @@ export default {
         async bookEvent() {
             try {
                 this.loading = true;
+
+                // Extract date without time
+                const selectedDate = new Date(this.date);
+                const formattedDate = selectedDate.toISOString().split('T')[0];
                 // Check if the date is already booked
                 const response = await axios.post(`${api}/bookings/check-date`, { date: this.date });
                 
@@ -455,7 +459,7 @@ export default {
                     lastName: this.lastName,
                     email: this.email,
                     phone: this.phone,
-                    date: this.date,
+                    date: formattedDate,
                     description: this.description
                 });
 
@@ -502,7 +506,7 @@ export default {
         },
 
         formatDate(date) {
-            return moment(date).fromNow();
+            return moment(date).format('YYYY-MM-DD');
         },
     }
 };
