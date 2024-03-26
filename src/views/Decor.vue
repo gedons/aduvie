@@ -107,8 +107,8 @@
                         </p>
 
                         <div class="wc qf pn dg cb">
-                            <img src="../assets/images/blog-04.png" alt="Blog" />
-                            <img src="../assets/images/blog-05.png" alt="Blog" />
+                            <img src="../assets/images/decor1.jpg" alt="Blog" />
+                            <img src="../assets/images/decor2.jpg" alt="Blog" />
                         </div>
 
                         <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Sit back and relax</h2>
