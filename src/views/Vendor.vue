@@ -67,8 +67,9 @@
                 </nav>
 
                 <div class="tc wf ig pb no">
-                    <router-link :to="{name: 'Book'}" :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                    class="lk gh dk rg tc wf xf _l gi hi  bg-sky">Book Your Event</router-link>
+                    <router-link :to="{ name: 'Book' }"
+                        :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
+                        class="lk gh dk rg tc wf xf _l gi hi  bg-sky">Book Your Event</router-link>
                 </div>
             </div>
             <!-- Navigation Links -->
@@ -76,8 +77,62 @@
     </header>
     <!-- ===== Header End ===== -->
 
-  
+    <section class="gj qp gr hj rp hr mt-0 md:-mt-16">
+        <!-- Section Title Start -->
+        <div>
+            <div class="animate_top bb ze rj ki xn vq">
+                <h2 class="fk vj pr kk wm on/5 gq/2 bb _b">
+                    Vendor Coordination
+                </h2>
+            </div>
+        </div>
+        <!-- Section Title End -->
+        <div class="bb ze ki xn 2xl:ud-px-0">
+            <div class="tc sf yo zf kq">
+                <div class="ro w-full">
+                    <div
+                        class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
+                        <p>
+                            We take the stress out of event planning by managing every aspect of vendor coordination on
+                            your behalf.
+                            From photographers and florists to entertainment and rentals, our experienced team will work
+                            tirelessly to
+                            ensure that every detail is meticulously coordinated, allowing you to relax and enjoy your
+                            event with
+                            confidence.
+                        </p>
 
+                        <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Comprehensive Vendor Services</h2>
+                        <p class="ob">
+                            From start to finish, our team will manage every aspect of vendor coordination,
+                            saving you time and hassle during the planning process. We'll handle communication,
+                            contracts, and logistics to ensure that all vendors are on the same page and working
+                            together seamlessly. Whether it's coordinating delivery schedules, arranging setup and
+                            breakdown, or troubleshooting last-minute issues, we'll be there every step of the way
+                            to ensure that your event runs smoothly from beginning to end.
+                        </p>
+
+                        <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Streamlined Communication</h2>
+                        <p class="ob">
+                            Communication is key to successful vendor coordination, which is why we'll
+                            serve as your single point of contact for all vendor-related inquiries and updates.
+                        </p>
+
+                        <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Ready to Get Started?</h2>
+                        <p>
+                            Let Aduvie Events Center  take the stress out of vendor coordination so you can focus 
+                            on what truly matters – enjoying your event with your loved ones. Contact us today to 
+                            learn more about our vendor coordination services and start planning the event of your 
+                            dreams with confidence. We can't wait to help you bring your vision to life!
+                        </p>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
 
     <!-- ===== Footer Start q===== -->
     <footer>
@@ -178,9 +233,13 @@
                             <h4 class="kk wm tj ec">Events</h4>
 
                             <ul>
-                                <li><router-link :to="{name: 'Decor'}" class="sc xl vb hover:text-[#478AC9]">Décor and Design</router-link></li>
-                                <li><router-link :to="{name: 'Staffing'}" class="sc xl vb hover:text-[#478AC9]">On-Site Staffing</router-link></li>
-                                <li><router-link :to="{name: 'Vendor'}" class="sc xl vb hover:text-[#478AC9]">Vendor Coordination</router-link></li>
+                                <li><router-link :to="{ name: 'Decor' }" class="sc xl vb hover:text-[#478AC9]">Décor and
+                                        Design</router-link></li>
+                                <li><router-link :to="{ name: 'Staffing' }"
+                                        class="sc xl vb hover:text-[#478AC9]">On-Site
+                                        Staffing</router-link></li>
+                                <li><router-link :to="{ name: 'Vendor' }" class="sc xl vb hover:text-[#478AC9]">Vendor
+                                        Coordination</router-link></li>
                             </ul>
                         </div>
 
@@ -188,7 +247,9 @@
                             <h4 class="kk wm tj ec">Services</h4>
 
                             <ul>
-                                <li><router-link :to="{name: 'Catering'}" class="sc xl vb hover:text-[#478AC9]">Catering Services</router-link></li>
+                                <li><router-link :to="{ name: 'Catering' }"
+                                        class="sc xl vb hover:text-[#478AC9]">Catering
+                                        Services</router-link></li>
                             </ul>
                         </div>
                     </div>
@@ -259,16 +320,16 @@ export default {
         };
     },
 
-     
+
     methods: {
         toggleMenu() {
             this.menuOpen = !this.menuOpen;
         },
-        
+
         formatDate(date) {
             return moment(date).fromNow();
         },
-      
+
     }
 };
 </script>
