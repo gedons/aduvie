@@ -258,9 +258,16 @@
                                         </div>
                                         <div class="w-full mb-5 mt-8">
                                             <label class="mb-2 block text-black">
+                                                User Message
+                                            </label>
+                                            <p v-html="message" class="w-full rounded border-[1.5px] text-gray-900 border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" ></p>
+                                        </div>
+
+                                        <div class="w-full mb-5 mt-8">
+                                            <label class="mb-2 block text-black">
                                                 Subject
                                             </label>
-                                            <input type="text" v-model="subject" placeholder="Email Subject" required
+                                            <input type="text" v-model="subject" placeholder="Enter Email Subject" required
                                                 class="w-full rounded border-[1.5px] text-gray-900 border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input" />
                                         </div>
 
@@ -268,14 +275,13 @@
                                             <label class="mb-2.5 mt-3 block text-black">
                                                 Message
                                             </label>
-                                            <ckeditor :editor="editor" v-model="message"></ckeditor>
+                                            <ckeditor :editor="editor" v-model="messages"></ckeditor>
                                         </div>
 
                                         <button v-if="loading" :disabled="loading" type="submit" :class="{
                 'cursor-not-allowed': loading,
                 'hover:bg-gray-700': loading,
-            }"
-                                            class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
+            }" class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
                                             <svg class="animate-spin mr-3 h-5 w-5 text-white"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
@@ -289,7 +295,7 @@
 
                                         <button v-else type="submit"
                                             class="flex  justify-center rounded bg-gray-900 hover:bg-gray-700 text-white p-3 font-medium text-gray">
-                                            Send
+                                            Send Email
                                         </button>
                                     </div>
                                 </form>
@@ -355,8 +361,9 @@ export default {
                 };
 
                 const response = await axios.get(`${api}/contacts/message/${messageId}`, config);
-                const { email } = response.data;
+                const { email, message } = response.data;
                 this.email = email;
+                this.message = message;
                 this.loading = false;
             } catch (error) {
                 console.error('Error fetching message:', error.response.data);
@@ -377,13 +384,13 @@ export default {
                 const response = await axios.post(`${api}/contacts/send-email`, {
                     email: this.email,
                     subject: this.subject,
-                    message: this.message
+                    messages: this.messages
                 }, config);
                 this.$toast.success('Mail Sent Successfully.', {
                     timeout: 3000,
-                });          
+                });
                 this.subject = '';
-                this.message = '';
+                this.messages = '';
                 this.loading = false;
             } catch (error) {
                 console.error('Error sending mail:', error.response.data);

@@ -24,6 +24,10 @@ import Blog from '../views/Blog.vue';
 import BlogView from '../views/BlogView.vue';
 import Contact from '../views/Contact.vue';
 import Book from '../views/Book.vue';
+import Vendor from '../views/Vendor.vue';
+import Staffing from '../views/Staffing.vue';
+import Catering from '../views/Catering.vue';
+import Decor from '../views/Decor.vue';
 
 
 
@@ -45,6 +49,10 @@ const routes = [
     { path: "/blog/post/:id", name: "BlogView", component: BlogView }, 
     { path: "/contact", name: "Contact", component: Contact },  
     { path: "/book-event", name: "Book", component: Book }, 
+    { path: "/catering", name: "Catering", component: Catering }, 
+    { path: "/vendor", name: "Vendor", component: Vendor }, 
+    { path: "/decor", name: "Decor", component: Decor }, 
+    { path: "/staffing", name: "Staffing", component: Staffing }, 
 
     // //admin routese
     {

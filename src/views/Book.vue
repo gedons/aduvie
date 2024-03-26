@@ -94,7 +94,7 @@
                     Book An Event
                 </h2>
                 <p class="bb on/5 wo/5 hq">
-                    Fill in the form below and we’d get in touch with you for details of your reservation!
+                    Fill the form below and we will get in touch with further details on your reservation!
                 </p>
             </div>
 
