@@ -315,7 +315,7 @@
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="flex items-center">
                                                         <img class="w-10 h-9 rounded-full"
-                                                            :src="`${back_url}${gallery.imageUrl}`" loading="lazy"
+                                                            :src="`${gallery.imageUrl}`" loading="lazy"
                                                             alt="">
 
 

@@ -293,6 +293,9 @@
                                             <tr>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                    Image</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                     Name</th>
                                                 <th
                                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -315,6 +318,12 @@
                                         </div>
                                         <tbody v-for="event in events" :key="event._id" class="bg-white">
                                             <tr>
+                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                    <div class="text-sm leading-5 font-semibold text-gray-900">
+                                                        <img class="w-10 h-9 rounded-full" :src="`${event.imageUrl}`"
+                                                            loading="lazy" alt="">
+                                                    </div>
+                                                </td>
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
                                                         {{ event.name }}</div>
@@ -403,6 +412,12 @@
                         <option value="booked">Booked</option>
                         <option value="completed">Completed</option>
                     </select>
+                    <label class=" mt-3 block text-black">
+                        Event Image
+                    </label>
+                    <input type="file" @change="handleImageUpload" accept="image/*" class="mt-3 mb-2" />
+                    <img v-if="imageUrl" :src="imageUrl" alt="Event Image" class="preview-image my-5" />
+
                     <textarea rows="4" placeholder="Edit Event" v-model="editedEvent.description"
                         class="mt-3 w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-gray-900 active:border-gray-900 disabled:cursor-default disabled:bg-whiter"></textarea>
                     <button class="bg-gray-900 px-3 py-2 rounded-md mt-3 text-white text-sm font-semibold"
@@ -475,6 +490,21 @@ export default {
                     console.error('Error getting events:', error);
                     this.loading = false;
                 });
+        },
+
+        handleImageUpload(event) {
+        // Retrieve the uploaded image file
+        const file = event.target.files[0];
+
+        // Check if a file is selected
+        if (file) {
+            this.editedEvent.image = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {                 
+                this.imageUrl = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
         },
 
         async updateEventStatus(event) {

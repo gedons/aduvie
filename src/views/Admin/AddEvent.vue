@@ -249,6 +249,14 @@
                                     <div class="p-6.5">
                                         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                             <div class="w-full xl:w-1/2">
+                                                <label class="mb-3 block text-black">
+                                                    Post Image
+                                                </label>
+                                                <input type="file" @change="handleImageUpload">
+                                                <img v-if="imageUrl" :src="imageUrl" alt="Event Image"
+                                                    class="preview-image my-5">
+                                            </div>
+                                            <div class="w-full xl:w-1/2">
                                                 <label class="mb-2.5 block text-black">
                                                     Event Name
                                                 </label>
@@ -340,11 +348,20 @@ export default {
             date: '',
             email: '',
             status: 'pending',
-            description: ''
+            description: '',
+            image: null,
+            imageUrl: '',
         };
     },
 
     methods: {
+
+        handleImageUpload(event) {
+            this.image = event.target.files[0];
+            this.imageUrl = URL.createObjectURL(this.image);
+            console.log(this.imageUrl);
+        },
+
 
         //create event
         async createEvent() {
@@ -352,24 +369,28 @@ export default {
                 this.loading = true;
 
                 // Extract date without time
-                const selectedDate = new Date(this.date);
-                const formattedDate = selectedDate.toISOString().split('T')[0];
+                // const selectedDate = new Date(this.date);
+                // const formattedDate = selectedDate.toISOString().split('T')[0];
 
                 const adminToken = localStorage.getItem('adminToken');
+                const formData = new FormData();  
+
+                // Append other form fields
+                formData.append('name', this.name);
+                formData.append('email', this.email);
+                formData.append('date', this.date);
+                formData.append('status', this.status);
+                formData.append('description', this.description);
+                formData.append('image', this.image);
+
                 const config = {
                     headers: {
+                        'Content-Type': 'multipart/form-data',  
                         Authorization: `Bearer ${adminToken}`,
                     },
                 };
-                const newEvent = {
-                    name: this.name,
-                    email: this.email,
-                    date: this.date,
-                    status: this.status,
-                    description: this.description
-                };
 
-                await axios.post(`${api}/events/create`, newEvent, config);
+                await axios.post(`${api}/events/create`, formData, config);  
                 this.$router.push({ name: 'Events' });
 
                 this.$toast.success('Event Created Successfully.', {
@@ -390,6 +411,7 @@ export default {
                 this.loading = false;
             }
         },
+
 
         logoutAdmin() {
             localStorage.removeItem('adminToken');

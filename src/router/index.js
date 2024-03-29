@@ -81,9 +81,13 @@ const routes = [
     { path: "/admin/sendemail/:id", name: "ViewSendEmail", component: ViewSendEmail, meta: { requiresAuth: true }}, 
 ];
 
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
 });
 
 router.beforeEach((to, from, next) => {

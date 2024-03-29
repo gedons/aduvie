@@ -232,7 +232,7 @@
                             </div>
                         </div>
                     </div>
-                </header>>
+                </header>
 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
 
@@ -318,7 +318,7 @@
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                     <div class="text-sm leading-5 font-semibold text-gray-900">
                                                         <img class="w-10 h-9 rounded-full"
-                                                            :src="`${back_url}${slider.imageUrl}`" loading="lazy"
+                                                            :src="`${slider.imageUrl}`" loading="lazy"
                                                             alt="">
                                                     </div>
                                                 </td>
